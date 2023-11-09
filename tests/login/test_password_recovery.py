@@ -1,11 +1,11 @@
 from pages.login.password_recovery import ResetPage
-from locators.login_page_locators import ResetPageLocators
+from locators.login_page_locators import ResetPageLocators, LoginPageLocators
 import pytest
 import time
 
 
 def test_password_reset(driver):
-    page = ResetPage(driver, url=ResetPageLocators.FORGOT_PASS_URL)
+    page = ResetPage(driver, url=LoginPageLocators.URL)
     page.open()
     page.button_forgot_password().click()
     page.email().send_keys('sve3363@gmail.com')
