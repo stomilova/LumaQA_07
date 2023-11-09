@@ -5,7 +5,7 @@ import time
 
 
 def test_password_reset(driver):
-    page = ResetPage(driver, url='https://magento.softwaretestingboard.com/customer/account/login')
+    page = ResetPage(driver, url=ResetPageLocators.FORGOT_PASS_URL)
     page.open()
     page.button_forgot_password().click()
     page.email().send_keys('sve3363@gmail.com')
