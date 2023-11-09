@@ -1,4 +1,5 @@
 import pytest
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
@@ -12,7 +13,6 @@ from locators.gear_page import (
     shop_by_title,
     side_bar_elements,
 )
-from selenium import webdriver
 
 total_categories = ["Bags", "Fitness Equipment", "Watches"]
 category_list = ["Bags", "Fitness Equipment", "Watches"]
@@ -26,6 +26,7 @@ list_of_category_url = [
 
 
 def find_categories_and_counters_at_the_sidebar():
+    """collect test data"""
     test_data = []
     options = Options()
     options.add_argument("--incognito")
