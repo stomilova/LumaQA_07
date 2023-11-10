@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from pages.gear_page.category_page import CategoryPage
 from pages.gear_page.gear_page import GearPage
-from pages.gear_page.urls import BAGS_PAGE, FITNESS_EQ_PAGE, WATCHES_PAGE
+from data.gear_page_urls import BAGS_PAGE, FITNESS_EQ_PAGE, WATCHES_PAGE
 from locators.gear_page_locators import GearPageLocators, CategoryPageLocators
 
 
