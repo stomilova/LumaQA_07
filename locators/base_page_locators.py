@@ -6,3 +6,4 @@ class BasePageLocators:
     MSG_ERROR = (By.CSS_SELECTOR, '[data-ui-id="message-error"]')
     MSG_SUCCESS = (By.CSS_SELECTOR, '[data-ui-id="message-success"]')
     LOGO_TITLE = (By.CSS_SELECTOR, '[class="logo"]')
+    ERIN_SECTION = (By.CSS_SELECTOR, '.home-erin')
