@@ -8,8 +8,7 @@ class TestIncorrectEmailFill(FakeData):
     def test_email_without_dot(self, driver):
         """TC_012.009.001 | Footer > 'Orders and Returns' > Email incorrect format\n
         Pre-conditions:
-            The user is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ )
-            and user not logged into the account.
+            User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
         Steps:
             User enters email in incorrect format in the 'Email' field and clicks the 'Continue' button
         Expected results:
@@ -25,8 +24,7 @@ class TestIncorrectEmailFill(FakeData):
     def test_email_without_at(self, driver):
         """TC_012.009.001 | Footer > 'Orders and Returns' > Email incorrect format\n
         Pre-conditions:
-            The user is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ )
-            and user not logged into the account.
+            User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
         Steps:
             User enters email in incorrect format in the 'Email' field and clicks the 'Continue' button
         Expected results:
@@ -44,8 +42,7 @@ class TestFieldsNotFilled(FakeData):
     def test_order_id_field_not_filled(self, driver):
         """TC_012.009.002 | Footer > “Orders and Returns” > Order_ID field\n
         Pre-conditions:
-            The user is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ )
-            and user not logged into the account.
+            User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
         Steps:
             The user filled in all fields except 'Order_id' and clicks the "Continue" button
         Expected results:
@@ -59,8 +56,7 @@ class TestFieldsNotFilled(FakeData):
     def test_billing_lastname_field_not_filled(self, driver):
         """TC_012.009.003 | Footer > “Orders and Returns” > Billing_Last_Name_field\n
         Pre-conditions:
-            The user is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ )
-            and user not logged into the account.
+            User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
         Steps:
             The user filled in all fields except "Billing Last Name" and clicks the "Continue" button
         Expected results:
@@ -74,8 +70,7 @@ class TestFieldsNotFilled(FakeData):
     def test_email_field_not_filled(self, driver):
         """TC_012.009.004 | Footer > “Orders and Returns” > Email_field\n
         Pre-conditions:
-            The user is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ )
-             and user not logged into the account.
+            User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
         Steps:
             The user filled in all fields except 'Email' and clicks the "Continue" button
         Expected results:
@@ -89,7 +84,7 @@ class TestFieldsNotFilled(FakeData):
     def test_zip_field_not_filled(self, driver):
         """TC_012.009.005 | Footer > “Orders and Returns” > ZIP code field\n
         Pre-conditions:
-            The user is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) and user not logged into the account.
+            User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
         Steps:
             1)The user selects "ZIP Code" in the "Find Order By" field\n
             2)The user filled in all fields except "Billing ZIP Code" and clicks the "Continue" button
@@ -116,8 +111,7 @@ class TestCheckNonExistentOrder(FakeData):
     def test_by_email(self, driver):
         """TC_012.009.006 | Footer > “Orders and Returns” > Search for a non-existent order\n
         Pre-conditions:
-            The user is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ )
-             and user not logged into the account.
+            User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
         Steps:
             The user fills in all fields with data for a non-existent order and clicks the "Continue" button
         Expected results:
@@ -133,8 +127,7 @@ class TestCheckNonExistentOrder(FakeData):
     def test_by_postcode(self, driver):
         """TC_012.009.008 | Footer > “Orders and Returns” > Search for a non-existent order\n
         Pre-conditions:
-            The user is on the page  (url = https://magento.softwaretestingboard.com/sales/guest/form/ )
-             and user not logged into the account.
+            User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
         Steps:
             1)The user selects "ZIP Code" in the "Find Order By" field\n
             2)The user fills in all fields with data for a non-existent order and clicks the "Continue" button\n
@@ -155,8 +148,7 @@ class TestCheckExistingOrder(FakeData):
     def test_by_email(self):
         """TC_012.009.007 | Footer > “Orders and Returns” > Search for an existing order By Email or ZIP Code\n
         Pre-conditions:
-            The user is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ )
-            and user not logged into the account.
+            User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
         Steps:
             The user enters the correct data for the existing order in all required fields
             and clicks the “Continue” button.
@@ -171,8 +163,7 @@ class TestCheckExistingOrder(FakeData):
     def test_by_postcode(self):
         """TC_012.009.007 | Footer > “Orders and Returns” > Search for an existing order By Email or ZIP Code\n
             Pre-conditions:
-                The user is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ )
-                and user not logged into the account.
+                User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
             Steps:
                 1)The user selects "ZIP Code" in the "Find Order By" field
                 2)The user enters the correct data for the existing order in all required fields
@@ -183,3 +174,38 @@ class TestCheckExistingOrder(FakeData):
                 instead of the word 'NUMBER' the number of the order you are looking for should be displayed.
                 The user sees all available information about the order, including status"""
         pass
+
+
+class TestChangeFindOrderBy:
+
+    def test_switch_to_zip(self, driver):
+        """TC_012.008.004 | Footer > “Orders and Returns” > Visibility and clickability > Verify the finding
+         criterion is "Billing ZIP code" upon choosing "ZIP code" in "Find Order By" field/n
+            Preconditions:
+                User not logged into the account and is on the page  (url = https://magento.softwaretestingboard.com/sales/guest/form/).
+            Steps:
+                Select 'ZIP Code' in the 'Find Order By' dropdown
+            Expected result:
+                The name of the fourth field is 'Billing ZIP Code'"""
+        page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL )
+        page.open()
+        page.select_find_order_by_postcode_dropdown()
+        assert page.billing_postcode_field_name().text == OrdersAndReturnsPageLocators.TEXT_NAME_POSTCODE_FIELD, 'не произошло переключение поиска заказа с Email на ZIP'
+
+    def test_switch_to_email(self, driver):
+        """TC_012.008.005 | Footer > “Orders and Returns” > Visibility and clickability > Verify the finding
+        criterion is "Email" upon choosing "Email" in "Find Order By" field/n
+            Preconditions:
+                User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
+            Steps:
+                1)Select 'ZIP Code' in the 'Find Order By' dropdown
+                2)Make sure the "Find Order By" field is "ZIP code"
+                3)Select 'Email' in the 'Find Order By' dropdown
+            Expected result:
+                The name of the fourth field is 'Email'"""
+        page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL)
+        page.open()
+        page.select_find_order_by_postcode_dropdown()
+        assert page.billing_postcode_field_name().text == OrdersAndReturnsPageLocators.TEXT_NAME_POSTCODE_FIELD, 'не произошло переключение поиска заказа с Email на ZIP'
+        page.select_find_order_by_email_dropdown()
+        assert page.email_field_name().text == OrdersAndReturnsPageLocators.TEXT_NAME_EMAIL_FIELD, 'не произошло переключение поиска заказа с ZIP на Email'

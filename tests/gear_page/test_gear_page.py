@@ -6,13 +6,8 @@ from selenium.webdriver.chrome.options import Options
 from pages.gear_page.category_page import CategoryPage
 from pages.gear_page.gear_page import GearPage
 from pages.gear_page.urls import BAGS_PAGE, FITNESS_EQ_PAGE, WATCHES_PAGE
-from locators.gear_page import (
-    sidebar_main,
-    last_item_counter,
-    category_title,
-    shop_by_title,
-    side_bar_elements,
-)
+from locators.gear_page_locators import GearPageLocators,CategoryPageLocators
+
 
 total_categories = ["Bags", "Fitness Equipment", "Watches"]
 category_list = ["Bags", "Fitness Equipment", "Watches"]
@@ -34,11 +29,11 @@ def find_categories_and_counters_at_the_sidebar():
     driver = webdriver.Chrome(options=options)
     gear_page = GearPage(driver=driver)
     gear_page.open()
-    sidebar = gear_page.is_visible(locator=sidebar_main)
+    sidebar = gear_page.is_visible(locator=GearPageLocators.SIDEBAR_MAIN)
 
     # Находим все элементы внутри контейнера
     categories = sidebar.find_elements(
-        *side_bar_elements
+        *GearPageLocators.SIDEBAR_ELEMENTS 
     )  # * выбирает все дочерние элементы и мы уже проверили что эти элементы в сайдбаре
 
     # Теперь у вас есть список элементов внутри сайдбара
@@ -69,11 +64,11 @@ def test_find_and_verify_title_of_sidebar(gear_page_precondition):
 
     gear_page = gear_page_precondition
 
-    sidebar = gear_page.is_visible(locator=sidebar_main)
+    sidebar = gear_page.is_visible(locator=GearPageLocators.SIDEBAR_MAIN)
 
     # проверяем что, элементы находятся в сайдбаре
-    title_1 = sidebar.find_element(*shop_by_title).text
-    title_2 = sidebar.find_element(*category_title).text
+    title_1 = sidebar.find_element(*GearPageLocators.SHOP_BY_TITLE).text
+    title_2 = sidebar.find_element(*GearPageLocators.CATEGORY_TITLE).text
 
     assert f"{title_1} {title_2}" == "Shop By Category"
 
@@ -186,7 +181,7 @@ def test_verify_category_counter_on_gear_and_category_page(
     ), f"We reach {driver.title}, but Expected to be at {category_name} page"
 
     counter_on_the_category_page = category_page.is_visible(
-        locator=last_item_counter
+        locator=CategoryPageLocators.LAST_ITEM_COUNTER
     ).text
 
     assert int(category_counter) == int(
