@@ -12,6 +12,9 @@ class MainPage(BasePage):
     def check_visibility_of_erin_recommends_widget(self):
         return self.is_visible(BasePageLocators.ERIN_SECTION)
 
+    def check_clickability_of_erin_recommends_widget(self):
+        return self.is_clickable(BasePageLocators.ERIN_SECTION)
+
     def add_clamber_watch_from_gear_catalog_to_cart(self):
         self.hold_mouse_on_element(BasePageLocators.LINK_GEAR_CATALOG)
         self.is_clickable(BasePageLocators.LINK_WATCHES_CATALOG).click()

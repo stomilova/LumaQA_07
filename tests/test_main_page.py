@@ -11,3 +11,10 @@ class TestMainPage:
         page = MainPage(driver, url=MainPage.URL)
         page.open()
         page.check_visibility_of_erin_recommends_widget()
+
+    def test_clickability_of_erin_recommends_widget(self, driver):
+        page = MainPage(driver, url=MainPage.URL)
+        page.open()
+        page.check_clickability_of_erin_recommends_widget()
+
+
