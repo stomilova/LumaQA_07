@@ -173,7 +173,7 @@ class TestCheckExistingOrder(FakeData):
         assert page.text_order_number_on_view_order_page().text == f"Order # {order_id}", 'Не удалось отследить существующий заказ'
         assert page.order_status(), 'У заказа отсутствует статус'
 
-    def test_by_postcode(self, driver,execution_number):
+    def test_by_postcode(self, driver):
         """TC_012.009.007 | Footer > “Orders and Returns” > Search for an existing order By Email or ZIP Code\n
         Pre-conditions:
             The user must place an order on the website.
