@@ -3,6 +3,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
+from locators.base_page_locators import BasePageLocators
+
+
 class BasePage():
     """
     Базовый класс для страниц веб-приложения, использующий Selenium для взаимодействия с элементами на странице.
@@ -62,3 +65,6 @@ class BasePage():
             TimeoutException: Если элемент не становится кликабельным в течение указанного времени.
         """
         return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
+
+    def header(self) -> WebElement:
+        return self.is_visible(BasePageLocators.HEADER)

@@ -16,3 +16,11 @@ class LoginPage(BasePage):
 
     def button_forgot_password(self) -> WebElement:
         return self.is_clickable(LoginPageLocators.BUTTON_FORGOT_PASSWORD)
+
+    def sign_in(self):
+        self.email().send_keys('sve3363@gmail.com')
+        self.password().send_keys('Zaqxsw100')
+        self.button_sign_in().click()
+        assert self.header().text == 'My Account', "Не удалось войти"
+
+
