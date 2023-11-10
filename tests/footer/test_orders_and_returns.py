@@ -96,15 +96,6 @@ class TestFieldsNotFilled(FakeData):
         page.continue_button().click()
         assert page.error_msg_billing_postcode_not_filled().text == OrdersAndReturnsPageLocators.TEXT_ERROR_MESSAGE_FIELD_NOT_FIELD, "Поле zipcode не заполнено , а ошибка не показана"
 
-    # УТОЧНИТЬ БАГ ИЛИ НЕ БАГ
-    # def test_ru_email(self, driver):
-    #     page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL)
-    #     page.open()
-    #     page.fill_all_field_with_email(order_id=self.fake_order_id, email='почта@маил.рус',
-    #                                    billing_lastname=self.last_name)
-    #     page.continue_button().click()
-    #     assert page.error_msg_email_not_filled_or_incorrect_type().text == OrdersAndReturnsPageLocators.TEXT_ERROR_MESSAGE_EMAIL_TYPE, "Не появилась ошибка про неправильный формат email"
-
 
 class TestCheckNonExistentOrder(FakeData):
 
@@ -122,7 +113,7 @@ class TestCheckNonExistentOrder(FakeData):
         page.fill_all_field_with_email(billing_lastname=self.last_name, order_id=self.fake_order_id,
                                        email=self.email)
         page.continue_button().click()
-        assert page.error_msg_incorrect_data().text == OrdersAndReturnsPageLocators.TEXT_ERROR_MESSAGE_INCORRECT_DATA, "Поле zipcode не заполнено , а ошибка не показана"
+        assert page.error_msg_incorrect_data().text == OrdersAndReturnsPageLocators.TEXT_ERROR_MESSAGE_INCORRECT_DATA, "Не появилась ошибка о том что введены неправильные данные заказа"
 
     def test_by_postcode(self, driver):
         """TC_012.009.008 | Footer > “Orders and Returns” > Search for a non-existent order\n
@@ -139,7 +130,7 @@ class TestCheckNonExistentOrder(FakeData):
         page.fill_all_field_with_postcode(billing_lastname=self.last_name, order_id=self.fake_order_id,
                                           postcode=self.postcode)
         page.continue_button().click()
-        assert page.error_msg_incorrect_data().text == OrdersAndReturnsPageLocators.TEXT_ERROR_MESSAGE_INCORRECT_DATA, "Поле zipcode не заполнено , а ошибка не показана"
+        assert page.error_msg_incorrect_data().text == OrdersAndReturnsPageLocators.TEXT_ERROR_MESSAGE_INCORRECT_DATA, "Не появилась ошибка о том что введены неправильные данные заказа"
 
 
 class TestCheckExistingOrder(FakeData):
@@ -187,7 +178,7 @@ class TestChangeFindOrderBy:
                 Select 'ZIP Code' in the 'Find Order By' dropdown
             Expected result:
                 The name of the fourth field is 'Billing ZIP Code'"""
-        page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL )
+        page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL)
         page.open()
         page.select_find_order_by_postcode_dropdown()
         assert page.billing_postcode_field_name().text == OrdersAndReturnsPageLocators.TEXT_NAME_POSTCODE_FIELD, 'не произошло переключение поиска заказа с Email на ZIP'
@@ -209,3 +200,52 @@ class TestChangeFindOrderBy:
         assert page.billing_postcode_field_name().text == OrdersAndReturnsPageLocators.TEXT_NAME_POSTCODE_FIELD, 'не произошло переключение поиска заказа с Email на ZIP'
         page.select_find_order_by_email_dropdown()
         assert page.email_field_name().text == OrdersAndReturnsPageLocators.TEXT_NAME_EMAIL_FIELD, 'не произошло переключение поиска заказа с ZIP на Email'
+
+
+class TestFieldsAreSavedInputData(FakeData):
+
+    def test_filling_fields_with_email(self, driver):
+        """TC_012.008.006 | Footer > “Orders and Returns” > Visibility and clickability > Saving entered
+         information in fields/n
+         Preconditions:
+                User not logged into the account and is on the page
+                (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
+         Steps:
+                The user fills in all required fields ( Order ID , Billing Last Name , Email )
+         Expected result:
+                All information entered by the user is saved in the input fields and is displayed correctly
+                *The same result should be if you select Find Order By ZIP Code
+                and instead of email indicate zip code"""
+        page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL)
+        page.open()
+        order_id = self.fake_order_id
+        billing_last_name = self.last_name
+        email = self.email
+        page.fill_all_field_with_email(order_id, billing_last_name, email)
+
+        assert page.get_value_order_id_field() == str(order_id), 'ВВеденая информация в поле Order ID, отображается некорректно'
+        assert page.get_value_billing_lastname_field() == billing_last_name, 'ВВеденая информация в поле Billing Last Name, отображается некорректно'
+        assert page.get_value_email_field() == email, 'ВВеденая информация в поле Email , отображается некорректно'
+
+    def test_filling_fields_with_postcode(self, driver):
+        """TC_012.008.006 | Footer > “Orders and Returns” > Visibility and clickability > Saving entered
+        information in fields/n
+        Preconditions:
+            User not logged into the account and is on the page
+            (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
+        Steps:
+            The user fills in all required fields ( Order ID , Billing Last Name , Email )
+        Expected result:
+            All information entered by the user is saved in the input fields and is displayed correctly
+            *The same result should be if you select Find Order By ZIP Code
+            and instead of email indicate zip code"""
+        page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL)
+        page.open()
+        order_id = self.fake_order_id
+        billing_last_name = self.last_name
+        postcode = self.postcode
+        page.fill_all_field_with_postcode(order_id, billing_last_name, postcode)
+
+        assert page.get_value_order_id_field() == str(order_id), 'ВВеденая информация в поле Order ID, отображается некорректно'
+        assert page.get_value_billing_lastname_field() == billing_last_name, 'ВВеденая информация в поле Billing Last Name , отображается некорректно'
+        assert page.get_value_postcode_field() == postcode, 'ВВеденая информация в поле Billing Zip Code, отображается некорректно'

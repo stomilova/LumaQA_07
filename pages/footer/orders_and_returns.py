@@ -10,17 +10,26 @@ class OrdersAndReturnsPage(BasePage):
     def order_id_field(self) -> WebElement:
         return self.is_visible(OrdersAndReturnsPageLocators.ORDER_ID_FIELD)
 
+    def get_value_order_id_field(self):
+        return self.is_visible(OrdersAndReturnsPageLocators.ORDER_ID_FIELD).get_attribute('value')
+
     def error_msg_order_id_not_filled(self) -> WebElement:
         return self.is_visible(OrdersAndReturnsPageLocators.ORDER_ID_FIELD_MESSAGE_ERROR)
 
     def billing_lastname_field(self) -> WebElement:
         return self.is_visible(OrdersAndReturnsPageLocators.BILLING_LASTNAME_FIELD)
 
+    def get_value_billing_lastname_field(self):
+        return self.is_visible(OrdersAndReturnsPageLocators.BILLING_LASTNAME_FIELD).get_attribute('value')
+
     def error_msg_billing_lastname_not_filled(self) -> WebElement:
         return self.is_visible(OrdersAndReturnsPageLocators.BILLING_LASTNAME_FIELD_MESSAGE_ERROR)
 
     def email_field(self) -> WebElement:
         return self.is_visible(OrdersAndReturnsPageLocators.EMAIL_FIELD)
+
+    def get_value_email_field(self):
+        return self.is_visible(OrdersAndReturnsPageLocators.EMAIL_FIELD).get_attribute('value')
 
     def email_field_name(self):
         return self.is_visible(OrdersAndReturnsPageLocators.EMAIL_FIELD_NAME)
@@ -37,6 +46,9 @@ class OrdersAndReturnsPage(BasePage):
 
     def billing_postcode_field(self) -> WebElement:
         return self.is_visible(OrdersAndReturnsPageLocators.POSTCODE_FIELD)
+
+    def get_value_postcode_field(self):
+        return self.is_visible(OrdersAndReturnsPageLocators.POSTCODE_FIELD).get_attribute('value')
 
     def billing_postcode_field_name(self):
         return self.is_visible(OrdersAndReturnsPageLocators.POSTCODE_FIELD_NAME)
