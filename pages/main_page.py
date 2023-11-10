@@ -10,3 +10,6 @@ class MainPage(BasePage):
 
     def check_visibility_of_erin_recommends_widget(self):
         return self.is_visible(BasePageLocators.ERIN_SECTION)
+
+    def check_clickability_of_erin_recommends_widget(self):
+        return self.is_clickable(BasePageLocators.ERIN_SECTION)
