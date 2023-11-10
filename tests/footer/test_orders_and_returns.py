@@ -183,3 +183,42 @@ class TestCheckExistingOrder(FakeData):
                 instead of the word 'NUMBER' the number of the order you are looking for should be displayed.
                 The user sees all available information about the order, including status"""
         pass
+
+
+class TestChangeFindOrderBy:
+
+    def test_switch_to_zip(self, driver):
+        """TC_012.008.001 | Footer > “Orders and Returns” > Visibility and clickability > Verify the finding
+         criterion is "Billing ZIP code" upon choosing "ZIP code" in "Find Order By" field/n
+            Preconditions:
+                A guest user is on the https://magento.softwaretestingboard.com/sales/guest/form/ page
+            Steps:
+                1)Find the order search criterion field name equal to "Email" by default
+                2)Click on the "Find Order By" field
+                3)Choose "ZIP code" option
+            Expected result:
+                Order finding criterion field name is 'Billing ZIP code'"""
+        page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL )
+        page.open()
+        page.select_find_order_by_postcode_dropdown()
+        assert page.billing_postcode_field_name().text == OrdersAndReturnsPageLocators.TEXT_NAME_POSTCODE_FIELD, 'не произошло переключение поиска заказа с Email на ZIP'
+
+    def test_switch_to_email(self, driver):
+        """TC_012.008.002 | Footer > “Orders and Returns” > Visibility and clickability > Verify the finding
+        criterion is "Email" upon choosing "Email" in "Find Order By" field/n
+            Preconditions:
+                A guest user is on the page https://magento.softwaretestingboard.com/sales/guest/form/
+            Steps:
+                1)Click on the "Find Order By" field
+                2)Choose "ZIP code" option
+                3)Make sure the "Find Order By" field is "ZIP code"
+                4)Click on the "Find Order By" field
+                5)Choose "Email" option
+            Expected result:
+                Order finding criterion field name is 'Email'"""
+        page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL)
+        page.open()
+        page.select_find_order_by_postcode_dropdown()
+        assert page.billing_postcode_field_name().text == OrdersAndReturnsPageLocators.TEXT_NAME_POSTCODE_FIELD, 'не произошло переключение поиска заказа с Email на ZIP'
+        page.select_find_order_by_email_dropdown()
+        assert page.email_field_name().text == OrdersAndReturnsPageLocators.TEXT_NAME_EMAIL_FIELD, 'не произошло переключение поиска заказа с ZIP на Email'
