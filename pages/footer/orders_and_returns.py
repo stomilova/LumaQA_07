@@ -62,6 +62,12 @@ class OrdersAndReturnsPage(BasePage):
     def continue_button(self):
         return self.is_clickable(OrdersAndReturnsPageLocators.CONTINUE_BUTTON)
 
+    def order_status(self):
+        return self.is_visible(OrdersAndReturnsPageLocators.ORDER_STATUS)
+
+    def text_order_number_on_view_order_page(self):
+        return self.is_visible(OrdersAndReturnsPageLocators.ORDER_NUMBER_ON_VIEW_ORDER_PAGE)
+
     def select_find_order_by_postcode_dropdown(self):
         self.find_order_by_dropdown().click()
         return self.is_clickable(OrdersAndReturnsPageLocators.FIND_ORDER_BY_POSTCODE_DROPDOWN).click()
@@ -76,3 +82,12 @@ class OrdersAndReturnsPage(BasePage):
         self.billing_lastname_field().send_keys(billing_lastname)
         self.select_find_order_by_postcode_dropdown()
         self.billing_postcode_field().send_keys(postcode)
+
+    def find_order_by_email(self,order_id, billing_lastname, postcode):
+        self.fill_all_field_with_email(order_id, billing_lastname, postcode)
+        self.continue_button().click()
+
+    def find_order_by_postcode(self,order_id, billing_lastname, postcode):
+        self.fill_all_field_with_postcode(order_id, billing_lastname, postcode)
+        self.continue_button().click()
+

@@ -1,6 +1,9 @@
 from data.fake_data import FakeData
 from locators.orders_and_returns import OrdersAndReturnsPageLocators
+from pages.checkout_page import CheckoutPage
 from pages.footer.orders_and_returns import OrdersAndReturnsPage
+from pages.item_page import ItemPage
+from pages.main_page import MainPage
 
 
 class TestIncorrectEmailFill(FakeData):
@@ -135,10 +138,10 @@ class TestCheckNonExistentOrder(FakeData):
 
 class TestCheckExistingOrder(FakeData):
 
-    # требуется регистрация , логин и плейсордер
-    def test_by_email(self):
+    def test_by_email(self, driver):
         """TC_012.009.007 | Footer > “Orders and Returns” > Search for an existing order By Email or ZIP Code\n
         Pre-conditions:
+            The user must place an order on the website.
             User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
         Steps:
             The user enters the correct data for the existing order in all required fields
@@ -148,23 +151,63 @@ class TestCheckExistingOrder(FakeData):
             (url = https://magento.softwaretestingboard.com/sales/guest/view/ ) The header says "Order # 'NUMBER'",
              instead of the word 'NUMBER' the number of the order you are looking for should be displayed.
              The user sees all available information about the order, including status"""
-        pass
+        email = self.email
+        last_name = self.last_name
+        state = self.state
 
-    # требуется регистрация , логин и плейсордер
-    def test_by_postcode(self):
+        page = MainPage(driver, url=MainPage.URL)
+        page.open()
+        page.add_clamber_watch_from_gear_catalog_to_cart()
+
+        page = CheckoutPage(driver, CheckoutPage.URL)
+        page.open()
+        order_id = page.full_guest_place_order_us_address_flat_shipping(state, email, self.first_name,
+                                                                        last_name, self.street_address, self.city,
+                                                                        self.us_postcode_state(state),
+                                                                        self.phone_number)
+
+        page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL)
+        page.open()
+        page.find_order_by_email(order_id, last_name, email)
+
+        assert page.text_order_number_on_view_order_page().text == f"Order # {order_id}", 'Не удалось отследить существующий заказ'
+        assert page.order_status(), 'У заказа отсутствует статус'
+
+    def test_by_postcode(self, driver,execution_number):
         """TC_012.009.007 | Footer > “Orders and Returns” > Search for an existing order By Email or ZIP Code\n
-            Pre-conditions:
-                User not logged into the account and is on the page (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
-            Steps:
-                1)The user selects "ZIP Code" in the "Find Order By" field
-                2)The user enters the correct data for the existing order in all required fields
-                and clicks the “Continue” button.
-            Expected results:
-                There was a redirect to a page with information about the required order
-                (url = https://magento.softwaretestingboard.com/sales/guest/view/ ) The header says "Order # 'NUMBER'",
-                instead of the word 'NUMBER' the number of the order you are looking for should be displayed.
-                The user sees all available information about the order, including status"""
-        pass
+        Pre-conditions:
+            The user must place an order on the website.
+            User not logged into the account and is on the page
+             (url = https://magento.softwaretestingboard.com/sales/guest/form/ ) .
+        Steps:
+            1)The user selects "ZIP Code" in the "Find Order By" field
+            2)The user enters the correct data for the existing order in all required fields
+            and clicks the “Continue” button.
+        Expected results:
+            There was a redirect to a page with information about the required order.
+            The header says "Order # 'NUMBER'",instead of the word 'NUMBER' the number
+            of the order you are looking for should be displayed.
+            The user sees all available information about the order, including status"""
+        state = self.state
+        postcode = self.us_postcode_state(state)
+        last_name = self.last_name
+
+        page = ItemPage(driver, url=ItemPage.URL_DRIVEN_BACKPACK)
+        page.open()
+        page.add_driven_backpack_from_item_card_to_cart(3)
+
+        page = CheckoutPage(driver, CheckoutPage.URL)
+        page.open()
+        order_id = page.full_guest_place_order_us_address_best_way_shipping(state, self.email, self.first_name,
+                                                                            last_name, self.street_address, self.city,
+                                                                            postcode,
+                                                                            self.phone_number)
+
+        page = OrdersAndReturnsPage(driver, url=OrdersAndReturnsPage.URL)
+        page.open()
+        page.find_order_by_postcode(order_id, last_name, postcode)
+        assert page.text_order_number_on_view_order_page().text == f"Order # {order_id}", 'Не удалось отследить существующий заказ'
+        assert page.order_status(), 'У заказа отсутствует статус'
 
 
 class TestChangeFindOrderBy:
@@ -223,7 +266,8 @@ class TestFieldsAreSavedInputData(FakeData):
         email = self.email
         page.fill_all_field_with_email(order_id, billing_last_name, email)
 
-        assert page.get_value_order_id_field() == str(order_id), 'ВВеденая информация в поле Order ID, отображается некорректно'
+        assert page.get_value_order_id_field() == str(
+            order_id), 'ВВеденая информация в поле Order ID, отображается некорректно'
         assert page.get_value_billing_lastname_field() == billing_last_name, 'ВВеденая информация в поле Billing Last Name, отображается некорректно'
         assert page.get_value_email_field() == email, 'ВВеденая информация в поле Email , отображается некорректно'
 
@@ -246,6 +290,7 @@ class TestFieldsAreSavedInputData(FakeData):
         postcode = self.postcode
         page.fill_all_field_with_postcode(order_id, billing_last_name, postcode)
 
-        assert page.get_value_order_id_field() == str(order_id), 'ВВеденая информация в поле Order ID, отображается некорректно'
+        assert page.get_value_order_id_field() == str(
+            order_id), 'ВВеденая информация в поле Order ID, отображается некорректно'
         assert page.get_value_billing_lastname_field() == billing_last_name, 'ВВеденая информация в поле Billing Last Name , отображается некорректно'
         assert page.get_value_postcode_field() == postcode, 'ВВеденая информация в поле Billing Zip Code, отображается некорректно'
