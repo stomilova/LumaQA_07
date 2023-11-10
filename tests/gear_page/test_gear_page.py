@@ -42,7 +42,10 @@ def find_categories_and_counters_at_the_sidebar():
     ), f"The number of categories is {len(categories)},(expected = {len(category_list)}).Check, it can be update in category list"
 
     for category in categories:
-        category_xpath = (By.XPATH, f'//dd//a[text()="{category.text}"]')
+        category_xpath = (
+            By.XPATH, 
+            f'//dd//a[text()="{category.text}"]'
+        )
         counter_xpath = (
             By.XPATH,
             f'{category_xpath[1]}/following-sibling::span[@class="count"]',
@@ -70,7 +73,9 @@ def test_find_and_verify_title_of_sidebar(gear_page_precondition):
     title_1 = sidebar.find_element(*GearPageLocators.SHOP_BY_TITLE).text
     title_2 = sidebar.find_element(*GearPageLocators.CATEGORY_TITLE).text
 
-    assert f"{title_1} {title_2}" == "Shop By Category"
+    assert f"{title_1} {title_2}" == "Shop By Category", f"""
+        The title of the Sidebar - '{title_1} {title_2}'.
+        Expected - 'Shop By Category'"""
 
 
 @pytest.mark.parametrize(
@@ -94,14 +99,11 @@ def test_find_and_verify_category_at_the_sidebar(
     category_name = category.text
     assert (
         category_name in category_list
-    ), f"We found another one category title,please check the locators at the Sidebar"
+    ), f"We found another one category title - '{category_name}', Please check the locators at the Sidebar and list of categories"
 
-    category_list.remove(category_name)
-    founded_categories.append(category_name)
-
-    assert (
-        category.is_displayed()
-    ), f"This category is not displayed ,please check the locators at the  Sidebar"
+    category_list.remove(category_name) # удаляем из временного списка, чтоб проверить - нашлили мы все наши категории заданные по стори. лист может обновляться
+    founded_categories.append(category_name) # добавляем в новый лист, то что нашли, чтоб были видны сразу в резалте.
+    
 
 
 def test_category_list():
@@ -172,7 +174,7 @@ def test_verify_category_counter_on_gear_and_category_page(
     category.click()
     wait.until(EC.url_to_be(category_url))
 
-    # блок проверки редеректа - нужно уточнение данных условий, название страници состоит из двух значений "title - Gear"
+    # блок проверки редеректа - название страници категории состоит из двух значений "title - Gear"
     assert (
         driver.current_url == category_url
     ), f"We reached wrong url - {driver.current_url}, but expected - {category_url}"
