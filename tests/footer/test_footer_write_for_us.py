@@ -50,7 +50,7 @@ def test_check_visibility_or_clickability_of_the_title(param,any_url,driver):
     any_page.open()
 
     if param == 'visibility':
-        assert any_page.is_visible(locator=WRITE_FOR_US_LINK)
+        assert any_page.is_visible(locator=WRITE_FOR_US_LINK),f"Expected link '{expected_href}' isn't visible in the footer of page with '{any_url}'"
     else:
-        assert any_page.is_clickable(locator=WRITE_FOR_US_LINK)
+        assert any_page.is_clickable(locator=WRITE_FOR_US_LINK),f"Expected link '{expected_href}' isn't clickable in the footer of page with '{any_url}'"
 
