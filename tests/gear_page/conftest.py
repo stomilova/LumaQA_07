@@ -1,5 +1,5 @@
 import pytest
-from data.gear_page_urls import GearPage
+from pages.gear_page.gear_page import GearPage
 
 @pytest.fixture(scope="function")
 def gear_page_precondition(driver):
