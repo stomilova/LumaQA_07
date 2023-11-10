@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from base.seleniumbase import BasePage
-from pages.gear_page.urls import GEAR_PAGE
+from data.gear_page_urls import GEAR_PAGE
 
 
 class GearPage(BasePage):
