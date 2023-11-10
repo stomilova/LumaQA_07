@@ -8,7 +8,6 @@ from pages.gear_page.gear_page import GearPage
 from data.gear_page_urls import BAGS_PAGE, FITNESS_EQ_PAGE, WATCHES_PAGE
 from locators.gear_page_locators import GearPageLocators, CategoryPageLocators
 
-
 total_categories = ["Bags", "Fitness Equipment", "Watches"]
 category_list = ["Bags", "Fitness Equipment", "Watches"]
 founded_categories = []
@@ -23,22 +22,14 @@ list_of_category_url = [
 class TestGearPageCategory:
     """TC_009.001.001 - TC_009.002.006 for now"""
 
-    total_categories = ["Bags", "Fitness Equipment", "Watches"]
-    category_list = ["Bags", "Fitness Equipment", "Watches"]
-    founded_categories = []
-
-    list_of_category_url = [
-        BAGS_PAGE,
-        FITNESS_EQ_PAGE,
-        WATCHES_PAGE,
-    ]
-
     def find_categories_and_counters_at_the_sidebar():
         """collect test data"""
         test_data = []
         options = Options()
-        options.add_argument("--incognito")
-        options.add_argument("--headless")
+        options.add_argument('--window-size=2880,1800')
+        options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
         driver = webdriver.Chrome(options=options)
         gear_page = GearPage(driver=driver)
         gear_page.open()
