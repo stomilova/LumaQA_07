@@ -188,7 +188,7 @@ class TestCheckExistingOrder(FakeData):
 class TestChangeFindOrderBy:
 
     def test_switch_to_zip(self, driver):
-        """TC_012.008.001 | Footer > “Orders and Returns” > Visibility and clickability > Verify the finding
+        """TC_012.008.004 | Footer > “Orders and Returns” > Visibility and clickability > Verify the finding
          criterion is "Billing ZIP code" upon choosing "ZIP code" in "Find Order By" field/n
             Preconditions:
                 A guest user is on the https://magento.softwaretestingboard.com/sales/guest/form/ page
@@ -204,7 +204,7 @@ class TestChangeFindOrderBy:
         assert page.billing_postcode_field_name().text == OrdersAndReturnsPageLocators.TEXT_NAME_POSTCODE_FIELD, 'не произошло переключение поиска заказа с Email на ZIP'
 
     def test_switch_to_email(self, driver):
-        """TC_012.008.002 | Footer > “Orders and Returns” > Visibility and clickability > Verify the finding
+        """TC_012.008.005 | Footer > “Orders and Returns” > Visibility and clickability > Verify the finding
         criterion is "Email" upon choosing "Email" in "Find Order By" field/n
             Preconditions:
                 A guest user is on the page https://magento.softwaretestingboard.com/sales/guest/form/
