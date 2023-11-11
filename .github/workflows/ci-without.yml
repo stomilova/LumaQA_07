@@ -3,7 +3,7 @@ name: Run tests without Docker
 on:
   push:
     branches:    
-      - main
+      - test
 
 jobs:
   build: 
