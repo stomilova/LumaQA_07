@@ -1,4 +1,6 @@
+from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webelement import WebElement
@@ -6,7 +8,10 @@ from selenium.webdriver.remote.webelement import WebElement
 from locators.base_page_locators import BasePageLocators
 
 
-class BasePage():
+class BasePage:
+    MESSAGE_SUCCESS = (By.CSS_SELECTOR, "[data-ui-id='message-success']")
+    MESSAGE_NOTICE = (By.CSS_SELECTOR, "[data-ui-id='message-notice']")
+    MESSAGE_ERROR = (By.CSS_SELECTOR, "[data-ui-id='message-error']")
     """
     Базовый класс для страниц веб-приложения, использующий Selenium для взаимодействия с элементами на странице.
 
@@ -24,6 +29,7 @@ class BasePage():
     Note:
         Для использования этого класса необходимо импортировать соответствующие модули и создать экземпляр WebDriver перед его инициализацией.
     """
+
     def __init__(self, driver, url):
         self.driver = driver
         self.url = url
@@ -50,7 +56,7 @@ class BasePage():
         """
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
-    def is_clickable(self, locator:tuple, timeout: int = 10) -> WebElement:
+    def is_clickable(self, locator: tuple, timeout: int = 10) -> WebElement:
         """
         Ожидает, что элемент, заданный локатором, станет кликабельным в течение указанного времени.
 
@@ -74,3 +80,28 @@ class BasePage():
 
     def is_invisible(self, locator: tuple, timeout: int = 10) -> WebElement:
         return wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
+
+    def clear_and_send_keys(self, el: WebElement, val: str) -> None:
+        el.clear()
+        el.send_keys(val)
+
+    @property
+    def current_url(self):
+        return self.driver.current_url
+
+    @current_url.setter
+    def current_url(self, val) -> None:
+        self.driver.delete_cookie("mage-messages")
+        self.driver.get(val)
+
+    @property
+    def message_success(self) -> str:
+        return self.is_visible(self.MESSAGE_SUCCESS).text
+
+    @property
+    def message_notice(self) -> str:
+        return self.is_visible(self.MESSAGE_NOTICE).text
+
+    @property
+    def message_error(self) -> str:
+        return self.is_visible(self.MESSAGE_ERROR).text
