@@ -3,6 +3,7 @@ import pytest
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 
+
 @pytest.fixture
 def options():
     options = Options()
@@ -10,15 +11,17 @@ def options():
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    return options 
+    return options
 
-@pytest.fixture 
+
+@pytest.fixture
 def driver(options):
     driver = webdriver.Chrome(options=options)
-    yield driver 
+    yield driver
     driver.quit()
+
 
 @pytest.fixture
 def wait(driver):
-    wait = WebDriverWait(driver, timeout = 15)
-    return wait 
+    wait = WebDriverWait(driver, timeout=15)
+    return wait
