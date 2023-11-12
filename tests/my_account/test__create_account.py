@@ -9,17 +9,17 @@ from pages.main_page import MainPage
 class TestX(FakeData):
     def test_create_account(self, driver):
         page = CreateAccountPage(driver).new(self.first_name, self.last_name, self.email, self.password)
-        assert page.current_url == MyAccountPage.URL
-        assert page.message_success == CreateAccountPage.SUCCESS
+        assert page.current_url == MyAccountPage.URL, "User is not on expected page"
+        assert page.message_success == CreateAccountPage.SUCCESS, "Success message not as expected"
 
     def test_create_second_account_with_same_email(self, driver, create_account, email):
         LogoutPage(driver)
         page = CreateAccountPage(driver).new(self.first_name, self.last_name, email, self.password)
-        assert page.current_url == CreateAccountPage.URL
-        assert page.message_error == CreateAccountPage.ERROR
+        assert page.current_url == CreateAccountPage.URL, "User is not on expected page"
+        assert page.message_error == CreateAccountPage.ERROR, "Message not as expected"
 
     def test_logout(self, driver, create_account):
         page = LogoutPage(driver)
-        assert page.current_url == LogoutPage.URL_SUCCESS
-        sleep(6)
-        assert page.current_url == MainPage.URL
+        assert page.current_url == LogoutPage.URL_SUCCESS, "User is not on expected page"
+        page.redirect(MainPage.URL, 6)
+        assert page.current_url == MainPage.URL, "User not redirected to expected page"
