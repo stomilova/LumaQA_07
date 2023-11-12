@@ -38,6 +38,8 @@ class BasePage:
         """
         Открывает URL страницы в браузере.
         """
+        self.driver.execute_cdp_cmd("Network.enable", {})
+        self.driver.execute_cdp_cmd('Network.setExtraHTTPHeaders', {'headers': {'accept-language': 'en-US,en;q=0.9'}})
         self.driver.get(self.url)
 
     def is_visible(self, locator: tuple, timeout: int = 10) -> WebElement:
@@ -92,6 +94,8 @@ class BasePage:
     @current_url.setter
     def current_url(self, val) -> None:
         self.driver.delete_cookie("mage-messages")
+        self.driver.execute_cdp_cmd("Network.enable", {})
+        self.driver.execute_cdp_cmd('Network.setExtraHTTPHeaders', {'headers': {'accept-language': 'en-US,en;q=0.9'}})
         self.driver.get(val)
 
     @property
