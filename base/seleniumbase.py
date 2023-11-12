@@ -9,6 +9,7 @@ from locators.base_page_locators import BasePageLocators
 
 
 class BasePage:
+    TIMEOUT = 10
     MESSAGE_SUCCESS = (By.CSS_SELECTOR, "[data-ui-id='message-success']")
     MESSAGE_NOTICE = (By.CSS_SELECTOR, "[data-ui-id='message-notice']")
     MESSAGE_ERROR = (By.CSS_SELECTOR, "[data-ui-id='message-error']")
@@ -125,3 +126,22 @@ class BasePage:
         else:
             assert self.is_clickable(locator=element_locator),f"'{element_value}' isn't clickable in {location} of page with the url = '{self.url}'"
 
+    def visible(self, locator: (str, str), timeout: int = TIMEOUT) -> WebElement:
+        # self.is_loading()
+        try:
+            return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
+        except TimeoutException:
+            raise AssertionError(f"{timeout}s wait to be visible of {locator}")
+
+    def clickable(self, locator: tuple[str, str], timeout: int = TIMEOUT) -> WebElement:
+        # self.is_loading()
+        try:
+            return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
+        except TimeoutException:
+            raise AssertionError(f"{timeout}s wait to be clickable of {locator}")
+
+    def redirect(self, url, timeout: int = TIMEOUT):
+        try:
+            return wait(self.driver, timeout).until(EC.url_to_be(url))
+        except TimeoutException:
+            raise AssertionError(f"{timeout}s wait to be redirected to {url}")
