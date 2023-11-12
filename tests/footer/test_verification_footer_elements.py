@@ -1,6 +1,7 @@
 import pytest
 from pages.gear_page.category_page import BasePage
 from locators.base_page_locators import BasePageLocators
+from data.test_urls_list import TEST_URL_LIST
 
 
 class TestFooterElementsVisibleClickable:
@@ -8,22 +9,6 @@ class TestFooterElementsVisibleClickable:
         "visibility",
         "clickability",
     ]  # можно использовать данный список для отправки в  параметризацию, если нужно проверить два условия
-    TEST_URL_LIST = [
-        "https://magento.softwaretestingboard.com/",
-        "https://magento.softwaretestingboard.com/what-is-new.html",
-        "https://magento.softwaretestingboard.com/women.html",
-        "https://magento.softwaretestingboard.com/men.html",
-        "https://magento.softwaretestingboard.com/gear.html",
-        "https://magento.softwaretestingboard.com/training.html",
-        "https://magento.softwaretestingboard.com/sale.html",
-        "https://magento.softwaretestingboard.com/gear/bags.html",
-        "https://magento.softwaretestingboard.com/gear/fitness-equipment.html",
-        "https://magento.softwaretestingboard.com/gear/watches.html",
-        "https://magento.softwaretestingboard.com/men/tops-men.html",
-        "https://magento.softwaretestingboard.com/men/bottoms-men.html",
-        "https://magento.softwaretestingboard.com/women/tops-women.html",
-        "https://magento.softwaretestingboard.com/women/bottoms-women.html",
-    ]  # нужно вынести в дату
 
     @pytest.mark.parametrize("param", PARAMETERS)
     @pytest.mark.parametrize("any_url", TEST_URL_LIST)
@@ -70,7 +55,6 @@ class TestFooterElementsVisibleClickable:
                 The copyright information is visible in the footer of current page of the website.
         """
 
-        # expected_text = "Copyright © 2013-present Magento, Inc. All rights reserved."
         any_page = BasePage(driver=driver, url=any_url)
         any_page.open()
         any_page.verify_visability_or_clickability_of_the_element_in_location(
@@ -79,3 +63,25 @@ class TestFooterElementsVisibleClickable:
             element_locator=BasePageLocators.COPYRIGHT_INFO,
             location="the footer",
         )
+
+    @pytest.mark.parametrize("any_url", TEST_URL_LIST)
+    def test_text_verification_of_the_copyright(self, any_url, driver):
+        """
+        TC_012.011.002 | Footer > Self > Text verification of Copyright information
+            Precondition:
+                User on any page of the website and the copyright information is visible in the Footer.
+            Steps:
+                Verify the text of the copyright information in the Footer.
+            Expected results:
+                The copyright information should have a text “Copyright © 2013-present Magento, Inc. All rights reserved.”
+                opyright information is visible in the footer of current page of the website.
+        """
+
+        expected_text = "Copyright © 2013-present Magento, Inc. All rights reserved."
+        any_page = BasePage(driver=driver, url=any_url)
+        any_page.open()
+        copyright_info = any_page.is_visible(locator=BasePageLocators.COPYRIGHT_INFO)
+        assert (
+            copyright_info.text == expected_text
+        ), f"""
+            The copiright information from this page {any_url} = '{copyright_info.text}' and mismatch to the expected text ('{expected_text}')"""
