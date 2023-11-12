@@ -10,3 +10,6 @@ class BasePageLocators:
 
     LINK_GEAR_CATALOG = (By.XPATH, "//*[@id='ui-id-6']")
     LINK_WATCHES_CATALOG = (By.XPATH, "//*[@id='ui-id-27']")
+
+    WRITE_FOR_US_LINK = (By.XPATH,'//footer//a[@href="https://softwaretestingboard.com/write-for-us/"]')
+    COPYRIGHT_INFO = (By.XPATH,"//footer/following-sibling::*[@class='copyright']")
