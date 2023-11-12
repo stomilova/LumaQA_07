@@ -105,3 +105,19 @@ class BasePage:
     @property
     def message_error(self) -> str:
         return self.is_visible(self.MESSAGE_ERROR).text
+    
+    def verify_visability_or_clickability_of_the_element_in_location(self,param:str,element_value:str,element_locator:tuple,location:str):
+        """ 
+        Метод для упрощения проверки нахождения или кликабильности элемента на любой странице в пределах нужной нам локации
+        Args:
+            param -  параметр, который мы проверяем
+            element_value - описание элемента, который мы ищем
+            location - если мы ищем элемент в пределах какой то локации, будь то футер, или сайдбар или хэдер...можно описать как вам это нужно
+
+        пример использования можно найти : test/footer/test_verification_footer_elements
+        """
+        if param == 'visibility':
+            assert self.is_visible(locator=element_locator),f"'{element_value}' isn't visible in {location} of page with the url = '{self.url}'"
+        else:
+            assert self.is_clickable(locator=element_locator),f"'{element_value}' isn't clickable in {location} of page with the url = '{self.url}'"
+
