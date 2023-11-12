@@ -26,10 +26,10 @@ class TestGearPageCategory:
         """collect test data"""
         test_data = []
         options = Options()
-        options.add_argument('--window-size=2880,1800')
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument("--window-size=2880,1800")
+        options.add_argument("--headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
         driver = webdriver.Chrome(options=options)
         gear_page = GearPage(driver=driver)
         gear_page.open()
@@ -56,8 +56,7 @@ class TestGearPageCategory:
         driver.quit()
         return test_data
 
-
-    def test_find_and_verify_title_of_sidebar(self,gear_page_precondition):
+    def test_find_and_verify_title_of_sidebar(self, gear_page_precondition):
         """TC_009.001.001 | Gear page > categories > Shop By Category
         Pre-conditions:
             A user is on The Gear page
@@ -80,12 +79,11 @@ class TestGearPageCategory:
             The title of the Sidebar - '{title_1} {title_2}'.
             Expected - 'Shop By Category'"""
 
-
     @pytest.mark.parametrize(
         "category_xpath,counter_xpath", find_categories_and_counters_at_the_sidebar()
     )
     def test_find_and_verify_category_at_the_sidebar(
-        self,driver, category_xpath, counter_xpath, gear_page_precondition
+        self, category_xpath, counter_xpath, gear_page_precondition
     ):
         """TC_009.001.(002-004) | Gear page > categories > category
         Pre-conditions:
@@ -111,7 +109,6 @@ class TestGearPageCategory:
             category_name
         )  # добавляем в новый лист, то что нашли, чтоб были видны сразу в резалте.
 
-
     def test_category_list(self):
         """Additional step to verify the total list of categories after the previous test cases"""
 
@@ -122,12 +119,11 @@ class TestGearPageCategory:
             not category_list
         ), f"Please check compare the we have found : {founded_categories}, we should found : {total_categories}. we miss {missed_category}"
 
-
     @pytest.mark.parametrize(
         "category_xpath,counter_xpath", find_categories_and_counters_at_the_sidebar()
     )
     def test_find_and_verify_location_of_counter_at_the_sidebar(
-        self,driver, gear_page_precondition, category_xpath, counter_xpath
+        self, gear_page_precondition, category_xpath, counter_xpath
     ):
         """TC_009.002.(001-003) | Gear page > categories > The counter for the category
         Pre-conditions:
@@ -148,12 +144,11 @@ class TestGearPageCategory:
             category_counter.text
         ), f"We found a counter for {category.text}, but it is empty"
 
-
     @pytest.mark.parametrize(
         "category_xpath,counter_xpath", find_categories_and_counters_at_the_sidebar()
     )
     def test_verify_category_counter_on_gear_and_category_page(
-        self,driver, wait, gear_page_precondition, category_xpath, counter_xpath
+        self, driver, wait, gear_page_precondition, category_xpath, counter_xpath
     ):
         """TC_009.002.(004-006) | Gear page > categories >
         Verify the counter on the Gear Page for the category 'Bags' with counter on the Category Page
