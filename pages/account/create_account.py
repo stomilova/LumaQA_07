@@ -18,6 +18,8 @@ class CreateAccountPage(BasePage):
     def __init__(self, driver, url=URL):
         super().__init__(driver, url)
         self.current_url = url
+        self.is_visible = self.visible
+        self.is_clickable = self.clickable
 
     @property
     def first_name(self):
