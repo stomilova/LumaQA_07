@@ -11,4 +11,13 @@ class CreateNewAccountPageLocators:
     CREATE_ACCOUNT_BUTTON = (By.XPATH, "//button[@title='Create an Account']")
     SIGN_IN_BUTTON = (By.XPATH, "//button[@id='send2' and @class='action login primary']")
 
+    FIRST_NAME_LABEL = (By.CSS_SELECTOR, 'label[for="firstname"]')
+    LAST_NAME_LABEL = (By.CSS_SELECTOR, 'label[for="lastname"]')
+    EMAIL_LABEL = (By.CSS_SELECTOR, 'label[for="email_address"]')
+    PASSWORD_LABEL = (By.CSS_SELECTOR, 'label[for="password"]')
+    CONFIRM_PASSWORD_LABEL = (By.CSS_SELECTOR, 'label[for="password-confirmation"]')
+
+
     TEXT_THX_FOR_REGISTRATION_MSG = "Thank you for registering with Main Website Store."
+
+

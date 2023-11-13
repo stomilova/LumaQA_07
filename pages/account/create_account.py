@@ -72,3 +72,13 @@ class CreateAccountPage(BasePage):
         self.password_two = password
         self.create_account().click()
         return self
+
+    def element_label(self, locator):
+        label = self.is_visible(locator).text
+        script = "return window.getComputedStyle(document.querySelector('" + locator[
+            1] + "'),'::after').getPropertyValue('content')"
+        element = self.driver.execute_script(script)
+        return label + ' ' + element.strip('"')
+
+
+
