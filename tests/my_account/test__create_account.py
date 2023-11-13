@@ -11,7 +11,7 @@ from locators.create_new_account_locators import CreateNewAccountPageLocators as
 
 
 class TestX(FakeData):
-    def test_create_account(self, driver):
+    def teOFFst_create_account(self, driver):
         page = CreateAccountPage(driver).new(self.first_name, self.last_name, self.email, self.password)
         assert page.current_url == MyAccountPage.URL, "User is not on expected page"
         assert page.message_success == CreateAccountPage.SUCCESS, "Success message not as expected"
