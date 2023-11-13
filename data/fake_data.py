@@ -20,6 +20,10 @@ class FakeData:
         return Faker().password()
 
     @property
+    def company(self):
+        return Faker().company()
+
+    @property
     def phone_number(self):
         return Faker().phone_number()
 

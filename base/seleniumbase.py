@@ -1,4 +1,8 @@
+from time import sleep
+
+from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webelement import WebElement
@@ -6,7 +10,11 @@ from selenium.webdriver.remote.webelement import WebElement
 from locators.base_page_locators import BasePageLocators
 
 
-class BasePage():
+class BasePage:
+    TIMEOUT = 10
+    MESSAGE_SUCCESS = (By.CSS_SELECTOR, "[data-ui-id='message-success']")
+    MESSAGE_NOTICE = (By.CSS_SELECTOR, "[data-ui-id='message-notice']")
+    MESSAGE_ERROR = (By.CSS_SELECTOR, "[data-ui-id='message-error']")
     """
     Базовый класс для страниц веб-приложения, использующий Selenium для взаимодействия с элементами на странице.
 
@@ -24,6 +32,7 @@ class BasePage():
     Note:
         Для использования этого класса необходимо импортировать соответствующие модули и создать экземпляр WebDriver перед его инициализацией.
     """
+
     def __init__(self, driver, url):
         self.driver = driver
         self.url = url
@@ -32,6 +41,8 @@ class BasePage():
         """
         Открывает URL страницы в браузере.
         """
+        self.driver.execute_cdp_cmd("Network.enable", {})
+        self.driver.execute_cdp_cmd('Network.setExtraHTTPHeaders', {'headers': {'accept-language': 'en-US,en;q=0.9'}})
         self.driver.get(self.url)
 
     def is_visible(self, locator: tuple, timeout: int = 10) -> WebElement:
@@ -50,7 +61,7 @@ class BasePage():
         """
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
-    def is_clickable(self, locator:tuple, timeout: int = 10) -> WebElement:
+    def is_clickable(self, locator: tuple, timeout: int = 10) -> WebElement:
         """
         Ожидает, что элемент, заданный локатором, станет кликабельным в течение указанного времени.
 
@@ -74,3 +85,72 @@ class BasePage():
 
     def is_invisible(self, locator: tuple, timeout: int = 10) -> WebElement:
         return wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
+
+    def clear_and_send_keys(self, el: WebElement, val: str) -> None:
+        el.clear()
+        el.send_keys(val)
+
+    @property
+    def current_url(self):
+        return self.driver.current_url
+
+    @current_url.setter
+    def current_url(self, val) -> None:
+        self.driver.delete_cookie("mage-messages")
+        self.driver.execute_cdp_cmd("Network.enable", {})
+        self.driver.execute_cdp_cmd('Network.setExtraHTTPHeaders', {'headers': {'accept-language': 'en-US,en;q=0.9'}})
+        self.driver.get(val)
+
+    @property
+    def message_success(self) -> str:
+        return self.is_visible(self.MESSAGE_SUCCESS).text
+
+    @property
+    def message_notice(self) -> str:
+        return self.is_visible(self.MESSAGE_NOTICE).text
+
+    @property
+    def message_error(self) -> str:
+        return self.is_visible(self.MESSAGE_ERROR).text
+
+    def verify_visability_or_clickability_of_the_element_in_location(self, param: str, element_value: str,
+                                                                     element_locator: tuple, location: str):
+        """ 
+        Метод для упрощения проверки нахождения или кликабильности элемента на любой странице в пределах нужной нам локации
+        Args:
+            param -  параметр, который мы проверяем
+            element_value - описание элемента, который мы ищем
+            location - если мы ищем элемент в пределах какой то локации, будь то футер, или сайдбар или хэдер...можно описать как вам это нужно
+
+        пример использования можно найти : test/footer/test_verification_footer_elements
+        """
+        if param == 'visibility':
+            assert self.is_visible(
+                locator=element_locator), f"'{element_value}' isn't visible in {location} of page with the url = '{self.url}'"
+        else:
+            assert self.is_clickable(
+                locator=element_locator), f"'{element_value}' isn't clickable in {location} of page with the url = '{self.url}'"
+
+    def visible(self, locator: (str, str), timeout: int = TIMEOUT) -> WebElement:
+        # self.is_loading()
+        try:
+            return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
+        except TimeoutException:
+            raise AssertionError(f"{timeout}s wait to be visible of {locator}")
+
+    def clickable(self, locator: tuple[str, str], timeout: int = TIMEOUT) -> WebElement:
+        # self.is_loading()
+        try:
+            return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
+        except TimeoutException:
+            raise AssertionError(f"{timeout}s wait to be clickable of {locator}")
+
+    def redirect(self, url, timeout: int = TIMEOUT):
+        try:
+            return wait(self.driver, timeout).until(EC.url_to_be(url))
+        except TimeoutException:
+            raise AssertionError(f"{timeout}s wait to be redirected to {url}")
+
+    def is_loading(self):
+        while self.driver.execute_script("return document.querySelector('div.loader:not(.hidden)') != null;"):
+            sleep(0.1)
