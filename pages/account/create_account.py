@@ -80,5 +80,9 @@ class CreateAccountPage(BasePage):
         element = self.driver.execute_script(script)
         return label + ' ' + element.strip('"')
 
+    def element_hint(self, locator):
+        return self.is_visible(locator).get_attribute("title")
+
+
 
 

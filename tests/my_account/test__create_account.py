@@ -37,3 +37,14 @@ class TestX(FakeData):
         page = CreateAccountPage(driver)
         assert page.element_label(locator) == expected, f'У поля {expected[:-2]} нету *'
 
+    @pytest.mark.parametrize('locator, expected', [(Label.FIRST_NAME_FIELD, 'First Name'),
+                                                   (Label.LAST_NAME_FIELD, 'Last Name'),
+                                                   (Label.EMAIL_FIELD, 'Email'),
+                                                   (Label.PASSWORD_FIELD, 'Password'),
+                                                   (Label.CONFIRM_PASSWORD_FIELD, 'Confirm Password')])
+    def test_account_form_hints(self, driver, locator, expected):
+        page = CreateAccountPage(driver)
+        assert page.element_hint(locator) == expected, f'У поля {expected} нету хинта'
+
+
+
