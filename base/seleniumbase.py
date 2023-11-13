@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
@@ -110,8 +112,9 @@ class BasePage:
     @property
     def message_error(self) -> str:
         return self.is_visible(self.MESSAGE_ERROR).text
-    
-    def verify_visability_or_clickability_of_the_element_in_location(self,param:str,element_value:str,element_locator:tuple,location:str):
+
+    def verify_visability_or_clickability_of_the_element_in_location(self, param: str, element_value: str,
+                                                                     element_locator: tuple, location: str):
         """ 
         Метод для упрощения проверки нахождения или кликабильности элемента на любой странице в пределах нужной нам локации
         Args:
@@ -122,9 +125,11 @@ class BasePage:
         пример использования можно найти : test/footer/test_verification_footer_elements
         """
         if param == 'visibility':
-            assert self.is_visible(locator=element_locator),f"'{element_value}' isn't visible in {location} of page with the url = '{self.url}'"
+            assert self.is_visible(
+                locator=element_locator), f"'{element_value}' isn't visible in {location} of page with the url = '{self.url}'"
         else:
-            assert self.is_clickable(locator=element_locator),f"'{element_value}' isn't clickable in {location} of page with the url = '{self.url}'"
+            assert self.is_clickable(
+                locator=element_locator), f"'{element_value}' isn't clickable in {location} of page with the url = '{self.url}'"
 
     def visible(self, locator: (str, str), timeout: int = TIMEOUT) -> WebElement:
         # self.is_loading()
@@ -145,3 +150,7 @@ class BasePage:
             return wait(self.driver, timeout).until(EC.url_to_be(url))
         except TimeoutException:
             raise AssertionError(f"{timeout}s wait to be redirected to {url}")
+
+    def is_loading(self):
+        while self.driver.execute_script("return document.querySelector('div.loader:not(.hidden)') != null;"):
+            sleep(0.1)
