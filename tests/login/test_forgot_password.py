@@ -1,3 +1,4 @@
+from pages.account.sign_in import ForgotPage
 from pages.login.forgot_password_page import ForgotPasswordPage
 # from pages.login.forgot_password_page import ForgotPasswordPage
 from locators.login_page_locators import ResetPageLocators, LoginPageLocators, ForgotPasswordPageLocators
@@ -34,5 +35,7 @@ def test_email_valid_format(driver, test_email):
     email.send_keys(test_email)
     page.button_reset_password().click()
     message = page.text_after_reset_email()
-    assert message == LoginPageLocators.RESET_PASS_MESS, f'Expected result: {LoginPageLocators.RESET_PASS_MESS}, but got: {message}'
+    assert message == ForgotPage.SUCCESS % test_email, (f'Expected result: {ForgotPage.SUCCESS % test_email}, '
+                                                        f'but got: {message}')
+    # assert message == LoginPageLocators.RESET_PASS_MESS, f'Expected result: {LoginPageLocators.RESET_PASS_MESS}, but got: {message}'
 
