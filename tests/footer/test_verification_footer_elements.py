@@ -10,6 +10,7 @@ class TestFooterElementsVisibleClickable:
         "clickability",
     ]  # можно использовать данный список для отправки в  параметризацию, если нужно проверить два условия
 
+    @pytest.mark.long
     @pytest.mark.parametrize("param", PARAMETERS)
     @pytest.mark.parametrize("any_url", TEST_URL_LIST)
     def test_check_visibility_or_clickability_of_the_title_write_for_us(
@@ -43,6 +44,7 @@ class TestFooterElementsVisibleClickable:
             location="the footer",
         )
 
+    @pytest.mark.long
     @pytest.mark.parametrize("any_url", TEST_URL_LIST)
     def test_check_visibility_of_the_copyright(self, any_url, driver):
         """
@@ -64,6 +66,7 @@ class TestFooterElementsVisibleClickable:
             location="the footer",
         )
 
+    @pytest.mark.long
     @pytest.mark.parametrize("any_url", TEST_URL_LIST)
     def test_text_verification_of_the_copyright(self, any_url, driver):
         """
