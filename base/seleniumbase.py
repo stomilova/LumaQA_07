@@ -154,3 +154,7 @@ class BasePage:
     def is_loading(self):
         while self.driver.execute_script("return document.querySelector('div.loader:not(.hidden)') != null;"):
             sleep(0.1)
+
+    def item_count(self, locator):
+        return len(self.driver.find_elements(*locator))
+
