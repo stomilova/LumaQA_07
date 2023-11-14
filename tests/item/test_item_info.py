@@ -24,3 +24,11 @@ class TestItemInfo:
         page.add_your_review_link().click()
 
         assert page.block_review_add(), ' Не появился блок с добавлением нового отзыва'
+
+    def test_item_name_and_sku(self, driver):
+        """TC_002.008.001 | Product page > Main info > Name"""
+        page = ItemPage(driver, url=ItemPage.URL_DRIVEN_BACKPACK)
+        page.open()
+
+        assert page.item_name(), 'Имя товара не отображается '
+        assert page.item_sku_number(), 'SKU# товара не отображается'
