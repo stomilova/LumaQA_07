@@ -27,6 +27,12 @@ class ItemPage(BasePage):
         self.is_clickable(ItemPageLocators.ADD_TO_CART_BUTTON).click()
         self.is_visible(BasePageLocators.MSG_SUCCESS)
 
+    def item_name(self):
+        return self.is_visible(ItemPageLocators.ITEM_NAME)
+
+    def item_sku_number(self):
+        return self.is_visible(ItemPageLocators.ITEM_SKU_NUMBER)
+
     def item_review_count(self):
         return int(self.is_visible(ItemPageLocators.ITEM_REVIEW_COUNT).text)
 
@@ -67,5 +73,3 @@ class ItemPageJackets(BasePage):
 
     def related_item(self):
         return self.item_count(self.RELATED_ITEM)
-
-
