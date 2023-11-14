@@ -2,10 +2,13 @@ from selenium.webdriver.common.by import By
 
 
 class ItemPageLocators:
+    ITEM_NAME = (By.XPATH, "//*[@itemprop='name']")
+    ITEM_SKU_NUMBER = (By.XPATH, "//*[@class='product attribute sku']")
+
     ADD_TO_CART_BUTTON = (By.XPATH, "//*[@id='product-addtocart-button']")
 
-    ADD_YOUR_REVIEW_LINK = (By.XPATH,"//*[@class='action add']")
-    BLOCK_REVIEW_ADD = (By.XPATH,"//*[@class='block review-add']")
+    ADD_YOUR_REVIEW_LINK = (By.XPATH, "//*[@class='action add']")
+    BLOCK_REVIEW_ADD = (By.XPATH, "//*[@class='block review-add']")
     ITEM_REVIEW_COUNT = (By.XPATH, "//span[@itemprop='reviewCount']")
     ITEM_REVIEW_LINK = (By.XPATH, "//*[text()='Reviews']")
     ITEM_RATING = (By.XPATH, "//div[@class='rating-summary']//div[@class='rating-result']")
