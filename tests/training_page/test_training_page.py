@@ -1,4 +1,4 @@
-from pages.training_page.training_page import TrainingPage
+from pages.training_page.traning_page import TrainingPage
 from locators.training_page_locators import TrainingPageLocators
 
 
