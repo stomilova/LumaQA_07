@@ -26,3 +26,4 @@ class TestTrainingPage:
         assert compare_products_text.is_displayed(), "Compare Products text is not displayed"
         assert my_wish_list_text.is_displayed(), "My Wish List text is not displayed"
 
+
