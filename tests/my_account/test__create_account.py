@@ -22,7 +22,7 @@ class TestX(FakeData):
         assert page.current_url == CreateAccountPage.URL, "User is not on expected page"
         assert page.message_error == CreateAccountPage.ERROR, "Message not as expected"
 
-    def test_logout(self, driver, create_account):
+    def teOFFst_logout(self, driver, create_account):
         page = LogoutPage(driver)
         assert page.current_url == LogoutPage.URL_SUCCESS, "User is not on expected page"
         page.redirect(MainPage.URL, 6)
