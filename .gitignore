@@ -24,3 +24,6 @@ venv/
 
 # Игнорировать файлы .iml
 *.iml
+
+#
+Dockerfile_*
