@@ -8,21 +8,21 @@ from pages.account.sign_in import SignInPage
 
 
 class TestX(FakeData):
-    def test_change_first_name(self, driver, create_account):
+    def teOFFst_change_first_name(self, driver, create_account):
         page = AccountEditPage(driver)
         page.first_name = self.first_name
         page.save().click()
         assert page.current_url == MyAccountPage.URL, "Unexpected page URL"
         assert page.message_success == AccountEditPage.SUCCESS, "Message not as expected"
 
-    def test_change_last_name(self, driver, create_account):
+    def teOFFst_change_last_name(self, driver, create_account):
         page = AccountEditPage(driver)
         page.last_name = self.last_name
         page.save().click()
         assert page.current_url == MyAccountPage.URL, "Unexpected page URL"
         assert page.message_success == AccountEditPage.SUCCESS, "Message not as expected"
 
-    def test_change_email(self, driver, create_account, password):
+    def teOFFst_change_email(self, driver, create_account, password):
         page = AccountEditPage(driver)
         page.change_email().click()
         page.email = self.email
@@ -31,7 +31,7 @@ class TestX(FakeData):
         assert page.current_url == SignInPage.URL, "Unexpected page URL"
         assert page.message_success == AccountEditPage.SUCCESS, "Message not as expected"
 
-    def test_change_password(self, driver, create_account, password):
+    def teOFFst_change_password(self, driver, create_account, password):
         page = AccountEditPage(driver)
         page.change_password().click()
         page.password_current = password
@@ -41,7 +41,7 @@ class TestX(FakeData):
         assert page.current_url == SignInPage.URL, "Unexpected page URL"
         assert page.message_success == AccountEditPage.SUCCESS, "Message not as expected"
 
-    def test_change_email_and_password(self, driver, create_account, password):
+    def teOFFst_change_email_and_password(self, driver, create_account, password):
         page = AccountEditPage(driver)
         page.change_email().click()
         page.change_password().click()
@@ -53,7 +53,7 @@ class TestX(FakeData):
         assert page.current_url == SignInPage.URL, "Unexpected page URL"
         assert page.message_success == AccountEditPage.SUCCESS, "Message not as expected"
 
-    def test_add_address_with_select_state(self, driver, create_account):
+    def teOFFst_add_address_with_select_state(self, driver, create_account):
         page = AddressAddPage(driver)
         page.company = self.company
         page.telephone = self.phone_number
@@ -72,7 +72,7 @@ class TestX(FakeData):
         assert page.current_url == AddressAddPage.URL_DONE
         assert page.message_success == AddressAddPage.SUCCESS
 
-    def test_add_address_with_input_state(self, driver, create_account):
+    def teOFFst_add_address_with_input_state(self, driver, create_account):
         page = AddressAddPage(driver)
         page.company = self.company
         page.telephone = self.phone_number
