@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 
 # TRAINING_PAGE_LOCATORS
-
 class TrainingPageLocators:
     TRANING_MENU = (By.XPATH, "//a[@id='ui-id-7']/span[last()]")
     TRANING_TEXT = (By.CSS_SELECTOR, "#page-title-heading span")
@@ -12,4 +11,3 @@ class TrainingPageLocators:
     BLOCK1 = (By.XPATH, "//a[@class='block-promo training-main']")
     BLOCK1_TEXT = (By.CSS_SELECTOR, "a[class='block-promo training-main'] span[class='content']")
     BLOCK1_IMG = (By.CSS_SELECTOR, "a[class='block-promo training-main'] img")
-
