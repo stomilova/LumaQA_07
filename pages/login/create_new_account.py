@@ -30,11 +30,11 @@ class CreateNewAccountPage(BasePage):
         return self.is_visible(BasePageLocators.MSG_SUCCESS)
 
     def fill_in_all_required_fields(self, firstname, lastname, email, password):
-        self.first_name_field().send_keys(firstname)
-        self.last_name_field().send_keys(lastname)
-        self.email_field().send_keys(email)
-        self.first_password_field().send_keys(password)
-        self.confirm_password_field().send_keys(password)
+        self.clear_and_send_keys(self.first_name_field(), firstname)
+        self.clear_and_send_keys(self.last_name_field(), lastname)
+        self.clear_and_send_keys(self.email_field(), email)
+        self.clear_and_send_keys(self.first_password_field(), password)
+        self.clear_and_send_keys(self.confirm_password_field(), password)
 
     def create_new_account(self, firstname, lastname, email, password):
         self.fill_in_all_required_fields(firstname, lastname, email, password)

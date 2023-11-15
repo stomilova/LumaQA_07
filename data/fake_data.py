@@ -13,7 +13,7 @@ class FakeData:
 
     @property
     def email(self):
-        return Faker().email()
+        return f'{randint(111111,999999)}{Faker().email()}'
 
     @property
     def password(self):

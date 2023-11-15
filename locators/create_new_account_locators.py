@@ -19,5 +19,6 @@ class CreateNewAccountPageLocators:
 
 
     TEXT_THX_FOR_REGISTRATION_MSG = "Thank you for registering with Main Website Store."
+    TEXT_USER_EXIST_REGISTRATION_MSG = "There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account."
 
 
