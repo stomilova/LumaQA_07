@@ -96,7 +96,8 @@ class CheckoutPage(BasePage):
 
 class GuestShippingAddressPage(BasePage):
     WITH_REGIONS = ["AU", "BR", "CA", "CH", "CN", "CO", "EE", "ES",
-                    "HR", "IN", "LT", "LV", "MX", "PL", "RO", "US"]
+                    "HR", "IN", "LT", "LV", "MX", "PL", "RO", "US",
+                    "DE", "BE"]
     URL = "https://magento.softwaretestingboard.com/checkout/#shipping"
     URL_DONE = "https://magento.softwaretestingboard.com/checkout/#payment"
 

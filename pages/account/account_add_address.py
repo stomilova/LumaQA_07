@@ -5,7 +5,8 @@ from base.seleniumbase import BasePage
 
 class AddressAddPage(BasePage):
     WITH_REGIONS = ["AU", "BR", "CA", "CH", "CN", "CO", "EE", "ES",
-                    "HR", "IN", "LT", "LV", "MX", "PL", "RO", "US"]
+                    "HR", "IN", "LT", "LV", "MX", "PL", "RO", "US",
+                    "DE", "BE"]
     URL = "https://magento.softwaretestingboard.com/customer/address/new/"
     URL_DONE = "https://magento.softwaretestingboard.com/customer/address/index/"
 
