@@ -26,3 +26,6 @@ class MainPage(BasePage):
     def scroll_down_to_shop_erin_recom(self):
         self.scroll_to_element(BasePageLocators.SHOP_ERIN_RECOMMENDS)
 
+    def men_btn_catalog(self):
+        return self.is_clickable(BasePageLocators.LINK_MEN_CATALOG)
+

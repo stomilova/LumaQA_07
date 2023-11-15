@@ -1,6 +1,8 @@
 from pages.main_page import MainPage
 from locators.base_page_locators import BasePageLocators
 from pages.erin_recommends.erin_recommends import ErinRecommendsPage
+from data.men_page_url import MEN_PAGE
+
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 
@@ -29,3 +31,10 @@ class TestMainPage:
         page.is_clickable(BasePageLocators.SHOP_ERIN_RECOMMENDS).click()
 
         assert driver.current_url == ErinRecommendsPage.URL
+
+    def test_redirect_men_page_by_clicking_men_btn(self, driver, authorization):
+        page = MainPage(driver, url=MainPage.URL)
+        page.open()
+        page.men_btn_catalog().click()
+
+        assert driver.current_url == MEN_PAGE
