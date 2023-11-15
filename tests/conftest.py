@@ -1,6 +1,7 @@
+from time import strftime, sleep
+
 import pytest
 from faker import Faker
-from selenium.webdriver.chrome.service import Service
 from pages.account.create_account import CreateAccountPage
 
 
@@ -25,6 +26,5 @@ def password():
 
 
 @pytest.fixture
-def create_account(driver, first_name, last_name, email, password):
-    CreateAccountPage(driver).new(first_name, last_name, email, password)
-
+def create_account(driver):
+    CreateAccountPage(driver)
