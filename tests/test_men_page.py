@@ -1,7 +1,7 @@
 import time
 
 from pages.men_page import MenPage
-from data.men_page_url import TOPS_MEN_PAGE
+from data.men_page_url import TOPS_MEN_PAGE, JACKETS_MEN_PAGE
 
 
 class TestMenPage:
@@ -16,3 +16,14 @@ class TestMenPage:
         page.open()
         page.select_tops_from_men_dropdown()
         assert driver.current_url == TOPS_MEN_PAGE
+
+    def test_redirect_to_jackets_page_from_tops(self, driver):
+        page = MenPage(driver, url=MenPage.URL)
+        page.open()
+        page.select_tops_from_sidebar_menu()
+        page.select_jackets_from_tops_dropdown()
+        assert driver.current_url == JACKETS_MEN_PAGE
+
+
+
+
