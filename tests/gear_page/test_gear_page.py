@@ -35,12 +35,8 @@ class TestGearPageCategory:
         gear_page.open()
         sidebar = gear_page.is_visible(locator=GearPageLocators.SIDEBAR_MAIN)
 
-        # Находим все элементы внутри контейнера
-        categories = sidebar.find_elements(
-            *GearPageLocators.SIDEBAR_ELEMENTS
-        )  # * выбирает все дочерние элементы и мы уже проверили что эти элементы в сайдбаре
+        categories = sidebar.find_elements(*GearPageLocators.SIDEBAR_ELEMENTS)
 
-        # Теперь у вас есть список элементов внутри сайдбара
         assert len(categories) == len(
             category_list
         ), f"The number of categories is {len(categories)},(expected = {len(category_list)}).Check, it can be update in category list"
@@ -69,7 +65,6 @@ class TestGearPageCategory:
 
         sidebar = gear_page.is_visible(locator=GearPageLocators.SIDEBAR_MAIN)
 
-        # проверяем что, элементы находятся в сайдбаре
         title_1 = sidebar.find_element(*GearPageLocators.SHOP_BY_TITLE).text
         title_2 = sidebar.find_element(*GearPageLocators.CATEGORY_TITLE).text
 
@@ -102,19 +97,15 @@ class TestGearPageCategory:
             category_name in category_list
         ), f"We found another one category title - '{category_name}', Please check the locators at the Sidebar and list of categories"
 
-        category_list.remove(
-            category_name
-        )  # удаляем из временного списка, чтоб проверить - нашлили мы все наши категории заданные по стори. лист может обновляться
-        founded_categories.append(
-            category_name
-        )  # добавляем в новый лист, то что нашли, чтоб были видны сразу в резалте.
+        category_list.remove(category_name)
+        founded_categories.append(category_name)
 
     def test_category_list(self):
         """Additional step to verify the total list of categories after the previous test cases"""
 
         missed_category = [
             cat for cat in total_categories if cat not in founded_categories
-        ]  # if we miss something
+        ]
         assert (
             not category_list
         ), f"Please check compare the we have found : {founded_categories}, we should found : {total_categories}. we miss {missed_category}"
@@ -137,7 +128,6 @@ class TestGearPageCategory:
         """
         gear_page = gear_page_precondition
         category = gear_page.is_visible(locator=category_xpath)
-        # проверяем что каунтер есть рядом с нашей категорией
         category_counter = gear_page.is_visible(locator=counter_xpath)
 
         assert (
@@ -175,10 +165,9 @@ class TestGearPageCategory:
         category.click()
         wait.until(EC.url_to_be(category_url))
 
-        # блок проверки редеректа - название страници категории состоит из двух значений "title - Gear"
         assert (
-            driver.current_url == category_url
-        ), f"We reached wrong url - {driver.current_url}, but expected - {category_url}"
+            category_page.current_url == category_url
+        ), f"We reached wrong url - {category_page.current_url}, but expected - {category_url}"
         assert (
             driver.title.split(" - ")[0] == category_name
         ), f"We reach {driver.title}, but Expected to be at {category_name} page"
