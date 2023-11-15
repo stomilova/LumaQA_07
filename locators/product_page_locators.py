@@ -15,6 +15,7 @@ class ProductPageLocators:
     PICTURES = (By.XPATH, "//div[@class='product media']")
     DETAILED_INFO = (By.XPATH, "//div[@class='product info detailed']")
     RELATED_PRODUCTS = (By.XPATH, "//div[@class='block related']")
+    LIKED_PRODUCTS = (By.XPATH, "//div[@class='block upsell']")
 
     # class="product-info-main"
     PRODUCT_NAME = (By.XPATH, "//span[@itemprop='name']")
