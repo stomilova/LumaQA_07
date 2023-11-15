@@ -161,9 +161,12 @@ class BasePage:
             raise AssertionError(f"{timeout}s wait to be redirected to {url}")
 
     def is_loading(self):
+        trigger = False
         while self.driver.execute_script("return document.querySelector('div.loader:not(.hidden)') != null;"):
             sleep(0.1)
-        self.shot("loading_wait_done")
+            trigger = True
+        if trigger:
+            self.shot("loading_wait_done")
 
     def shot(self, file_name_prefix='shot'):
         self.driver.save_screenshot(f'{file_name_prefix}_{strftime("%H%M%S")}.png')
