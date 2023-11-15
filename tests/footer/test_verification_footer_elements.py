@@ -8,7 +8,7 @@ class TestFooterElementsVisibleClickable:
     PARAMETERS = [
         "visibility",
         "clickability",
-    ]  # можно использовать данный список для отправки в  параметризацию, если нужно проверить два условия
+    ]
 
     @pytest.mark.long
     @pytest.mark.parametrize("param", PARAMETERS)
@@ -18,20 +18,14 @@ class TestFooterElementsVisibleClickable:
     ):
         """
         TC_012.001.001 | Footer > "Write for us" link > Verify visibility of the link for the page for writing an article
+        TC_012.001.002 | Footer > "Write for us" link > Verify clickability of the link for the page for writing an article
             Steps:
                 1. Open any page on The Site.
                 2. Locate the Footer section.
-                3. Verify the presence of the title "Write For Us" in the Footer.
+                3. Verify the presence of/ability to click on  the title "Write For Us" in the Footer.
             Expected results:
-                The title "Write For Us" is visible in the footer of current page of The Site.
-
-        TC_012.001.002 | Footer > "Write for us" link > Verify clickability of the link for the page for writing an article
-            Precondition:
-                The User is on any page The Site and the title "Write For Us" is presence in the footer.
-            Steps:
-                    Check the ability to click on the link
-            Expected results:
-                The link is clickable"""
+                The title "Write For Us" is visible/clickable in the footer of current page of The Site.
+        """
 
         expected_link = "https://softwaretestingboard.com/write-for-us/"
 
