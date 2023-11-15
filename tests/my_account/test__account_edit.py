@@ -1,7 +1,5 @@
 from random import choice
 
-import pytest
-
 from base.seleniumbase import BasePage
 from data.fake_data import FakeData
 from pages.account.account_add_address import AddressAddPage
@@ -19,7 +17,6 @@ class TestX(FakeData):
         page.save().click()
         assert page.current_url == MyAccountPage.URL, "Unexpected page URL"
         assert page.message_success == AccountEditPage.SUCCESS, "Message not as expected"
-
 
     def test_change_last_name(self, driver, create_account):
         page = AccountEditPage(driver)
