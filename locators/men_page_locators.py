@@ -7,6 +7,7 @@ class MenPageLocators:
     # // *[ @ id = 'ui-id-17]"
 
     TOPS_CATEGORY_LINK = (By.XPATH, "//*[@id='narrow-by-list2']/dd/ol/li[1]/a")
+    SIDE_BAR_JACKETS = (By.XPATH, "//a[@id='ui-id-19']//span[contains(text(),'Jackets')]")
 
 
 class TopsMenPageLocators:
