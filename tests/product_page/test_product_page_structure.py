@@ -4,7 +4,7 @@ from locators.product_page_locators import ProductPageLocators
 from pages.product_page.product_page import ProductPage
 
 @pytest.mark.parametrize("url", PRODUCT_PAGE_URL_LIST)
-def test_product_name_in_page_title(driver, url):
+def test_product_page_structure(driver, url):
     """
     TC_002.002.001
     """

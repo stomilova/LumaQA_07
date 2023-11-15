@@ -10,6 +10,13 @@ class ProductPageLocators:
     FOOTER = (By.XPATH, "//footer[@class='page-footer']")
     COPYRIGHT = (By.XPATH, "//small[@class='copyright']")
 
+    # Product page body
+    MAIN_INFO = (By.XPATH, "//div[@class='product-info-main']")
+    PICTURES = (By.XPATH, "//div[@class='product media']")
+    DETAILED_INFO = (By.XPATH, "//div[@class='product info detailed']")
+    RELATED_PRODUCTS = (By.XPATH, "//div[@class='block related']")
+    LIKED_PRODUCTS = (By.XPATH, "//div[@class='block upsell']")
+
     # class="product-info-main"
     PRODUCT_NAME = (By.XPATH, "//span[@itemprop='name']")
 
