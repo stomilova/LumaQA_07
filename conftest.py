@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 
 
+
 @pytest.fixture
 def options():
     options = Options()
@@ -28,3 +29,4 @@ def driver(options):
 def wait(driver):
     wait = WebDriverWait(driver, timeout=15)
     return wait
+
