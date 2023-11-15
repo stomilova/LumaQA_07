@@ -1,4 +1,4 @@
-from time import sleep
+from time import sleep, strftime
 
 from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
@@ -12,6 +12,8 @@ from locators.base_page_locators import BasePageLocators
 
 class BasePage:
     TIMEOUT = 10
+    ATTEMPTS = 10
+    MESSAGE = (By.CSS_SELECTOR, "[data-ui-id^='message-']")
     MESSAGE_SUCCESS = (By.CSS_SELECTOR, "[data-ui-id='message-success']")
     MESSAGE_NOTICE = (By.CSS_SELECTOR, "[data-ui-id='message-notice']")
     MESSAGE_ERROR = (By.CSS_SELECTOR, "[data-ui-id='message-error']")
@@ -102,6 +104,10 @@ class BasePage:
         self.driver.get(val)
 
     @property
+    def message(self) -> str:
+        return self.is_visible(self.MESSAGE).text
+
+    @property
     def message_success(self) -> str:
         return self.is_visible(self.MESSAGE_SUCCESS).text
 
@@ -136,6 +142,7 @@ class BasePage:
         try:
             return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
         except TimeoutException:
+            self.shot("visible_timeout")
             raise AssertionError(f"{timeout}s wait to be visible of {locator}")
 
     def clickable(self, locator: tuple[str, str], timeout: int = TIMEOUT) -> WebElement:
@@ -143,17 +150,23 @@ class BasePage:
         try:
             return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
         except TimeoutException:
+            self.shot("clickable_timeout")
             raise AssertionError(f"{timeout}s wait to be clickable of {locator}")
 
     def redirect(self, url, timeout: int = TIMEOUT):
         try:
-            return wait(self.driver, timeout).until(EC.url_to_be(url))
+            return wait(self.driver, timeout, 0.5, [TimeoutException]).until(EC.url_to_be(url))
         except TimeoutException:
+            self.shot("redirect_timeout")
             raise AssertionError(f"{timeout}s wait to be redirected to {url}")
 
     def is_loading(self):
         while self.driver.execute_script("return document.querySelector('div.loader:not(.hidden)') != null;"):
             sleep(0.1)
+        self.shot("loading_wait_done")
+
+    def shot(self, file_name_prefix='shot'):
+        self.driver.save_screenshot(f'{file_name_prefix}_{strftime("%H%M%S")}.png')
 
     def item_count(self, locator):
         return len(self.driver.find_elements(*locator))
