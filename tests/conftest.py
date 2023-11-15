@@ -42,4 +42,3 @@ def check_if_failed(request, driver):
     if request.node.rep_setup.passed and request.node.rep_call.failed:
         fn = f'{request.node.nodeid}_{strftime("%H_%M")}.png'.replace("/", "-").replace(":", "_")
         driver.save_screenshot(fn)
-        driver.quit()
