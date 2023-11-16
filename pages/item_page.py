@@ -77,8 +77,8 @@ class ItemReviews(BasePage):
     def tab_reviews(self):
         return self.is_clickable(ItemPageReviewsLocators.TAB_REVIEWS)
 
-    def rating_star(self):
-        return self.hold_mouse_on_element_and_click(ItemPageReviewsLocators.RATING_STAR)
+    def rating_3_star(self):
+        return self.hold_mouse_on_element_and_click(ItemPageReviewsLocators.RATING_3_STAR)
 
     def nick_name(self, value):
         return self.clear_and_send_keys(self.is_visible(ItemPageReviewsLocators.NICKNAME_FIELD), value)
@@ -91,6 +91,9 @@ class ItemReviews(BasePage):
 
     def submit_review_button(self):
         return self.is_clickable(ItemPageReviewsLocators.SUBMIT_REVIEW_BUTTON)
+
+    def block_customer_reviews(self):
+        return self.is_visible(ItemPageLocators.BLOCK_CUSTOMER_REVIEWS)
 
 
 
