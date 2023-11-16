@@ -1,0 +1,1 @@
+WHATS_NEW_PAGE = 'https://magento.softwaretestingboard.com/what-is-new.html'

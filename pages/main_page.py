@@ -17,7 +17,7 @@ class MainPage(BasePage):
         return self.is_clickable(BasePageLocators.ERIN_SECTION)
 
     def add_clamber_watch_from_gear_catalog_to_cart(self):
-        self.hold_mouse_on_element(BasePageLocators.LINK_GEAR_CATALOG)
+        self.hold_mouse_on_element(BasePageLocators.LINK_GEAR)
         self.is_clickable(BasePageLocators.LINK_WATCHES_CATALOG).click()
         self.hold_mouse_on_element(ItemPageLocators.LINK_CLAMBER_WATCH)
         self.is_clickable(ItemPageLocators.ADD_TO_CART_CLAMBER_WATCH_BUTTON).click()
