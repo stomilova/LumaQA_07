@@ -89,7 +89,7 @@ class BasePage:
         ActionChains(self.driver).move_to_element(self.is_visible(locator)).perform()
 
     def hold_mouse_on_element_and_click(self, locator):
-        ActionChains(self.driver).move_to_element(self.is_visible(locator)).pause(0.5).click().perform()
+        ActionChains(self.driver).move_to_element(self.is_visible(locator)).move_by_offset(40,0).click().perform()
 
     def is_invisible(self, locator: tuple, timeout: int = TIMEOUT) -> WebElement:
         return wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))

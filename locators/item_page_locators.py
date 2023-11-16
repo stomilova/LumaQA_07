@@ -9,6 +9,7 @@ class ItemPageLocators:
 
     ADD_YOUR_REVIEW_LINK = (By.XPATH, "//*[@class='action add']")
     BLOCK_REVIEW_ADD = (By.XPATH, "//*[@class='block review-add']")
+    BLOCK_CUSTOMER_REVIEWS = (By.XPATH,"//*[text()='Customer Reviews']")
     ITEM_REVIEW_COUNT = (By.XPATH, "//span[@itemprop='reviewCount']")
     ITEM_REVIEW_LINK = (By.XPATH, "//*[text()='Reviews']")
     ITEM_RATING = (By.XPATH, "//div[@class='rating-summary']//div[@class='rating-result']")
@@ -28,7 +29,7 @@ class ItemPageReviewsLocators:
     URL = 'https://magento.softwaretestingboard.com/breathe-easy-tank.html'
 
     TAB_REVIEWS = (By.CSS_SELECTOR, '#tab-label-reviews-title')
-    RATING_STAR = (By.XPATH, "(//div[@class='control review-control-vote']/label)[3]")
+    RATING_3_STAR = (By.XPATH, "(//div[@class='control review-control-vote']/label)[3]")
     NICKNAME_FIELD = (By.CSS_SELECTOR, 'input#nickname_field')
     SUMMARY_FIELD = (By.CSS_SELECTOR, 'input#summary_field')
     REVIEW_FIELD = (By.CSS_SELECTOR, 'textarea#review_field')
