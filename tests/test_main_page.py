@@ -32,7 +32,7 @@ class TestMainPage:
 
         assert driver.current_url == ErinRecommendsPage.URL
 
-    def test_redirect_men_page_by_clicking_men_btn(self, driver, authorization):
+    def test_redirect_men_page_by_clicking_men_btn(self, driver):
         page = MainPage(driver, url=MainPage.URL)
         page.open()
         page.men_btn_catalog().click()
