@@ -1,1 +1,0 @@
-HOME_PAGE = 'https://magento.softwaretestingboard.com/'
