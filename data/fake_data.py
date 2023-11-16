@@ -13,11 +13,15 @@ class FakeData:
 
     @property
     def email(self):
-        return Faker().email()
+        return f'{randint(111111,999999)}{Faker().email()}'
 
     @property
     def password(self):
         return Faker().password()
+
+    @property
+    def company(self):
+        return Faker().company()
 
     @property
     def phone_number(self):
