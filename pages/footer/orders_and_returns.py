@@ -1,7 +1,7 @@
 from selenium.webdriver.remote.webelement import WebElement
 
 from base.seleniumbase import BasePage
-from locators.orders_and_returns_locators import OrdersAndReturnsPageLocators
+from locators.orders_and_returns import OrdersAndReturnsPageLocators
 
 
 class OrdersAndReturnsPage(BasePage):

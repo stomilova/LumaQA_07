@@ -1,1 +1,0 @@
-SALE_PAGE = 'https://magento.softwaretestingboard.com/sale.html'
