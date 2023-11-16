@@ -29,3 +29,6 @@ class MainPage(BasePage):
     def men_btn_catalog(self):
         return self.is_clickable(BasePageLocators.LINK_MEN)
 
+    def scroll_down_to_shop_performance(self):
+        self.scroll_to_element(BasePageLocators.SHOP_PERFORMANCE)
+
