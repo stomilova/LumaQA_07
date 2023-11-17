@@ -33,3 +33,10 @@ class TestTrainingPage:
         video_download_link = page.is_clickable(TrainingPageLocators.VIDEO_DOWNLOAD)
         assert video_download_link.is_displayed(), "Video Download link is not displayed"
         assert video_download_link.get_attribute('href') is not None, "Video Download link is None"
+
+    def test_redirect_to_video_download_page(self, driver):
+        page = TrainingPage(driver, url=TrainingPage.URL)
+        page.open()
+        page.click_video_download_link()
+        expected_url = "https://magento.softwaretestingboard.com/training/training-video.html"
+        assert page.current_url == expected_url, "Wrong URL"
