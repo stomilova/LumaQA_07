@@ -17,3 +17,4 @@ class BannerLocators:
     # Gear page banners
     SPRITE_YOGA_COMPANION_KIT_BANNER = (By.XPATH, '//a[@class="block-promo gear-main"]')
     LOOSEN_UP_BANNER = (By.XPATH, '//a[@class="block-promo gear-fitnes"]')
+    LUMA_WATER_BOTTLE_BANNER = (By.XPATH, '//a[@class="block-promo gear-equipment"]')
