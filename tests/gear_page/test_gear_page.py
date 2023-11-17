@@ -1,10 +1,9 @@
 import pytest
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
 from pages.gear_page.category_page import CategoryPage
 from pages.gear_page.gear_page import GearPage
+from tests.gear_page.conftest import driver_initiation_for_test_data
 from data.gear_page_urls import BAGS_PAGE, FITNESS_EQ_PAGE, WATCHES_PAGE
 from locators.gear_page_locators import GearPageLocators, CategoryPageLocators
 
@@ -25,29 +24,20 @@ class TestGearPageCategory:
     def find_categories_and_counters_at_the_sidebar():
         """collect test data"""
         test_data = []
-        options = Options()
-        options.add_argument("--window-size=2880,1800")
-        options.add_argument("--headless")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        driver = webdriver.Chrome(options=options)
+        driver = driver_initiation_for_test_data()
         gear_page = GearPage(driver=driver)
         gear_page.open()
         sidebar = gear_page.is_visible(locator=GearPageLocators.SIDEBAR_MAIN)
-
         categories = sidebar.find_elements(*GearPageLocators.SIDEBAR_ELEMENTS)
-
         assert len(categories) == len(
             category_list
         ), f"The number of categories is {len(categories)},(expected = {len(category_list)}).Check, it can be update in category list"
-
         for category in categories:
             category_xpath = (By.XPATH, f'//dd//a[text()="{category.text}"]')
             counter_xpath = (
                 By.XPATH,
                 f'{category_xpath[1]}/following-sibling::span[@class="count"]',
             )
-
             test_data.append([category_xpath, counter_xpath])
         driver.quit()
         return test_data
@@ -62,12 +52,9 @@ class TestGearPageCategory:
         The title 'Shop By Category' is displayed on the sidebar."""
 
         gear_page = gear_page_precondition
-
         sidebar = gear_page.is_visible(locator=GearPageLocators.SIDEBAR_MAIN)
-
         title_1 = sidebar.find_element(*GearPageLocators.SHOP_BY_TITLE).text
         title_2 = sidebar.find_element(*GearPageLocators.CATEGORY_TITLE).text
-
         assert (
             f"{title_1} {title_2}" == "Shop By Category"
         ), f"""
@@ -89,18 +76,15 @@ class TestGearPageCategory:
             The category is visible on the sidebar."""
 
         gear_page = gear_page_precondition
-
         category = gear_page.is_visible(locator=category_xpath)
-
         category_name = category.text
         assert (
             category_name in category_list
         ), f"We found another one category title - '{category_name}', Please check the locators at the Sidebar and list of categories"
-
         category_list.remove(category_name)
         founded_categories.append(category_name)
 
-    def test_category_list(self):
+    def test_check_category_list(self):
         """Additional step to verify the total list of categories after the previous test cases"""
 
         missed_category = [
@@ -129,7 +113,6 @@ class TestGearPageCategory:
         gear_page = gear_page_precondition
         category = gear_page.is_visible(locator=category_xpath)
         category_counter = gear_page.is_visible(locator=counter_xpath)
-
         assert (
             category_counter.text
         ), f"We found a counter for {category.text}, but it is empty"
@@ -153,29 +136,22 @@ class TestGearPageCategory:
             The counter on the Gear page match the counter on the respective category page.
         """
         gear_page = gear_page_precondition
-
         category = gear_page.is_visible(locator=category_xpath)
         category_name = category.text
-
         category_counter = gear_page.is_visible(locator=counter_xpath).text
         category_url = category.get_attribute("href")
-
         category_page = CategoryPage(driver=driver, url=category_url)
-
         category.click()
         wait.until(EC.url_to_be(category_url))
-
         assert (
             category_page.current_url == category_url
         ), f"We reached wrong url - {category_page.current_url}, but expected - {category_url}"
         assert (
             driver.title.split(" - ")[0] == category_name
         ), f"We reach {driver.title}, but Expected to be at {category_name} page"
-
         counter_on_the_category_page = category_page.is_visible(
             locator=CategoryPageLocators.LAST_ITEM_COUNTER
         ).text
-
         assert int(category_counter) == int(
             counter_on_the_category_page
         ), f"""
