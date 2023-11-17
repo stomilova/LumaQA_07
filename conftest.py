@@ -1,5 +1,6 @@
 from os import environ
-
+import os
+import time
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -17,10 +18,20 @@ def options():
     return options 
 
 
-@pytest.fixture 
-def driver(options):
+@pytest.fixture
+def driver(options, request):
     driver = webdriver.Chrome(options=options)
-    yield driver 
+    screenshots_directory = "screenshots" 
+    failed_before = request.session.testsfailed
+    yield driver
+    if request.session.testsfailed != failed_before:
+        test_name = request.node.name
+        time_string = time.asctime().replace(":", "_")[3:-5]
+        run_directory = os.path.join(screenshots_directory, f"run_{request.session.testscollected}")
+        os.makedirs(run_directory, exist_ok=True)
+        file_name = f"{time_string}_{test_name}.png"
+        full_file_path = os.path.join(run_directory, file_name)
+        driver.get_screenshot_as_file(full_file_path)
     driver.quit()
 
 
