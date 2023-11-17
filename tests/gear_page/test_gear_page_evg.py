@@ -19,3 +19,10 @@ def test_luma_water_bottle_is_visible(driver):
     page = BasePage(driver, url=GEAR_PAGE)
     page.open()
     assert page.is_visible(BannerLocators.LUMA_WATER_BOTTLE_BANNER)
+
+def test_bags_is_visible(driver):
+    """TC_009.004.001 | Gear page > categories >Visibility of the 'Bags' banner"""
+    page = BasePage(driver, url=GEAR_PAGE)
+    page.open()
+    assert page.is_visible(BannerLocators.BAGS_BANNER)
+
