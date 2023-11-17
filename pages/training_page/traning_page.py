@@ -6,3 +6,7 @@ class TrainingPage(BasePage):
 
     def click_training_menu(self):
         self.is_clickable(TrainingPageLocators.TRAINING_MENU).click()
+
+
+    def click_video_download_link(self):
+        self.is_clickable(TrainingPageLocators.VIDEO_DOWNLOAD).click()
