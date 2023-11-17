@@ -40,3 +40,9 @@ class TestTrainingPage:
         page.click_video_download_link()
         expected_url = "https://magento.softwaretestingboard.com/training/training-video.html"
         assert page.current_url == expected_url, "Wrong URL"
+
+    def test_Block1_is_displayed(self, driver):
+        page = TrainingPage(driver, url=TrainingPage.URL)
+        page.open()
+        block1 = page.the_presence_of_element_located(TrainingPageLocators.BLOCK1)
+        assert block1.is_displayed(), "Block1 is not displayed"
