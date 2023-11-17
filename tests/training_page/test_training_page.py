@@ -53,3 +53,11 @@ class TestTrainingPage:
         block1_list = page.is_visible_all_elements(TrainingPageLocators.BLOCK1_TEXT)
         expected_text = 'Motivate yourself.\nReach goals.\nBoost ambition.\nMax fitness.\nUpgrade lifestyle.'
         assert expected_text in block1_list[0].text
+
+    def test_Block1_size_is_correct(self, driver):
+        page = TrainingPage(driver, url=TrainingPage.URL)
+        page.open()
+        block1_img = page.the_presence_of_element_located(TrainingPageLocators.BLOCK1_IMG)
+        assert block1_img.size['height'] == TrainingPage.BLOCK1_IMG_HEIGHT and \
+               block1_img.size['width'] == TrainingPage.BLOCK1_IMG_WIDTH, "Block1 height and width is not correct"
+
