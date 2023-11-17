@@ -19,3 +19,21 @@ def test_luma_water_bottle_is_visible(driver):
     page = BasePage(driver, url=GEAR_PAGE)
     page.open()
     assert page.is_visible(BannerLocators.LUMA_WATER_BOTTLE_BANNER)
+
+def test_bags_is_visible(driver):
+    """TC_009.004.001 | Gear page > categories >Visibility of the 'Bags' banner"""
+    page = BasePage(driver, url=GEAR_PAGE)
+    page.open()
+    assert page.is_visible(BannerLocators.BAGS_BANNER)
+
+def test_fitness_equipment_is_visible(driver):
+    """TC_009.004.002 | Gear page > categories > Visibility of the 'Fitness Equipment' banner"""
+    page = BasePage(driver, url=GEAR_PAGE)
+    page.open()
+    assert page.is_visible(BannerLocators.FITNESS_EUQIPMENT_BANNER)
+
+def test_watches_is_visible(driver):
+    """TC_009.004.003 | Gear page > categories > Visibility of the 'Watches' banner"""
+    page = BasePage(driver, url=GEAR_PAGE)
+    page.open()
+    assert page.is_visible(BannerLocators.WATCHES_BANNER)
