@@ -26,3 +26,8 @@ def test_bags_is_visible(driver):
     page.open()
     assert page.is_visible(BannerLocators.BAGS_BANNER)
 
+def test_fitness_equipment_is_visible(driver):
+    """TC_009.004.002 | Gear page > categories > Visibility of the 'Fitness Equipment' banner"""
+    page = BasePage(driver, url=GEAR_PAGE)
+    page.open()
+    assert page.is_visible(BannerLocators.FITNESS_EUQIPMENT_BANNER)
