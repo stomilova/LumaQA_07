@@ -31,3 +31,9 @@ def test_fitness_equipment_is_visible(driver):
     page = BasePage(driver, url=GEAR_PAGE)
     page.open()
     assert page.is_visible(BannerLocators.FITNESS_EUQIPMENT_BANNER)
+
+def test_watches_is_visible(driver):
+    """TC_009.004.003 | Gear page > categories > Visibility of the 'Watches' banner"""
+    page = BasePage(driver, url=GEAR_PAGE)
+    page.open()
+    assert page.is_visible(BannerLocators.WATCHES_BANNER)
