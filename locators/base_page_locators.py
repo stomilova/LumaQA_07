@@ -44,4 +44,5 @@ class BasePageLocators:
     COPYRIGHT_INFO = (By.XPATH,"//footer/following-sibling::*[@class='copyright']")
 
     SHOP_ERIN_RECOMMENDS = (By.CSS_SELECTOR, "a[class='block-promo home-erin'] span[class='action more icon']")
+    SHOP_PERFORMANCE = (By.XPATH, "//span[normalize-space()='Shop Performance'][1]")
 
