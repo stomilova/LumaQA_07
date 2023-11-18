@@ -26,9 +26,9 @@ class MenCategoryPage(BasePage):
         otherwise False
         """
         first_item = self.driver.find_element(*MCL.ITEM)
-        property = first_item.value_of_css_property('box-shadow')
+        box_property = first_item.value_of_css_property('box-shadow')
 
-        return property == 'rgba(0, 0, 0, 0.3) 3px 4px 4px 0px'
+        return box_property == 'rgba(0, 0, 0, 0.3) 3px 4px 4px 0px'
 
     def is_options_displayed(self) -> bool:
         """
