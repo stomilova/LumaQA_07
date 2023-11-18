@@ -1,8 +1,9 @@
 from pages.main_page import MainPage
 from locators.base_page_locators import BasePageLocators
 from pages.erin_recommends.erin_recommends import ErinRecommendsPage
-from data.men_page_url import MEN_PAGE
+from data.men_page_url import MEN_PAGE, TOPS_MEN_PAGE
 from pages.performance_fabrics.performance_fabrics import PerformanceFabricsPage
+
 
 
 class TestMainPage:
@@ -34,6 +35,13 @@ class TestMainPage:
         page.men_btn_catalog().click()
 
         assert driver.current_url == MEN_PAGE
+
+    def test_select_tops_from_mens_dropdown_menu(self, driver):
+        page = MainPage(driver, url=MainPage.URL)
+        page.open()
+        page.select_to_tops_from_mens_dropdown_menu()
+
+        assert driver.current_url == TOPS_MEN_PAGE
 
     def test_main_page_erin_recommends_visible(self, driver):
         page = MainPage(driver, url=MainPage.URL)
