@@ -20,6 +20,7 @@ class AccountEditPage(BasePage):
     SAVE = (By.CSS_SELECTOR, "button.save")
 
     SUCCESS = "You saved the account information."
+    ERROR_EMAIL_IN_USE = "A customer with the same email address already exists in an associated website."
 
     CHANGE_PASSWORD_ERROR = 'This is a required field.'
 
