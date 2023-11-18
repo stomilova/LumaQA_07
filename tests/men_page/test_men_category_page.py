@@ -53,3 +53,19 @@ class TestHoodiesSweatshirtsFilter:
                 current_url == mp_url.MARCO_LIGHTWEIGHT
         ), "Failed to go to the product page by image"
 
+    def test_redirect_by_product_title(self, page_with_hs_filter):
+        """
+        TC_008.014.005 | Men > Tops > Hoodies & Sweatshirts filter
+                        > Redirect to the product page by product title
+        """
+
+        page = page_with_hs_filter
+
+        page.driver.find_element(*MCL.ITEM_TITLE).click()
+
+        current_url = page.driver.current_url
+
+        assert (
+                current_url == mp_url.MARCO_LIGHTWEIGHT
+        ), "Failed to go to the product page by title"
+
