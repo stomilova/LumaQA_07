@@ -1,3 +1,7 @@
+import data.men_page_url as mp_url
+from locators.men_page_locators import MenCategoryPageLocators as MCL
+
+
 class TestHoodiesSweatshirtsFilter:
     def test_product_are_visible(self, page_with_hs_filter):
         """
