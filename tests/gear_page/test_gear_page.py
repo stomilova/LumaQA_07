@@ -57,7 +57,7 @@ class TestGearPageCategory:
         title_1 = sidebar.find_element(*GearPageLocators.SHOP_BY_TITLE).text
         title_2 = sidebar.find_element(*GearPageLocators.CATEGORY_TITLE).text
         assert (
-            f"{title_1} {title_2}" != "Shop By Category"
+            f"{title_1} {title_2}" == "Shop By Category"
         ), f"""
             The title of the Sidebar - '{title_1} {title_2}'.
             Expected - 'Shop By Category'"""
