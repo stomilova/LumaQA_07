@@ -18,6 +18,11 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Run tests
+    - name: Run tests initially
       run: |
         pytest -s -v
+
+    - name: Re-run failed tests
+      if: failure()
+      run: |
+        pytest --last-failed -s -v
