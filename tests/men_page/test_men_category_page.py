@@ -1,3 +1,7 @@
+import data.men_page_url as mp_url
+from locators.men_page_locators import MenCategoryPageLocators as MCL
+
+
 class TestHoodiesSweatshirtsFilter:
     def test_product_are_visible(self, page_with_hs_filter):
         """
@@ -32,4 +36,20 @@ class TestHoodiesSweatshirtsFilter:
         page.hover_first_item()
 
         assert page.is_options_displayed(), "Product options are not displayed"
+
+    def test_redirect_by_product_image(self, page_with_hs_filter):
+        """
+        TC_008.014.004 | Men > Tops > Hoodies & Sweatshirts filter
+                        > Redirect to the product page by product image
+        """
+
+        page = page_with_hs_filter
+
+        page.driver.find_element(*MCL.ITEM_PHOTO).click()
+
+        current_url = page.driver.current_url
+
+        assert (
+                current_url == mp_url.MARCO_LIGHTWEIGHT
+        ), "Failed to go to the product page by image"
 
