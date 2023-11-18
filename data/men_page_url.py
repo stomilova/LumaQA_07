@@ -10,3 +10,6 @@ MEN_BOTTOMS_SHORTS_PAGE = 'https://magento.softwaretestingboard.com/men/bottoms-
 
 # URL with selected filters
 MEN_HOODIES_AND_SWEATSHIRTS_FILTER = 'https://magento.softwaretestingboard.com/men/tops-men.html?cat=15'
+
+# Product pages
+MARCO_LIGHTWEIGHT = 'https://magento.softwaretestingboard.com/marco-lightweight-active-hoodie.html'
