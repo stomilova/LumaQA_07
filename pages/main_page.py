@@ -3,6 +3,7 @@ from locators.base_page_locators import BasePageLocators
 from locators.item_page_locators import ItemPageLocators
 
 
+
 class MainPage(BasePage):
     URL = 'https://magento.softwaretestingboard.com/'
 
@@ -27,6 +28,10 @@ class MainPage(BasePage):
 
     def men_btn_catalog(self):
         return self.is_clickable(BasePageLocators.LINK_MEN)
+
+    def select_to_tops_from_mens_dropdown_menu(self):
+        self.hold_mouse_on_element(BasePageLocators.LINK_MEN)
+        self.is_clickable(BasePageLocators.LINK_MEN_TOPS).click()
 
     def scroll_down_to_shop_performance(self):
         self.scroll_to_element(BasePageLocators.SHOP_PERFORMANCE)
