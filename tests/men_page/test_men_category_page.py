@@ -21,3 +21,15 @@ class TestHoodiesSweatshirtsFilter:
 
         assert page.is_shadow(), "The product is not highlighted with a shadow"
 
+    def test_options_appear_on_the_products(self, page_with_hs_filter):
+        """
+        TC_008.014.003 | Men > Tops > Hoodies & Sweatshirts filter
+                         > Options appear on the product item
+        """
+
+        page = page_with_hs_filter
+
+        page.hover_first_item()
+
+        assert page.is_options_displayed(), "Product options are not displayed"
+
