@@ -36,12 +36,17 @@ class TestMainPage:
 
         assert driver.current_url == MEN_PAGE
 
-    def test_select_tops_from_mens_dropdown_menu(self, driver):
+    def test_select_tops_from_men_dropdown_menu(self, driver):
         page = MainPage(driver, url=MainPage.URL)
         page.open()
-        page.select_to_tops_from_mens_dropdown_menu()
+        page.select_tops_from_mens_dropdown_menu()
+        assert page.visibility_of_men_tops_secondary_dropdown_menu(), "element is not visible"
 
-        assert driver.current_url == TOPS_MEN_PAGE
+    def test_select_bottoms_from_men_dropdown_menu(self, driver):
+        page = MainPage(driver, url=MainPage.URL)
+        page.open()
+        page.select_bottoms_from_mens_dropdown_menu()
+        assert page.visibility_of_men_bottoms_secondary_dropdown_menu(), "element is not visible"
 
     def test_main_page_erin_recommends_visible(self, driver):
         page = MainPage(driver, url=MainPage.URL)

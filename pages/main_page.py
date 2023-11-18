@@ -29,9 +29,21 @@ class MainPage(BasePage):
     def men_btn_catalog(self):
         return self.is_clickable(BasePageLocators.LINK_MEN)
 
-    def select_to_tops_from_mens_dropdown_menu(self):
+    def select_tops_from_mens_dropdown_menu(self):
         self.hold_mouse_on_element(BasePageLocators.LINK_MEN)
-        self.is_clickable(BasePageLocators.LINK_MEN_TOPS).click()
+        self.is_clickable(BasePageLocators.LINK_MEN_TOPS)
+
+    def select_bottoms_from_mens_dropdown_menu(self):
+        self.hold_mouse_on_element(BasePageLocators.LINK_MEN)
+        self.is_clickable(BasePageLocators.LINK_MEN_BOTTOMS)
+
+    def visibility_of_men_tops_secondary_dropdown_menu(self):
+        self.hold_mouse_on_element(BasePageLocators.LINK_MEN_TOPS)
+        return self.is_visible(BasePageLocators.LINK_MEN_TOPS_JACKETS)
+
+    def visibility_of_men_bottoms_secondary_dropdown_menu(self):
+        self.hold_mouse_on_element(BasePageLocators.LINK_MEN_BOTTOMS)
+        return self.is_visible(BasePageLocators.LINK_MEN_BOTTOMS_PANTS)
 
     def scroll_down_to_shop_performance(self):
         self.scroll_to_element(BasePageLocators.SHOP_PERFORMANCE)
