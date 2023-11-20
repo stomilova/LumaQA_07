@@ -25,3 +25,13 @@ class CheckoutPageLocators:
     PLACE_ORDER_BUTTON = (By.XPATH, "//button[@title='Place Order']")
 
     OVERLAY = (By.XPATH, "//*[@data-role='loader']")
+
+    EMAIL_FIELD_ERROR = (By.XPATH, "//div[@id='customer-email-error']")
+    FIRST_NAME_FIELD_ERROR = (By.XPATH, "//*[@name='firstname']//following-sibling::div[@class='field-error']")
+    LAST_NAME_FIELD_ERROR = (By.XPATH, "//*[@name='lastname']//following-sibling::div[@class='field-error']")
+    STREET_1_FIELD_ERROR = (By.XPATH, "//*[@name='street[0]']//following-sibling::div[@class='field-error']")
+    CITY_FIELD_ERROR = (By.XPATH, "//*[@name='city']//following-sibling::div[@class='field-error']")
+    POSTCODE_FIELD_ERROR = (By.XPATH, "//*[@name='postcode']//following-sibling::div[@class='field-error']")
+    POSTCODE_FIELD_ALERT = (By.XPATH, "//*[@name='postcode']//following-sibling::div[@class='field-error']//following-sibling::div[@class='message warning']")
+    PHONE_NUMBER_FIELD_ERROR = (By.XPATH, "//*[@name='telephone']//following-sibling::div[@class='field-error']")
+    SHIPPING_METHOD_ALERT = (By.XPATH, "//span[@data-bind='text: errorValidationMessage()']")

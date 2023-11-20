@@ -69,6 +69,14 @@ class CheckoutPage(BasePage):
         self.postcode_field().send_keys(postcode)
         self.phone_number_field().send_keys(phone_number)
 
+    def fill_invalid_data_as_guest_us_shipping(self):
+        self.email_field().send_keys('123')
+        self.first_name_field().send_keys(' ')
+        self.last_name_field().send_keys(' ')
+        self.street_address_1_field().send_keys(' ')
+        self.city_field().send_keys(' ')
+        self.postcode_field().send_keys(' ')
+        self.phone_number_field().send_keys(' ')
     def full_guest_place_order_us_address_flat_shipping(self, state, email, firstname, lastname, street_1, city,
                                                         postcode,
                                                         phone_number) -> str:
