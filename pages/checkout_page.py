@@ -123,6 +123,7 @@ class GuestShippingAddressPage(BasePage):
 
     SHIPPING_METHOD = (By.CSS_SELECTOR, ".table-checkout-shipping-method > tbody > tr")
     LOADER = (By.CSS_SELECTOR, "div.loader")
+    LOADER_ONE = (By.XPATH, "//*[@data-role='loader']")
 
     def __init__(self, driver, url=URL):
         super().__init__(driver, url)
@@ -233,12 +234,15 @@ class GuestShippingAddressPage(BasePage):
         Select(self.is_clickable(self.COUNTRY)).select_by_value(val)
 
     def button_next(self):
-        self.awailable()
+        self.available()
         return self.is_clickable(self.BUTTON_NEXT)
 
     def shipping_method(self):
-        self.awailable()
+        self.available()
         return self.is_clickable(self.SHIPPING_METHOD)
 
-    def awailable(self):
+    def available(self):
         return self.is_invisible(self.LOADER)
+
+    def wait_close_loader_one(self):
+        return self.is_invisible(self.LOADER_ONE)
