@@ -119,7 +119,10 @@ class GuestShippingAddressPage(BasePage):
 
     BUTTON_NEXT = (By.CSS_SELECTOR, "button.continue")
 
-    LD_PAYMENT_METHOD = (By.CSS_SELECTOR, "li.checkout-payment-method")
+    # LD_PAYMENT_METHOD = (By.CSS_SELECTOR, "li.checkout-payment-method")
+
+    SHIPPING_METHOD = (By.CSS_SELECTOR, ".table-checkout-shipping-method > tbody > tr")
+    LOADER = (By.CSS_SELECTOR, "div.loader")
 
     def __init__(self, driver, url=URL):
         super().__init__(driver, url)
@@ -230,5 +233,12 @@ class GuestShippingAddressPage(BasePage):
         Select(self.is_clickable(self.COUNTRY)).select_by_value(val)
 
     def button_next(self):
-        self.is_invisible(self.LD_PAYMENT_METHOD)
+        self.awailable()
         return self.is_clickable(self.BUTTON_NEXT)
+
+    def shipping_method(self):
+        self.awailable()
+        return self.is_clickable(self.SHIPPING_METHOD)
+
+    def awailable(self):
+        return self.is_invisible(self.LOADER)
