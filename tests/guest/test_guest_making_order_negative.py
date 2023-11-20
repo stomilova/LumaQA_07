@@ -16,8 +16,8 @@ from locators.checkout_page_locators import CheckoutPageLocators as cpl
     Steps:
     Click “Shop New Yoga” button in “New Luma Yoga Collection” widget
     Hover over “Echo Fit Compression Short” product card
-    Choose “28” in “size” rdiobutton on the item’s card
-    Choose “black” in “color” rdiobutton on the item’s card
+    Choose “28” in “size” radiobutton on the item’s card
+    Choose “black” in “color” radiobutton on the item’s card
     Click “Add to cart” button
     Click “Cart” button
     Click “Proceed to Checkout”

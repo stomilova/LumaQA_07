@@ -77,6 +77,7 @@ class CheckoutPage(BasePage):
         self.city_field().send_keys(' ')
         self.postcode_field().send_keys(' ')
         self.phone_number_field().send_keys(' ')
+
     def full_guest_place_order_us_address_flat_shipping(self, state, email, firstname, lastname, street_1, city,
                                                         postcode,
                                                         phone_number) -> str:
