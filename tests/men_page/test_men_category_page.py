@@ -82,3 +82,15 @@ class TestTeesFilter:
 
         assert page.is_products_displayed(), "Element is not displayed on the page"
 
+    def test_item_is_highlighted(self, page_with_tees_filter):
+        """
+        TC_008.017.002 | Men > Tops > Tees filter
+                        > The item is highlighted with a shadow
+
+        """
+        page = page_with_tees_filter
+
+        page.hover_first_item()
+
+        assert page.is_shadow(), "The product is not highlighted with a shadow"
+
