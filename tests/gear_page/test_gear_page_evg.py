@@ -1,4 +1,4 @@
-from data.gear_page_urls import GEAR_PAGE, SPRITE_YOGA_COMPANION_KIT_PAGE
+from data.gear_page_urls import GEAR_PAGE, SPRITE_YOGA_COMPANION_KIT_PAGE, SHOP_FITNESS_PAGE
 from locators.gear_page_locators import BannerLocators
 from base.seleniumbase import BasePage
 
@@ -53,3 +53,11 @@ def test_sprite_yoga_companion_kit_page_is_open_after_click_button(driver):
     page.is_visible(BannerLocators.SPRITE_YOGA_COMPANION_KIT_BANNER_BUTTON).click()
     current_page = driver.current_url
     assert current_page == SPRITE_YOGA_COMPANION_KIT_PAGE
+
+def test_shop_fitness_page_is_open(driver):
+    """TC_009.005.003 | Gear page > categories > Verify opening the ‘Shop Fitness’ page"""
+    page = BasePage(driver, url=GEAR_PAGE)
+    page.open()
+    page.is_visible(BannerLocators.LOOSEN_UP_BANNER).click()
+    current_page = driver.current_url
+    assert current_page == SHOP_FITNESS_PAGE
