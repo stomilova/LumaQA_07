@@ -2,11 +2,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from base.seleniumbase import BasePage
-from locators.checkout_page_locators import CheckoutPageLocators
+from locators.checkout_page_locators import CheckoutPageLocators, MultipleAddressesPageLocators
 
 
 class CheckoutPage(BasePage):
     URL = "https://magento.softwaretestingboard.com/checkout/"
+    URL_USER_HAVE_ADDRESS = "https://magento.softwaretestingboard.com/checkout/#shipping"
 
     def email_field(self):
         return self.is_visible(CheckoutPageLocators.EMAIL_FIELD)
@@ -45,9 +46,6 @@ class CheckoutPage(BasePage):
     def step_2_next_button(self):
         return self.is_clickable(CheckoutPageLocators.CHECKOUT_STEP_2_NEXT_BUTTON)
 
-    def wait_overlay_closed(self):
-        return self.is_invisible(CheckoutPageLocators.OVERLAY)
-
     def place_order_button(self):
         return self.is_clickable(CheckoutPageLocators.PLACE_ORDER_BUTTON)
 
@@ -57,6 +55,24 @@ class CheckoutPage(BasePage):
 
     def order_number_guest(self):
         return self.is_visible(CheckoutPageLocators.ORDER_NUMBER_GUEST)
+
+    def additional_address(self):
+        return self.is_visible(CheckoutPageLocators.ADDITIONAL_ADDRESS)
+
+    def check_data_availability(self, what, where):
+        for i in what:
+            if i not in where:
+                return False
+        return True
+
+    def current_delivery_address(self):
+        return self.is_visible(CheckoutPageLocators.CURRENT_DELIVERY_ADDRESS)
+
+    def ship_here_button(self):
+        return self.is_clickable(CheckoutPageLocators.SHIP_HERE_BUTTON)
+
+    def state_of_additional_address(self):
+        return self.is_visible(CheckoutPageLocators.STATE_OF_ADDITIONAL_ADDRESS).text
 
     def fill_all_require_field_as_guest_us_shipping(self, state, email, firstname, lastname, street_1, city, postcode,
                                                     phone_number):
@@ -101,6 +117,42 @@ class CheckoutPage(BasePage):
         self.place_order()
         order_id = self.order_number_guest().text
         return order_id
+
+
+class MultipleAddressesPage(CheckoutPage):
+    URL_SHIP_TO_MULTIPLE_ADDRESSES = "https://magento.softwaretestingboard.com/multishipping/checkout/addresses/"
+    URL_CREATE_SHIPPING_ADDRESS = "https://magento.softwaretestingboard.com/multishipping/checkout_address/newShipping/"
+    URL_SELECT_SHIPPING_METHOD = "https://magento.softwaretestingboard.com/multishipping/checkout/shipping/"
+
+    def presence_of_an_asterisk(self, locator):
+        label = self.is_visible(locator).text
+        script = ("return window.getComputedStyle(document.querySelector('" +
+                  locator[1] + "'),'::after').getPropertyValue('content')")
+        element = self.driver.execute_script(script)
+        return label + ' ' + element.strip('"')
+
+    def enter_a_new_address_button(self):
+        return self.is_clickable(MultipleAddressesPageLocators.ENTER_A_NEW_ADDRESS_BUTTON)
+
+    def back_to_cart_link(self):
+        return self.is_visible(MultipleAddressesPageLocators.BACK_TO_CART_LINK)
+
+    def select_shipping_method_block(self):
+        return self.is_visible(MultipleAddressesPageLocators.SELECT_SHIPPING_METHOD_BLOCK)
+
+    def update_qty_and_address_button(self):
+        return self.is_clickable(MultipleAddressesPageLocators.UPDATE_QTY_AND_ADDRESS_BUTTON)
+
+    def select_address_from_dropdown_send_to(self, first_name, last_name, street, number_of_item: int = 1):
+        return self.is_clickable((By.XPATH,
+                                  f'(//div[@class="field address"]//option[text()[contains(.,"{first_name + " " + last_name}") and contains(.,"{street}")]])[{number_of_item}]'))
+
+    def change_button_for_a_specifically_address(self, first_name, last_name, phone_number):
+        return self.is_clickable((By.XPATH,
+                                  f'//div[div[address[text()="{first_name + " " + last_name}"]/a[text()="{phone_number}"]]]//a[@class="action edit"]'))
+
+    def go_to_shipping_info_button(self):
+        return self.is_clickable(MultipleAddressesPageLocators.GO_TO_SHIPPING_INFO_BUTTON)
 
 
 class GuestShippingAddressPage(BasePage):

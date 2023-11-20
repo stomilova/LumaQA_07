@@ -9,6 +9,8 @@ class BasePageLocators:
     LINK_HEADER_SIGN_IN = (By.XPATH, "//header[@class='page-header']//child::a[contains(text(), 'Sign In')]")
     LINK_HEADER_CREATE_ACCOUNT = (By.XPATH, "//header[@class='page-header']//child::a[contains(text(), 'Create an Account')]")
     ERIN_SECTION = (By.CSS_SELECTOR, '.home-erin')
+    OVERLAY = (By.XPATH, "//*[@data-role='loader']")
+
     LINK_WHATS_NEW = (By.XPATH, "//a[@id='ui-id-3']")
 
     LINK_WOMEN = (By.XPATH, "//a[@id='ui-id-4']")
