@@ -1,4 +1,4 @@
-from data.gear_page_urls import GEAR_PAGE, SPRITE_YOGA_COMPANION_KIT_PAGE, SHOP_FITNESS_PAGE
+from data.gear_page_urls import GEAR_PAGE, SPRITE_YOGA_COMPANION_KIT_PAGE, SHOP_FITNESS_PAGE, LUMA_WATER_BOTTLE_PAGE
 from locators.gear_page_locators import BannerLocators
 from base.seleniumbase import BasePage
 
@@ -61,3 +61,12 @@ def test_shop_fitness_page_is_open(driver):
     page.is_visible(BannerLocators.LOOSEN_UP_BANNER).click()
     current_page = driver.current_url
     assert current_page == SHOP_FITNESS_PAGE
+
+def test_luma_bottle_water_page_is_open(driver):
+    """TC_009.005.004 | Gear page > categories > Verify opening the ‘Luma water bottle’ page"""
+    page = BasePage(driver, url=GEAR_PAGE)
+    page.open()
+    page.is_visible(BannerLocators.LUMA_WATER_BOTTLE_BANNER).click()
+    current_page = driver.current_url
+    assert current_page == LUMA_WATER_BOTTLE_PAGE
+
