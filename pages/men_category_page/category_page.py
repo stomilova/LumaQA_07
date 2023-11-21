@@ -30,3 +30,16 @@ class MenCategoryPage(BasePage):
 
         return box_property == 'rgba(0, 0, 0, 0.3) 3px 4px 4px 0px'
 
+    def get_product_options(self) -> dict:
+        """
+        Returns a dictionary where:
+            {'element name': WebElement, ...}
+        """
+
+        options = {
+            'add_to_cart': self.driver.find_element(*MCL.ADD_TO_CART),
+            'add_to_wish_list': self.driver.find_element(*MCL.ADD_TO_WISH_LIST),
+            'add_to_compare': self.driver.find_element(*MCL.ADD_TO_COMPARE)
+        }
+
+        return options
