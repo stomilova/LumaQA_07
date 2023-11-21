@@ -35,7 +35,8 @@ class TestHoodiesSweatshirtsFilter:
 
         page.hover_first_item()
 
-        assert page.is_options_displayed(), "Product options are not displayed"
+        for name, element in page.get_product_options().items():
+            assert element.is_displayed(), f"The '{name}' option is not displayed"
 
     def test_redirect_by_product_image(self, page_with_hs_filter):
         """
@@ -103,4 +104,5 @@ class TestTeesFilter:
 
         page.hover_first_item()
 
-        assert page.is_options_displayed(), "Product options are not displayed"
+        for name, element in page.get_product_options().items():
+            assert element.is_displayed(), f"The '{name}' option is not displayed"
