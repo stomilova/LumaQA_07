@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from base.seleniumbase import BasePage
-from locators.new_luma_yoga_collection_locators.PriceTabLocators import PRICE_TAB
+from locators.new_luma_yoga_collection_locators import PriceTabLocators 
 from selenium.webdriver.remote.webelement import WebElement
 #PRICE_TAB,PRICE_LIST,PRICE_LEVEL_LOCATOR
 
@@ -14,21 +14,22 @@ class NewLumaYogaCollectionPage(BasePage):
             url='https://magento.softwaretestingboard.com/collections/yoga-new.html',
             driver=driver
         )
-    def find_price_tab_and_click(self) -> WebElement:
-        return self.is_clickable(locator=PriceTabLocators.PRICE_TAB).click()
+    def find_price_tab(self) -> WebElement:
+        return self.is_clickable(PriceTabLocators.PRICE_TAB)
+    
 
-    def find_element_in_sidebar(self, locator: tuple) -> WebElement:
-        sidebar = self.find_sidebar()
-        return self.find_visible_element_in_sidebar(sidebar, *locator)
+    def find_element_in_price_tab(self, locator: tuple) -> WebElement:
+        price_tab = self.find_element_in_price_tab(locator=PriceTabLocators.PRICE_TAB)
+        return self.find_visible_element_in_sidebar(price_tab, *locator)
 
     def find_elements_in_price_tab(self, locator: tuple) -> list[WebElement]:
-        sidebar = self.find_sidebar()
-        return self.find_visible_elements_in_price_tab(sidebar, locator)
+        price_tab = self.find_price_tab()
+        return self.find_visible_elements_price_tab(price_tab, locator)
 
     def find_visible_elements_price_tab(
-        self, sidebar: WebElement, locator: tuple
+        self, price_tab: WebElement, locator: tuple
     ) -> list[WebElement]:
-        return sidebar.find_elements(*locator)
+        return price_tab.find_elements(locator)
 
 
     # def rederect_to_the_current_category_page(

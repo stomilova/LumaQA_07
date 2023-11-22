@@ -1,12 +1,11 @@
-from tests.new_luma_yoga_collection.conftest import new_luma_yoga_collection_page_precondition_for_test_data
+from xml.etree.ElementPath import xpath_tokenizer
 import pytest
 from pages.new_luma_yoga_collection_page.new_luma_yoga_collection_page import NewLumaYogaCollectionPage
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
-from locators.new_luma_yoga_collection_locators import PRICE_TAB,PRICE_LIST,PRICE_LEVEL_LOCATOR
-
-
+from locators.new_luma_yoga_collection_locators import PriceTabLocators
+from tests.new_luma_yoga_collection.conftest import new_luma_yoga_collection_page_precondition_for_test_data
 
 PRICE_LEVELS = [
     "$10.00-$19.99",
@@ -30,20 +29,19 @@ class TestPriceLevelsVisibleClickable:
     def collect_test_data():
         test_data = []
         collection_page = new_luma_yoga_collection_page_precondition_for_test_data()
-        collection_page.find_price_tab_and_click
+        collection_page.is_visible(locator=PriceTabLocators.PRICE_TAB).click()
         time.sleep(3)
-        price_levels = collection_page.find_elements(locator=PRICE_LIST)
+        price_levels = collection_page.find_elements_in_price_tab(locator=PriceTabLocators.PRICE_LIST)
         for idx,price_level in enumerate(price_levels):
-            price_level_link = price_level.find_element(By.XPATH,PRICE_LIST[1]+"/a").get_attribute("href")
-            link_locator = (By.XPATH,PRICE_LIST[1]+f"/a[@href='{price_level_link}']")
-            # separator_locator = (By.XPATH, '//span/following-sibling::text()')
+            price_level_link = price_level.find_element(By.XPATH,PriceTabLocators.PRICE_LIST[1]+"/a").get_attribute("href")
+            link_locator = (By.XPATH,PriceTabLocators.PRICE_LIST[1]+f"/a[@href='{price_level_link}']")
+            separator_locator = (By.XPATH, '//span/following-sibling::text()')
             
-            # separator = price_level.find_element(separator_locator).strip()
+            separator = price_level.find_element(separator_locator).strip()
             
-            # pytest.fail(f"{separator}")
-            titles = price_level.find_elements(*PRICE_LEVEL_LOCATOR)
+
+            titles = price_level.find_elements(PriceTabLocators.PRICE_LEVEL_LOCATOR)
             combined_titles = []
-            separator = '-'
 
             if idx == len(price_levels):
                 separator=' and above'
@@ -60,21 +58,21 @@ class TestPriceLevelsVisibleClickable:
         return test_data
 
 
-    # @pytest.mark.parametrize("param", PARAMETERS)
-    # @pytest.mark.parametrize("price_level_locator,expected_price_level", collect_test_data())
-    # def test_check_visibility_or_clickability_of_the_title_write_for_us(
-    #     self, param, price_level_locator,expected_price_level,driver
-    # ):
-    #     """
-    #     """
+    @pytest.mark.parametrize("param", PARAMETERS)
+    @pytest.mark.parametrize("price_level_locator,expected_price_level", collect_test_data())
+    def test_check_visibility_or_clickability_of_the_title_write_for_us(
+        self, param, price_level_locator,expected_price_level,driver
+    ):
+        """
+        """
 
-    #     collection_page = NewLumaYogaCollectionPage(driver=driver)
-    #     collection_page.open()
-    #     collection_page.is_clickable(locator=PRICE_TAB).click()
+        collection_page = NewLumaYogaCollectionPage(driver=driver)
+        collection_page.open()
+        collection_page.is_clickable(locator=PRICE_TAB).click()
 
-    #     collection_page.verify_visability_or_clickability_of_the_element_in_location(
-    #         param=param,
-    #         element_value=f"The Price Level({expected_price_level})'",
-    #         element_locator=price_level_locator,
-    #         location="price table",
-    #     )
+        collection_page.verify_visability_or_clickability_of_the_element_in_location(
+            param=param,
+            element_value=f"The Price Level({expected_price_level})'",
+            element_locator=price_level_locator,
+            location="price table",
+        )
