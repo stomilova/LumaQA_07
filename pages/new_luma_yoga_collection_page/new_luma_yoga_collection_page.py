@@ -15,21 +15,14 @@ class NewLumaYogaCollectionPage(BasePage):
             driver=driver
         )
     def find_price_tab(self) -> WebElement:
-        return self.is_clickable(PriceTabLocators.PRICE_TAB)
+        return self.driver.find_element(*PriceTabLocators.PRICE_TAB)
     
 
-    def find_element_in_price_tab(self, locator: tuple) -> WebElement:
-        price_tab = self.find_element_in_price_tab(locator=PriceTabLocators.PRICE_TAB)
-        return self.find_visible_element_in_sidebar(price_tab, *locator)
+    def find_price_list(self, locator: tuple) -> list[WebElement]:
+        return self.driver.find_elements(*locator)
 
-    def find_elements_in_price_tab(self, locator: tuple) -> list[WebElement]:
-        price_tab = self.find_price_tab()
-        return self.find_visible_elements_price_tab(price_tab, locator)
-
-    def find_visible_elements_price_tab(
-        self, price_tab: WebElement, locator: tuple
-    ) -> list[WebElement]:
-        return price_tab.find_elements(locator)
+    # def find_elements_in_price_tab(self, locator: tuple) -> list[WebElement]:
+    #     return self.find_elements_in_price_tab(*locator)
 
 
     # def rederect_to_the_current_category_page(
