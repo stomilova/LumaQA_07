@@ -4,6 +4,7 @@ from pages.erin_recommends.erin_recommends import ErinRecommendsPage
 
 from locators.training_page_locators import TrainingPageLocators as tpl
 
+
 class TestTrainingPageLoggedIn:
     def test_training_page_elements_visibility(self, driver):
         page = CreateAccountPage(driver)
