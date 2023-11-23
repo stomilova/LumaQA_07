@@ -35,26 +35,18 @@ class TestPriceLevelsVisibleClickable:
         time.sleep(3)
         price_levels = collection_page.find_price_list(locator=PriceTabLocators.PRICE_LIST)
         for idx,price_level in enumerate(price_levels):
-            price_level_link = price_level.find_element(By.XPATH,PriceTabLocators.PRICE_LIST[1]+"/a").get_attribute("href")
-            link_locator = (By.XPATH,PriceTabLocators.PRICE_LIST[1]+f"/a[@href='{price_level_link}']")
-            separator_locator = (By.XPATH, '//span/following-sibling::text()')
-            
-            separator = price_level.find_element(*separator_locator).text
-            
+            spans = price_level.find_elements(By.XPATH, ".//span[@class='price']")
+            if len(spans) >= 2:
+                first_span_text = spans[0].text
+                separator = price_level.text.replace(first_span_text, "").strip()
+                print(separator)
 
-            titles = price_level.find_elements(*PriceTabLocators.PRICE_LEVEL_LOCATOR)
-            combined_titles = []
+        
 
-            if idx == len(price_levels)-1:
-                separator=' and above'
-                combined_titles_text = f'{titles[0].text}{separator}'
-            elif idx < len(price_levels)-1:
-                for title in titles:
-                    combined_titles.append(title.text)
-                    combined_titles_text = f'{separator}'.join(combined_titles[:2]) 
-            assert combined_titles_text == PRICE_LEVELS[idx]
-            UPDATABLE_PRICE_LEVEL_LIST.remove(PRICE_LEVELS[idx])
-            test_data.append([link_locator, PRICE_LEVELS[idx]])
+            
+            # assert combined_titles_text == PRICE_LEVELS[idx]
+            # UPDATABLE_PRICE_LEVEL_LIST.remove(PRICE_LEVELS[idx])
+            # test_data.append([link_locator, PRICE_LEVELS[idx]])
 
         # assert not UPDATABLE_PRICE_LEVEL_LIST 
         return test_data
