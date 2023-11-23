@@ -14,6 +14,8 @@ class BasePageLocators:
     LINK_HEADER_CREATE_ACCOUNT = (By.XPATH, "//header[@class='page-header']//child::a[contains(text(), 'Create an Account')]")
     ERIN_SECTION = (By.CSS_SELECTOR, '.home-erin')
     OVERLAY = (By.XPATH, "//*[@data-role='loader']")
+    WELCOME_MENU_BUTTON = (By.XPATH, '//span[@class="customer-name"]/button[@data-action="customer-menu-toggle"]')
+    WELCOME_MENU_MY_ACCOUNT_BUTTON = (By.XPATH, '//li[@class="customer-welcome active"]//a[@href="https://magento.softwaretestingboard.com/customer/account/"]')
 
     LINK_WHATS_NEW = (By.XPATH, "//a[@id='ui-id-3']")
 
