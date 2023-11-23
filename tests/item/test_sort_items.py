@@ -1,5 +1,4 @@
 import pytest
-
 from locators.sort_items_locators import SortItemsLocators, ShowItemsPerPageLocators
 from pages.men_category_page.sort_items import SortItemsByProduct, ShowItemsPerPage
 
@@ -9,7 +8,7 @@ def test_sort_items_by_product_name(driver):
     page.open()
     page.sort_select().select_by_value('name')
 
-    assert page.wait_url_redirection(SortItemsByProduct.URL_SORTED_BY_NAME)
+    assert page.wait_url_redirection(SortItemsByProduct.URL_SORTED_BY_NAME,30)
     assert page.sort_direction().get_attribute('data-value') == 'desc'
     res = []
     while page.paging_button_next_visible():
@@ -26,7 +25,7 @@ def test_sort_items_by_price(driver):
     page.open()
     page.sort_select().select_by_value('price')
 
-    # assert page.wait_url_redirection(SortItemsByProduct.URL_SORTED_BY_NAME)
+    assert page.wait_url_redirection(SortItemsByProduct.URL_SORTED_BY_PRICE,30)
     assert page.sort_direction().get_attribute('data-value') == 'desc'
     res = []
     while page.paging_button_next_visible():
@@ -65,6 +64,8 @@ def test_show_items_per_page_list(driver, qty):
     page.modes_list_active()
     page.select_show_items().select_by_value(str(qty))
     assert page.item_count(ShowItemsPerPageLocators.NAME_ITEMS) == qty, 'Не верное количество'
+
+
 
 
 
