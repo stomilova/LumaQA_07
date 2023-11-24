@@ -98,4 +98,4 @@ class TestFooterElementsVisibleClickable:
             element_value=f"The link to the '{expected_link}'",
             element_locator=BasePageLocators.LINK_SEARCH_TERMS,
             location="the footer",
-        )
+            )
