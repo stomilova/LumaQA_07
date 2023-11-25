@@ -14,3 +14,9 @@ def new_luma_yoga_collection_page_precondition_for_test_data():
     new_luma_yoga_collection_page = NewLumaYogaCollectionPage(driver=driver)
     new_luma_yoga_collection_page.open()
     return  new_luma_yoga_collection_page
+
+@pytest.fixture(scope="function")
+def new_luma_yoga_collection_page_precondition(driver):
+    new_luma_yoga_collection_page = NewLumaYogaCollectionPage(driver=driver)
+    new_luma_yoga_collection_page.open()
+    return  new_luma_yoga_collection_page
