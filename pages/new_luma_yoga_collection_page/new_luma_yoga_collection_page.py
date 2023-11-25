@@ -3,12 +3,10 @@ from selenium.webdriver.common.by import By
 from base.seleniumbase import BasePage
 from locators.new_luma_yoga_collection_locators import PriceTabLocators 
 from selenium.webdriver.remote.webelement import WebElement
-#PRICE_TAB,PRICE_LIST,PRICE_LEVEL_LOCATOR
 
 
 
 class NewLumaYogaCollectionPage(BasePage):
-    # page with categories
 
     def __init__(self, driver):
         super().__init__(
