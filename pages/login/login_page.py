@@ -1,8 +1,9 @@
 import pytest
 from selenium.webdriver.remote.webelement import WebElement
-from base.seleniumbase import BasePage
-from locators.login_page_locators import LoginPageLocators
-from locators.base_page_locators import BasePageLocators
+from LumaQA_07.base.seleniumbase import BasePage
+from LumaQA_07.locators.login_page_locators import LoginPageLocators
+from LumaQA_07.locators.base_page_locators import BasePageLocators
+
 
 
 class LoginPage(BasePage):
@@ -24,4 +25,13 @@ class LoginPage(BasePage):
         self.button_sign_in().click()
         assert self.header().text == 'My Account', "Не удалось войти"
 
+
+class MyAccountPage(BasePage):
+    URL = 'https://magento.softwaretestingboard.com/customer/account/'
+
+    def check_visibility_of_sale_section(self):
+        return self.is_visible(BasePageLocators.SALE_SECTION)
+
+    def check_clickability_of_sale_section(self):
+        return self.is_clickable(BasePageLocators.SALE_SECTION)
 

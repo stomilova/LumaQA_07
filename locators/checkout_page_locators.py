@@ -2,6 +2,10 @@ from selenium.webdriver.common.by import By
 
 
 class CheckoutPageLocators:
+    CHECKOUT_STEP_METHODS = (By.CSS_SELECTOR, '#shipping')
+    SHIPPING_METHODS = (By.XPATH, '//*[contains(text(), "Shipping Methods")]')
+    ORDER_SUMMARY = (By.XPATH, '//div[@class="opc-block-summary"]')
+
     EMAIL_FIELD = (By.XPATH, "//div[@class='field required']//*[@id='customer-email']")
     FIRST_NAME_FIELD = (By.XPATH, "//*[@name='firstname']")
     LAST_NAME_FIELD = (By.XPATH, "//*[@name='lastname']")
@@ -11,7 +15,6 @@ class CheckoutPageLocators:
     STATE_FIELD_DROPDOWN = (By.XPATH, "//*[@name='region_id']")
     POSTCODE_FIELD = (By.XPATH, "//*[@name='postcode']")
     PHONE_NUMBER_FIELD = (By.XPATH, "//*[@name='telephone']")
-
 
     SHIPPING_BEST_WAY = (By.XPATH, "//*[@id='label_carrier_bestway_tablerate']")
     SHIPPING_FLAT_RATE = (By.XPATH, "//*[@id='label_carrier_flatrate_flatrate']")

@@ -65,6 +65,9 @@ class BasePage:
         """
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
+    def are_visible(self, locator: tuple, timeout: int = TIMEOUT) -> WebElement:
+        return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
+
     def is_clickable(self, locator: tuple, timeout: int = TIMEOUT) -> WebElement:
         """
         Ожидает, что элемент, заданный локатором, станет кликабельным в течение указанного времени.
