@@ -69,3 +69,9 @@ class MenCategoryPage(BasePage):
             (number, self.driver.find_element(*MCL.get_option_locator(number)))
             for number in numbers
         ]
+
+    def click_limit_button(self) -> None:
+        """
+        Clicks on the Limit button
+        """
+        self.driver.find_element(*MCL.LIMITER).click()
