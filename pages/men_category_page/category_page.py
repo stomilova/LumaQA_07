@@ -50,3 +50,22 @@ class MenCategoryPage(BasePage):
         """
 
         self.driver.find_element(*MCL.CLEAR_ALL).click()
+
+    def get_limit_options(self, mode='grid') -> list:
+        """
+        Returns a list where:
+            [('element name', WebElement), ...]
+
+        If mode == 'grid' returns options for Grid mode only,
+        else for 'list' mode
+        """
+
+        numbers = (
+            ('5', '10', '15', '20', '25'),
+            ('12', '24', '36')
+        )[mode == 'grid']
+
+        return [
+            (number, self.driver.find_element(*MCL.get_option_locator(number)))
+            for number in numbers
+        ]
