@@ -10,7 +10,7 @@ class MenCategoryPage(BasePage):
         Returns a list with all products
         """
 
-        return self.driver.find_elements(*MCL.ITEM)
+        return self.driver.find_elements(*MCL.ITEM_PHOTO)
 
     def is_products_displayed(self) -> bool:
         """
@@ -78,9 +78,10 @@ class MenCategoryPage(BasePage):
 
     def click_limit_button(self) -> None:
         """
-        Clicks on the Limit button
+        Waits for the "Limit" button to become clickable, then clicks on it
         """
-        self.driver.find_element(*MCL.LIMITER).click()
+
+        self.is_clickable(MCL.LIMITER).click()
 
     def click_list_mode(self) -> None:
         """
@@ -88,3 +89,9 @@ class MenCategoryPage(BasePage):
         """
 
         self.is_clickable(MCL.LIST_MODE).click()
+
+    def click_option(self, option):
+        """
+        Waits for the "option" button to become clickable, then clicks on it
+        """
+        self.is_clickable(MCL.get_option_locator(option)).click()

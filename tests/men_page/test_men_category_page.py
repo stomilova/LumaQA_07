@@ -205,8 +205,8 @@ class TestMenBottomsPage:
         page = page_bottoms
 
         page.click_limit_button()
-        page.driver.find_element(*MCL.get_option_locator(option)).click()
+        page.click_option(option)
 
         assert (
-            len(page.get_all_products()) <= int(option)
+            len([el for el in page.get_all_products() if el.is_displayed()]) <= int(option)
             ), f'The number of items exceeds the limit: {option}'
