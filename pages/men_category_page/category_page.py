@@ -88,3 +88,9 @@ class MenCategoryPage(BasePage):
         """
 
         self.is_clickable(MCL.LIST_MODE).click()
+
+    def click_option(self, option):
+        """
+        Waits for the "option" button to become clickable, then clicks on it
+        """
+        self.is_clickable(MCL.get_option_locator(option)).click()
