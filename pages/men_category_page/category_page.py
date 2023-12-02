@@ -5,14 +5,20 @@ from locators.men_page_locators import MenCategoryPageLocators as MCL
 class MenCategoryPage(BasePage):
     '''Page for categories on the "Men" page, e.g. Tops, Bottoms.'''
 
+    def get_all_products(self) -> list:
+        """
+        Returns a list with all products
+        """
+
+        return self.driver.find_elements(*MCL.ITEM)
+
     def is_products_displayed(self) -> bool:
         """
         Returns True if all products are displayed on the page,
         otherwise False.
         """
-        items = self.driver.find_elements(*MCL.ITEM_PHOTO)
 
-        return all([item.is_displayed() for item in items])
+        return all([item.is_displayed() for item in self.get_all_products()])
 
     def hover_first_item(self) -> None:
         """
