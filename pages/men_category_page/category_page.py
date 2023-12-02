@@ -17,9 +17,8 @@ class MenCategoryPage(BasePage):
         Returns True if all products are displayed on the page,
         otherwise False.
         """
-        items = self.driver.find_elements(*MCL.ITEM_PHOTO)
 
-        return all([item.is_displayed() for item in items])
+        return all([item.is_displayed() for item in self.get_all_products()])
 
     def hover_first_item(self) -> None:
         """
