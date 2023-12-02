@@ -194,3 +194,19 @@ class TestMenBottomsPage:
 
         for name, element in page.get_limit_options(mode='list'):
             assert element.is_displayed(), f'Option "{name}" is not displayed'
+
+    @pytest.mark.parametrize('option', ['12', '24', '36'])
+    def test_grid_choosing_limit_option(self, page_bottoms, option):
+        """
+        TC_008.034.003 | Men > Bottoms > Grid mode > Limit controller
+                        > Choosing of quantity displaying items on the page
+        """
+
+        page = page_bottoms
+
+        page.click_limit_button()
+        page.driver.find_element(*MCL.get_option_locator(option)).click()
+
+        assert (
+            len(page.get_all_products()) <= int(option)
+            ), f'The number of items exceeds the limit: {option}'
