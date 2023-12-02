@@ -1,5 +1,7 @@
 from base.seleniumbase import BasePage
 from locators.men_page_locators import MenCategoryPageLocators as MCL
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait as wait
 
 
 class MenCategoryPage(BasePage):
@@ -10,7 +12,7 @@ class MenCategoryPage(BasePage):
         Returns a list with all products
         """
 
-        return self.driver.find_elements(*MCL.ITEM)
+        return self.driver.find_elements(*MCL.ITEM_PHOTO)
 
     def is_products_displayed(self) -> bool:
         """
