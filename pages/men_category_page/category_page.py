@@ -1,7 +1,5 @@
 from base.seleniumbase import BasePage
 from locators.men_page_locators import MenCategoryPageLocators as MCL
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait as wait
 
 
 class MenCategoryPage(BasePage):
