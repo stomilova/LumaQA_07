@@ -210,3 +210,20 @@ class TestMenBottomsPage:
         assert (
             len([el for el in page.get_all_products() if el.is_displayed()]) <= int(option)
             ), f'The number of items exceeds the limit: {option}'
+
+    @pytest.mark.parametrize('option', ['5', '10', '15', '20', '25'])
+    def test_list_choosing_limit_option(self, page_bottoms, option):
+        """
+        TC_008.034.004 | Men > Bottoms > List mode > Limit controller
+                        > Choosing of quantity displaying items on the page
+        """
+
+        page = page_bottoms
+
+        page.click_list_mode()
+        page.click_limit_button()
+        page.click_option(option)
+
+        assert (
+                len([el for el in page.get_all_products() if el.is_displayed()]) <= int(option)
+        ), f'The number of items exceeds the limit: {option}'
