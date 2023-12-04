@@ -76,3 +76,4 @@ class BasePageLocators:
         BLOCK_1, BLOCK_2, BLOCK_3, ERIN_SECTION, BLOCK_5, BLOCK_6
     ]
     SHOP_NEW_YOGA = (By.XPATH, "//span[@class='action more button']")
+    LIST_MENU_BAR = [LINK_WHATS_NEW, LINK_WOMEN, LINK_MEN, LINK_GEAR, LINK_TRAINING, LINK_SALE]
