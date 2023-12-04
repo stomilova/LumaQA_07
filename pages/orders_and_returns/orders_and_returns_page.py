@@ -19,9 +19,9 @@ class OrdersAndReturnsPage(BasePage):
         dropdown.select_by_visible_text("ZIP Code")
 
     def is_search_field_name_visible(self):
-        """The method verifies if 'Billing Zip code' field becomes the search criterion field name"""
+        """The method verifies if 'Search field' name is visible"""
         return self.is_visible(ORPL.POSTCODE_FIELD_NAME)
 
     def get_search_field_name_text(self):
         """The method gets the search field name"""
-        return self.is_visible(ORPL.POSTCODE_FIELD_NAME).text
+        return self.is_search_field_name_visible().text
