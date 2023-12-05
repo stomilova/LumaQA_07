@@ -116,7 +116,7 @@ def test_anchor_links_in_the_left_navbar_are_clickable(driver, anchor_link_locat
     Visability of the anchor links"""
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
     page.open()
-    link = page.is_visible(anchor_link_locator).is_displayed()
+    link = page.is_visible(anchor_link_locator).is_enabled()
     assert link == expected_result
 
 
