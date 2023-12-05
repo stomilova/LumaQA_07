@@ -13,7 +13,7 @@ import language_tool_python
     (PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK, 'color', 'rgba(0, 107, 180, 1)'),
     (PrivacyCookiePolicyPageLocators.CONTACT_US_LINK_LOCATOR, 'color', 'rgba(0, 107, 180, 1)')
 ])
-def test_fonts_of_the_block_titled_your_choices_regarding_use_of_the_information_we_collect(driver, locator, css_value, expected_fonts):
+def test_privacy_cookie_policy_value_of_elements(driver, locator, css_value, expected_fonts):
     """TC_012.007.001 | Footer > "Privacy and Cookie Policy" > Content >
      The Font family of the text block titled 'Your Choices Regarding Use Of The Information We Collect'"""
 
