@@ -54,13 +54,17 @@ def test_text_block_format_titled_list_of_cookie_files_we_collect(driver):
     element_format = page.is_visible(locator=PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_CONTENT_LOCATOR).tag_name
     assert element_format == 'table', f"The text of the block is NOT presented in a tabular format"
 
-def test_list_of_cookies_we_collects_section_is_displayed(driver):
+@pytest.mark.parametrize('locator, expected_page_url, error_message', [
+    (PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK, LIST_OF_COOKIES_WE_COLLECT_SECTION, "The 'List of cookies we collect' section doesn`t displayed"),
+
+])
+def test_list_of_cookies_we_collects_section_is_displayed(driver,locator, expected_page_url, error_message):
     """TC_012.014.002 | Footer > "Privacy and Cookie Policy" > Navigation within text >
      Verify redirection of the "List of cookies we collect" section"""
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
     page.open()
-    page.is_clickable(locator=PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK).click()
-    assert page.current_url == LIST_OF_COOKIES_WE_COLLECT_SECTION, "The 'List of cookies we collect' section doesn`t displayed"
+    page.is_clickable(locator).click()
+    assert page.current_url == expected_page_url, error_message
 
 @pytest.mark.xfail
 def test_contact_us_page_opening_after_clicking_on_contact_us_link(driver):
