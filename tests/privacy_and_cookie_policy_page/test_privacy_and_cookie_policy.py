@@ -15,23 +15,21 @@ def test_text_block_font_family_titled_your_choices_regarding_use_of_the_informa
     assert font_family == PrivacyCookiePolicyFonts.TEXT_FONT_FAMILY
 
 @pytest.mark.parametrize('locator, expected_font_size', [
-    (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_HEADER_LOCATOR, PrivacyCookiePolicyFonts.HEADER_TEXT_FONT_SIZE)])
+    (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_HEADER_LOCATOR, PrivacyCookiePolicyFonts.HEADER_TEXT_FONT_SIZE),
+    (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR, PrivacyCookiePolicyFonts.TEXT_FONT_SIZE)
+])
 
 def test_text_block_header_font_size_titled_your_choices_regarding_use_of_the_information_we_collect(driver, locator, expected_font_size):
     """TC_012.007.002 | Footer > "Privacy and Cookie Policy" > Content >
      The Font-size of the title 'Your Choices Regarding Use Of The Information We Collect'"""
+
+    """TC_012.007.003 | Footer > "Privacy and Cookie Policy" > Content >
+     The Font-size of the text of the block titled 'Your Choices Regarding Use Of The Information We Collect'"""
+
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
     page.open()
     font_size = page.is_visible(locator).value_of_css_property('font-size')
     assert font_size == expected_font_size
-
-def test_text_block_font_size_titled_your_choices_regarding_use_of_the_information_we_collect(driver):
-    """TC_012.007.003 | Footer > "Privacy and Cookie Policy" > Content >
-     The Font-size of the text of the block titled 'Your Choices Regarding Use Of The Information We Collect'"""
-    page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
-    page.open()
-    font_size = page.is_visible(locator=PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR).value_of_css_property('font-size')
-    assert font_size == PrivacyCookiePolicyFonts.TEXT_FONT_SIZE
 
 def test_text_block_for_typos_titled_your_choices_regarding_use_of_the_information_we_collect(driver):
     """TC_012.007.004 | Footer > "Privacy and Cookie Policy" > Content > Verify the text block and title for typos
