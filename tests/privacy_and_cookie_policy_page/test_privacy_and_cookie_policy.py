@@ -51,13 +51,16 @@ def test_text_block_format_titled_list_of_cookie_files_we_collect(driver):
     element_format = page.is_visible(locator=PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_CONTENT_LOCATOR).tag_name
     assert element_format == 'table', f"The text of the block is NOT presented in a tabular format"
 
-def test_list_of_cookies_we_collect_text_is_displayed_as_blue_link(driver):
+@pytest.mark.parametrize('link_locator, expected_color', [
+    (PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK, 'rgba(0, 107, 180, 1)'),
+])
+def test_list_of_cookies_we_collect_text_is_displayed_as_blue_link(driver, link_locator, expected_color):
     """TC_012.014.001 | Footer > "Privacy and Cookie Policy" > Navigation within text >
     Visability of the "List of cookies we collect" text in the section "The Information We Collect."""
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
     page.open()
-    link_color = page.is_visible(locator=PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK).value_of_css_property('color')
-    assert link_color == 'rgba(0, 107, 180, 1)'
+    link_color = page.is_visible(link_locator).value_of_css_property('color')
+    assert link_color == expected_color
 
 def test_list_of_cookies_we_collects_section_is_displayed(driver):
     """TC_012.014.002 | Footer > "Privacy and Cookie Policy" > Navigation within text >
