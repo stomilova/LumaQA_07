@@ -56,24 +56,19 @@ def test_text_block_format_titled_list_of_cookie_files_we_collect(driver):
 
 @pytest.mark.parametrize('locator, expected_page_url, error_message', [
     (PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK, LIST_OF_COOKIES_WE_COLLECT_SECTION, "The 'List of cookies we collect' section doesn`t displayed"),
-
+    (PrivacyCookiePolicyPageLocators.CONTACT_US_LINK_LOCATOR, CONTACT_US_PAGE, "The 'Contact Us' page doesn`t displayed")
 ])
-def test_list_of_cookies_we_collects_section_is_displayed(driver,locator, expected_page_url, error_message):
+def test_opening_pages_after_links_clicking(driver,locator, expected_page_url, error_message):
     """TC_012.014.002 | Footer > "Privacy and Cookie Policy" > Navigation within text >
      Verify redirection of the "List of cookies we collect" section"""
+
+    """TC_012.015.002 | Footer > "Privacy and Cookie Policy" > Navigation within text >
+     Verify opening the contact page"""
+
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
     page.open()
     page.is_clickable(locator).click()
     assert page.current_url == expected_page_url, error_message
-
-@pytest.mark.xfail
-def test_contact_us_page_opening_after_clicking_on_contact_us_link(driver):
-    """TC_012.015.002 | Footer > "Privacy and Cookie Policy" > Navigation within text >
-     Verify opening the contact page"""
-    page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
-    page.open()
-    page.is_clickable(locator=PrivacyCookiePolicyPageLocators.CONTACT_US_LINK_LOCATOR).click()
-    assert page.current_url == CONTACT_US_PAGE
 
 @pytest.mark.parametrize('anchor_link_locator, expected_result', [
     (PrivacyCookiePolicyAnchorLinksLocators.LUMA_SECURITY, True),
