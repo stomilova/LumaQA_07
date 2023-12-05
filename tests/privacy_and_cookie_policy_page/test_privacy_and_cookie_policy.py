@@ -7,20 +7,19 @@ from locators.privacy_and_cookie_policy_page_locators import PrivacyCookiePolicy
 import language_tool_python
 
 @pytest.mark.parametrize('locator, css_value, expected_fonts', [
+    (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR, 'font-family', PrivacyCookiePolicyFonts.TEXT_FONT_FAMILY),
     (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_HEADER_LOCATOR, 'font-size', PrivacyCookiePolicyFonts.HEADER_TEXT_FONT_SIZE),
-    (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR, 'font-size', PrivacyCookiePolicyFonts.TEXT_FONT_SIZE),
-    (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR, 'font-family', PrivacyCookiePolicyFonts.TEXT_FONT_FAMILY)
+    (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR, 'font-size', PrivacyCookiePolicyFonts.TEXT_FONT_SIZE)
 ])
+def test_fonts_of_the_block_titled_your_choices_regarding_use_of_the_information_we_collect(driver, locator, css_value, expected_fonts):
+    """TC_012.007.001 | Footer > "Privacy and Cookie Policy" > Content >
+     The Font family of the text block titled 'Your Choices Regarding Use Of The Information We Collect'"""
 
-def test_text_block_header_font_size_titled_your_choices_regarding_use_of_the_information_we_collect(driver, locator, css_value, expected_fonts):
     """TC_012.007.002 | Footer > "Privacy and Cookie Policy" > Content >
      The Font-size of the title 'Your Choices Regarding Use Of The Information We Collect'"""
 
     """TC_012.007.003 | Footer > "Privacy and Cookie Policy" > Content >
      The Font-size of the text of the block titled 'Your Choices Regarding Use Of The Information We Collect'"""
-
-    """TC_012.007.001 | Footer > "Privacy and Cookie Policy" > Content >
-     The Font family of the text block titled 'Your Choices Regarding Use Of The Information We Collect'"""
 
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
     page.open()
