@@ -6,14 +6,14 @@ from data.privacy_and_cookie_policy_page_fonts import PrivacyCookiePolicyFonts
 from locators.privacy_and_cookie_policy_page_locators import PrivacyCookiePolicyPageLocators, PrivacyCookiePolicyAnchorLinksLocators
 import language_tool_python
 
-@pytest.mark.parametrize('locator, css_value, expected_fonts', [
+@pytest.mark.parametrize('locator, css_value, expected_result', [
     (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR, 'font-family', PrivacyCookiePolicyFonts.TEXT_FONT_FAMILY),
     (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_HEADER_LOCATOR, 'font-size', PrivacyCookiePolicyFonts.HEADER_TEXT_FONT_SIZE),
     (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR, 'font-size', PrivacyCookiePolicyFonts.TEXT_FONT_SIZE),
     (PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK, 'color', 'rgba(0, 107, 180, 1)'),
     (PrivacyCookiePolicyPageLocators.CONTACT_US_LINK_LOCATOR, 'color', 'rgba(0, 107, 180, 1)')
 ])
-def test_privacy_cookie_policy_value_of_elements(driver, locator, css_value, expected_fonts):
+def test_privacy_cookie_policy_value_of_elements(driver, locator, css_value, expected_result):
     """TC_012.007.001 | Footer > "Privacy and Cookie Policy" > Content >
      The Font family of the text block titled 'Your Choices Regarding Use Of The Information We Collect'"""
 
@@ -32,7 +32,7 @@ def test_privacy_cookie_policy_value_of_elements(driver, locator, css_value, exp
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
     page.open()
     font_size = page.is_visible(locator).value_of_css_property(css_value)
-    assert font_size == expected_fonts
+    assert font_size == expected_result
 
 def test_text_block_for_typos_titled_your_choices_regarding_use_of_the_information_we_collect(driver):
     """TC_012.007.004 | Footer > "Privacy and Cookie Policy" > Content > Verify the text block and title for typos
