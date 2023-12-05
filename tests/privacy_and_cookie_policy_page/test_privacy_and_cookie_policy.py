@@ -11,7 +11,7 @@ import language_tool_python
     (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_HEADER_LOCATOR, 'font-size', PrivacyCookiePolicyFonts.HEADER_TEXT_FONT_SIZE),
     (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR, 'font-size', PrivacyCookiePolicyFonts.TEXT_FONT_SIZE),
     (PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK, 'color', 'rgba(0, 107, 180, 1)'),
-
+    (PrivacyCookiePolicyPageLocators.CONTACT_US_LINK_LOCATOR, 'color', 'rgba(0, 107, 180, 1)')
 ])
 def test_fonts_of_the_block_titled_your_choices_regarding_use_of_the_information_we_collect(driver, locator, css_value, expected_fonts):
     """TC_012.007.001 | Footer > "Privacy and Cookie Policy" > Content >
@@ -25,6 +25,9 @@ def test_fonts_of_the_block_titled_your_choices_regarding_use_of_the_information
 
     """TC_012.014.001 | Footer > "Privacy and Cookie Policy" > Navigation within text >
     Visability of the "List of cookies we collect" text in the section "The Information We Collect."""
+
+    """TC_012.015.001 | Footer > Privacy and Cookie Policy Page > Contact us link >
+     Visibility of the "Contact Us" text in the "Questions for Luma?" section"""
 
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
     page.open()
@@ -50,19 +53,6 @@ def test_text_block_format_titled_list_of_cookie_files_we_collect(driver):
     page.open()
     element_format = page.is_visible(locator=PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_CONTENT_LOCATOR).tag_name
     assert element_format == 'table', f"The text of the block is NOT presented in a tabular format"
-
-@pytest.mark.parametrize('link_locator, expected_color', [
-    (PrivacyCookiePolicyPageLocators.CONTACT_US_LINK_LOCATOR, 'rgba(0, 107, 180, 1)')
-])
-def test_list_of_cookies_we_collect_and_contact_us_link_are_displayed_as_blue_links(driver, link_locator, expected_color):
-
-    """TC_012.015.001 | Footer > Privacy and Cookie Policy Page > Contact us link >
-     Visibility of the "Contact Us" text in the "Questions for Luma?" section"""
-
-    page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
-    page.open()
-    link_color = page.is_visible(link_locator).value_of_css_property('color')
-    assert link_color == expected_color
 
 def test_list_of_cookies_we_collects_section_is_displayed(driver):
     """TC_012.014.002 | Footer > "Privacy and Cookie Policy" > Navigation within text >
