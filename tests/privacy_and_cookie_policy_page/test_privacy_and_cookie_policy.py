@@ -53,10 +53,15 @@ def test_text_block_format_titled_list_of_cookie_files_we_collect(driver):
 
 @pytest.mark.parametrize('link_locator, expected_color', [
     (PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK, 'rgba(0, 107, 180, 1)'),
+    (PrivacyCookiePolicyPageLocators.CONTACT_US_LINK_LOCATOR, 'rgba(0, 107, 180, 1)')
 ])
-def test_list_of_cookies_we_collect_text_is_displayed_as_blue_link(driver, link_locator, expected_color):
+def test_list_of_cookies_we_collect_and_contact_us_link_are_displayed_as_blue_links(driver, link_locator, expected_color):
     """TC_012.014.001 | Footer > "Privacy and Cookie Policy" > Navigation within text >
     Visability of the "List of cookies we collect" text in the section "The Information We Collect."""
+
+    """TC_012.015.001 | Footer > Privacy and Cookie Policy Page > Contact us link >
+     Visibility of the "Contact Us" text in the "Questions for Luma?" section"""
+
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
     page.open()
     link_color = page.is_visible(link_locator).value_of_css_property('color')
@@ -69,14 +74,6 @@ def test_list_of_cookies_we_collects_section_is_displayed(driver):
     page.open()
     page.is_clickable(locator=PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK).click()
     assert page.current_url == LIST_OF_COOKIES_WE_COLLECT_SECTION, "The 'List of cookies we collect' section doesn`t displayed"
-
-def test_contact_us_text_is_displayed_as_blue_link(driver):
-    """TC_012.015.001 | Footer > Privacy and Cookie Policy Page > Contact us link >
-     Visibility of the "Contact Us" text in the "Questions for Luma?" section"""
-    page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
-    page.open()
-    link_color = page.is_visible(locator=PrivacyCookiePolicyPageLocators.CONTACT_US_LINK_LOCATOR).value_of_css_property('color')
-    assert link_color == 'rgba(0, 107, 180, 1)'
 
 @pytest.mark.xfail
 def test_contact_us_page_opening_after_clicking_on_contact_us_link(driver):
