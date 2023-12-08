@@ -3,6 +3,7 @@ from locators.men_tops_page_locators import MenTopsPageLocators
 from locators.men_page_locators import MenPageLocators, MenCategoryPageLocators
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
+from selenium.webdriver.support.select import Select
 
 
 class MenTops(BasePage):
@@ -35,6 +36,30 @@ class MenTops(BasePage):
     def click_image(self, position):
         image = self.is_clickable(MenCategoryPageLocators.get_product_image(position))
         image.click()
+
+    def select_sorter(self, name):
+        self.is_clickable(MenTopsPageLocators.TOP_MEN_SORTER)
+        select_element = self.driver.find_element(*MenTopsPageLocators.TOP_MEN_SORTER)
+        select = Select(select_element)
+        select.select_by_visible_text(name)
+
+    def get_product_names(self):
+        self.is_visible_all_elements(MenTopsPageLocators.TOP_MEN_PRODUCT_ITEMS_NAME)
+        return self.driver.find_elements(*MenTopsPageLocators.TOP_MEN_PRODUCT_ITEMS_NAME)
+
+    def get_price(self):
+        self.is_visible_all_elements(MenTopsPageLocators.TOP_MEN_PRODUCT_ITEMS_PRICE)
+        return self.driver.find_elements(*MenTopsPageLocators.TOP_MEN_PRODUCT_ITEMS_PRICE)
+
+    def click_arrow(self):
+        self.is_clickable(MenTopsPageLocators.TOP_MEN_ARROW)
+        arrow = self.driver.find_element(*MenTopsPageLocators.TOP_MEN_ARROW)
+        arrow.click()
+
+    def click_list_mode(self):
+        self.is_visible(MenTopsPageLocators.TOP_MEN_LIST_MODE)
+        list_mode = self.driver.find_element(*MenTopsPageLocators.TOP_MEN_LIST_MODE)
+        list_mode.click()
 
     def mode_list_is_visible(self):
         return self.is_visible(MenCategoryPageLocators.LIST_MODE)
