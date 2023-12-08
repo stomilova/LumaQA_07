@@ -20,7 +20,16 @@ CASSIUS_SPARRING_TANK = 'https://magento.softwaretestingboard.com/cassius-sparri
 MEN_TOPS_CARDS = [(1, 'https://magento.softwaretestingboard.com/cassius-sparring-tank.html'),
                   (2, 'https://magento.softwaretestingboard.com/atlas-fitness-tank.html'),
                   (3, 'https://magento.softwaretestingboard.com/tiberius-gym-tank.html'),
-                  (4, 'https://magento.softwaretestingboard.com/sinbad-fitness-tank.html')]
+                  (4, 'https://magento.softwaretestingboard.com/sinbad-fitness-tank.html'),
+                  (5, 'https://magento.softwaretestingboard.com/sparta-gym-tank.html'),
+                  (6, 'https://magento.softwaretestingboard.com/argus-all-weather-tank.html'),
+                  (7, 'https://magento.softwaretestingboard.com/vulcan-weightlifting-tank.html'),
+                  (8, 'https://magento.softwaretestingboard.com/rocco-gym-tank.html'),
+                  (9, 'https://magento.softwaretestingboard.com/helios-endurance-tank.html'),
+                  (10, 'https://magento.softwaretestingboard.com/primo-endurance-tank.html'),
+                  (11, 'https://magento.softwaretestingboard.com/tristan-endurance-tank.html'),
+                  (12, 'https://magento.softwaretestingboard.com/erikssen-cooltech-trade-fitness-tank.html')]
+
 
 MEN_SHORTS_CARDS = [('Pierce Gym Short', 'https://magento.softwaretestingboard.com/pierce-gym-short.html'),
                     ('Arcadio Gym Short', 'https://magento.softwaretestingboard.com/arcadio-gym-short.html'),
