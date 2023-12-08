@@ -13,11 +13,19 @@ class MenTops(BasePage):
     def check_clickability_grid(self):
         return self.is_clickable(MenPageLocators.MEN_TOPS_GRID)
 
-    def click_men_tops_product_foto(self):
-        return self.is_clickable(MenTopsPageLocators.TOP_MEN_PRODUCT_FOTO).click()
+    def click_men_tops_product_foto(self, position):
+        return self.is_clickable(MenTopsPageLocators.get_product_trough_foto(position)).click()
 
-    def click_men_tops_product_title(self):
-        return self.is_clickable(MenTopsPageLocators.TOP_MEN_PRODUCT_TITLE).click()
+    def click_men_tops_product_title(self, position):
+        return self.is_clickable(MenTopsPageLocators.get_product_trough_title(position))
+
+    def go_to_men_tops_product(self, position):
+        cart = self.is_visible(MenTopsPageLocators.location_product_item(position))
+        self.action_move_to_element(cart)
+
+    def click_add_button(self, position):
+        cart = self.is_visible(MenTopsPageLocators.location_add_button(position))
+        cart.click()
 
     def check_visibility_grid(self):
         return self.is_visible(MenPageLocators.MEN_TOPS_GRID)

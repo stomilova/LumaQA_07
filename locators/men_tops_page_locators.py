@@ -10,3 +10,19 @@ class MenTopsPageLocators:
     TOP_MEN_PRODUCT_ITEMS_PRICE = (By.CSS_SELECTOR, ".price-wrapper .price")
     TOP_MEN_LIST_MODE = (By.CSS_SELECTOR, ".toolbar-products:nth-child(3) .mode-list")
     # PAGE_NAME = (By.TAG_NAME, "h1")
+
+    @staticmethod
+    def get_product_trough_foto(position: int):
+        return By.CSS_SELECTOR, f"li[class='item product product-item']:nth-child({position}) img[class='product-image-photo']"
+
+    @staticmethod
+    def get_product_trough_title(position: int):
+        return By.CSS_SELECTOR, f"li[class='item product product-item']:nth-child({position}) a[class='product-item-link']"
+
+    @staticmethod
+    def location_add_button(position: int):
+        return By.CSS_SELECTOR, f"li[class='item product product-item']:nth-child({position}) button"
+
+    @staticmethod
+    def location_product_item(position: int):
+        return By.CSS_SELECTOR, f"li[class='item product product-item']:nth-child({position})"
