@@ -5,41 +5,26 @@ from data.gear_page_urls import GEAR_PAGE, SPRITE_YOGA_COMPANION_KIT_PAGE, SHOP_
 from locators.gear_page_locators import BannerLocators
 from base.seleniumbase import BasePage
 
-def test_sprite_yoga_companion_kit_is_visible(driver):
+
+@pytest.mark.parametrize('element_locator, expected_result', [
+    (BannerLocators.SPRITE_YOGA_COMPANION_KIT_BANNER, True),
+    (BannerLocators.LOOSEN_UP_BANNER, True),
+    (BannerLocators.LUMA_WATER_BOTTLE_BANNER, True),
+    (BannerLocators.BAGS_BANNER, True),
+    (BannerLocators.FITNESS_EUQIPMENT_BANNER, True),
+    (BannerLocators.WATCHES_BANNER, True),
+])
+def test_banners_of_page_are_visible(driver, element_locator, expected_result):
     """TC_009.003.001 | Gear page > categories > Visibility of the 'Sprite Yoga Companion Kit' banner"""
-    page = BasePage(driver, url=GEAR_PAGE)
-    page.open()
-    assert page.is_visible(BannerLocators.SPRITE_YOGA_COMPANION_KIT_BANNER)
-
-def test_loosen_up_is_visible(driver):
     """TC_009.003.002 | Gear page > categories > Visibility of the 'Loosen Up' banner"""
-    page = BasePage(driver, url=GEAR_PAGE)
-    page.open()
-    assert page.is_visible(BannerLocators.LOOSEN_UP_BANNER)
-
-def test_luma_water_bottle_is_visible(driver):
     """TC_009.003.003 | Gear page > categories > Visibility of the 'Luma water bottle' banner"""
-    page = BasePage(driver, url=GEAR_PAGE)
-    page.open()
-    assert page.is_visible(BannerLocators.LUMA_WATER_BOTTLE_BANNER)
-    
-def test_bags_is_visible(driver):
     """TC_009.004.001 | Gear page > categories >Visibility of the 'Bags' banner"""
-    page = BasePage(driver, url=GEAR_PAGE)
-    page.open()
-    assert page.is_visible(BannerLocators.BAGS_BANNER)
-
-def test_fitness_equipment_is_visible(driver):
     """TC_009.004.002 | Gear page > categories > Visibility of the 'Fitness Equipment' banner"""
-    page = BasePage(driver, url=GEAR_PAGE)
-    page.open()
-    assert page.is_visible(BannerLocators.FITNESS_EUQIPMENT_BANNER)
-
-def test_watches_is_visible(driver):
     """TC_009.004.003 | Gear page > categories > Visibility of the 'Watches' banner"""
-    page = BasePage(driver, url=GEAR_PAGE)
+    page = BasePage(driver,  url=GEAR_PAGE)
     page.open()
-    assert page.is_visible(BannerLocators.WATCHES_BANNER)
+    banner = page.is_visible(element_locator).is_displayed()
+    assert banner == expected_result, f"{element_locator} - isn`t visible"
 
 
 @pytest.mark.xfail
