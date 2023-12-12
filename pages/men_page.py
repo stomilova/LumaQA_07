@@ -43,3 +43,13 @@ class MenJacketsPage(BasePage):
 
     def check_redirect_page(self):
         self.find_element_and_click(MenPageLocators.LANDO_GYM_JACKET)
+
+    def all_item(self):
+        num_jackets = 11
+        jacket_items = [MenCPL.create_item_list(i) for i in range(1, num_jackets + 1)]
+        for item_selector in jacket_items:
+            try:
+                self.is_visible(item_selector)
+            except Exception:
+                return False, f'Item is not visible: {item_selector}'
+            return True, 'All items are visible'
