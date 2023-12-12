@@ -75,6 +75,8 @@ def test_text_block_format_titled_list_of_cookie_files_we_collect(driver):
     with allure.step('Check format of the element'):
         assert element_format == 'table', f"The text of the block is NOT presented in a tabular format"
 
+@allure.feature('Privacy and Cookie Policy elements')
+@allure.story('Clickability and redirection')
 @pytest.mark.parametrize('locator, expected_page_url', [
     (PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK, LIST_OF_COOKIES_WE_COLLECT_SECTION),
     (PrivacyCookiePolicyPageLocators.CONTACT_US_LINK_LOCATOR, CONTACT_US_PAGE)])
@@ -84,9 +86,12 @@ def test_opening_pages_after_links_clicking(driver, locator, expected_page_url):
     """TC_012.015.002 | Footer > "Privacy and Cookie Policy" > Navigation within text >
      Verify opening the contact page"""
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
-    page.open()
-    page.is_clickable(locator).click()
-    assert page.current_url == expected_page_url, f"The expected page {expected_page_url} isn`t open"
+    with allure.step('Open Privacy and Cookie Policy page'):
+        page.open()
+    with allure.step('Check link clickability'):
+        page.is_clickable(locator).click()
+    with allure.step('Check the redirection'):
+        assert page.current_url == expected_page_url, f"The expected page {expected_page_url} isn`t open"
 
 @pytest.mark.parametrize('anchor_link_locator', [
     (PrivacyCookiePolicyAnchorLinksLocators.LUMA_SECURITY),
