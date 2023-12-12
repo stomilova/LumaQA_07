@@ -1,4 +1,5 @@
 import pytest
+import allure
 from base.seleniumbase import BasePage
 from data.privacy_and_cookie_policy_page_urls import PRIVACY_AND_COOKIE_POLICY_PAGE, LIST_OF_COOKIES_WE_COLLECT_SECTION
 from data.contact_us_page_urls import CONTACT_US_PAGE
@@ -6,6 +7,8 @@ from data.privacy_and_cookie_policy_page_fonts import PrivacyCookiePolicyFonts
 from locators.privacy_and_cookie_policy_page_locators import PrivacyCookiePolicyPageLocators, PrivacyCookiePolicyAnchorLinksLocators
 import language_tool_python
 
+@allure.feature('Privacy and Cookie Policy elements')
+@allure.story('Css value of the element')
 @pytest.mark.parametrize('locator, css_value, expected_result', [
     (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR, 'font-family', PrivacyCookiePolicyFonts.TEXT_FONT_FAMILY),
     (PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_HEADER_LOCATOR, 'font-size', PrivacyCookiePolicyFonts.HEADER_TEXT_FONT_SIZE),
@@ -24,15 +27,18 @@ def test_privacy_cookie_policy_value_of_elements(driver, locator, css_value, exp
      The Font-size of the text of the block titled 'Your Choices Regarding Use Of The Information We Collect'"""
 
     """TC_012.014.001 | Footer > "Privacy and Cookie Policy" > Navigation within text >
-    Visability of the "List of cookies we collect" text in the section "The Information We Collect."""
+    Visibility of the "List of cookies we collect" text in the section "The Information We Collect."""
 
     """TC_012.015.001 | Footer > Privacy and Cookie Policy Page > Contact us link >
      Visibility of the "Contact Us" text in the "Questions for Luma?" section"""
 
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
-    page.open()
-    font_size = page.is_visible(locator).value_of_css_property(css_value)
-    assert font_size == expected_result
+    with allure.step('Open Privacy and Cookie Policy page'):
+        page.open()
+    with allure.step('Get the font size of the element'):
+        font_size = page.is_visible(locator).value_of_css_property(css_value)
+    with allure.step('Check the font size of the element'):
+        assert font_size == expected_result
 
 def test_text_block_for_typos_titled_your_choices_regarding_use_of_the_information_we_collect(driver):
     """TC_012.007.004 | Footer > "Privacy and Cookie Policy" > Content > Verify the text block and title for typos
