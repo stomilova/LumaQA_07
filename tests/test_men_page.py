@@ -37,8 +37,8 @@ class TestMenPage:
 
 
 class TestMenJacketsPage:
-    @allure.title('TC_008.011.005 | Jackets page >Verify inner-buttons are visable')
-    def test_verify_inner_buttons_are_visable(self, driver):
+    @allure.title('TC_008.011.005 | Jackets page >Verify inner-buttons are visible')
+    def test_verify_inner_buttons_are_visible(self, driver):
         page = MenJacketsPage(driver, MEN_TOPS_JACKETS_PAGE)
         page.open()
         page.random_choice_item()
@@ -57,3 +57,7 @@ class TestMenJacketsPage:
         men_jacket_page.check_redirect_page()
         assert driver.current_url == LANDO_GYM_JACKET_URL, 'NOT REDIRECT after click item title'
 
+    @allure.title("TC_008.011.001 | Jackets page >Verify visibility products on the page")
+    def test_verify_visibility_products_on_the_page(self, driver, men_jacket_page):
+        result, message = men_jacket_page.all_item()
+        assert result, message
