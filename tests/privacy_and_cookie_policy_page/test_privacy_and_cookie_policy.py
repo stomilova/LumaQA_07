@@ -96,49 +96,52 @@ def test_opening_pages_after_links_clicking(driver, locator, expected_page_url):
 @allure.feature('Privacy and Cookie Policy elements')
 @allure.story('Visibility')
 @pytest.mark.parametrize('anchor_link_locator', [
-    (PrivacyCookiePolicyAnchorLinksLocators.LUMA_SECURITY),
-    (PrivacyCookiePolicyAnchorLinksLocators.LUMA_PRIVACY_POLICY),
-    (PrivacyCookiePolicyAnchorLinksLocators.THE_INFORMATION_WE_COLLECT),
-    (PrivacyCookiePolicyAnchorLinksLocators.HOW_WE_USE_THE_INFORMATION_WE_COLLECT),
-    (PrivacyCookiePolicyAnchorLinksLocators.SECURITY),
-    (PrivacyCookiePolicyAnchorLinksLocators.OTHERS_WITH_WHOM_WE_SHARE_YOUR_INFORMATION),
-    (PrivacyCookiePolicyAnchorLinksLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT),
-    (PrivacyCookiePolicyAnchorLinksLocators.YOUR_CALIFORNIA_PRIVACY_RIGHTS),
-    (PrivacyCookiePolicyAnchorLinksLocators.COOKIES_WEB_BEACONS_AND_HOW_WE_USE_THEM),
-    (PrivacyCookiePolicyAnchorLinksLocators.LIST_OF_COOKIES_WE_COLLECT),
-    (PrivacyCookiePolicyAnchorLinksLocators.ONLINE_ACCOUNT_REGISTRATION),
-    (PrivacyCookiePolicyAnchorLinksLocators.EMAILS),
-    (PrivacyCookiePolicyAnchorLinksLocators.ACCEPTANCE),
-    (PrivacyCookiePolicyAnchorLinksLocators.QUESTIONS_FOR_LUMA)])
+    PrivacyCookiePolicyAnchorLinksLocators.LUMA_SECURITY,
+    PrivacyCookiePolicyAnchorLinksLocators.LUMA_PRIVACY_POLICY,
+    PrivacyCookiePolicyAnchorLinksLocators.THE_INFORMATION_WE_COLLECT,
+    PrivacyCookiePolicyAnchorLinksLocators.HOW_WE_USE_THE_INFORMATION_WE_COLLECT,
+    PrivacyCookiePolicyAnchorLinksLocators.SECURITY,
+    PrivacyCookiePolicyAnchorLinksLocators.OTHERS_WITH_WHOM_WE_SHARE_YOUR_INFORMATION,
+    PrivacyCookiePolicyAnchorLinksLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT,
+    PrivacyCookiePolicyAnchorLinksLocators.YOUR_CALIFORNIA_PRIVACY_RIGHTS,
+    PrivacyCookiePolicyAnchorLinksLocators.COOKIES_WEB_BEACONS_AND_HOW_WE_USE_THEM,
+    PrivacyCookiePolicyAnchorLinksLocators.LIST_OF_COOKIES_WE_COLLECT,
+    PrivacyCookiePolicyAnchorLinksLocators.ONLINE_ACCOUNT_REGISTRATION,
+    PrivacyCookiePolicyAnchorLinksLocators.EMAILS,
+    PrivacyCookiePolicyAnchorLinksLocators.ACCEPTANCE,
+    PrivacyCookiePolicyAnchorLinksLocators.QUESTIONS_FOR_LUMA])
 def test_anchor_links_in_the_left_navbar_are_displayed(driver, anchor_link_locator):
     """TC_012.005.001 | Footer > "Privacy and Cookie Policy" > Visibility and clickability >
-    Visability of the anchor links"""
+    Visibility of the anchor links"""
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
     with allure.step('Open Privacy and Cookie Policy page'):
         page.open()
     with allure.step('Check the visibility of the elements'):
         assert page.is_visible(anchor_link_locator), f"{anchor_link_locator} - isn`t visible"
 
+@allure.feature('Privacy and Cookie Policy elements')
+@allure.story('Clickability')
 @pytest.mark.parametrize('anchor_link_locator', [
-    (PrivacyCookiePolicyAnchorLinksLocators.LUMA_SECURITY),
-    (PrivacyCookiePolicyAnchorLinksLocators.LUMA_PRIVACY_POLICY),
-    (PrivacyCookiePolicyAnchorLinksLocators.THE_INFORMATION_WE_COLLECT),
-    (PrivacyCookiePolicyAnchorLinksLocators.HOW_WE_USE_THE_INFORMATION_WE_COLLECT),
-    (PrivacyCookiePolicyAnchorLinksLocators.SECURITY),
-    (PrivacyCookiePolicyAnchorLinksLocators.OTHERS_WITH_WHOM_WE_SHARE_YOUR_INFORMATION),
-    (PrivacyCookiePolicyAnchorLinksLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT),
-    (PrivacyCookiePolicyAnchorLinksLocators.YOUR_CALIFORNIA_PRIVACY_RIGHTS),
-    (PrivacyCookiePolicyAnchorLinksLocators.COOKIES_WEB_BEACONS_AND_HOW_WE_USE_THEM),
-    (PrivacyCookiePolicyAnchorLinksLocators.LIST_OF_COOKIES_WE_COLLECT),
-    (PrivacyCookiePolicyAnchorLinksLocators.ONLINE_ACCOUNT_REGISTRATION),
-    (PrivacyCookiePolicyAnchorLinksLocators.EMAILS),
-    (PrivacyCookiePolicyAnchorLinksLocators.ACCEPTANCE),
-    (PrivacyCookiePolicyAnchorLinksLocators.QUESTIONS_FOR_LUMA)])
+    PrivacyCookiePolicyAnchorLinksLocators.LUMA_SECURITY,
+    PrivacyCookiePolicyAnchorLinksLocators.LUMA_PRIVACY_POLICY,
+    PrivacyCookiePolicyAnchorLinksLocators.THE_INFORMATION_WE_COLLECT,
+    PrivacyCookiePolicyAnchorLinksLocators.HOW_WE_USE_THE_INFORMATION_WE_COLLECT,
+    PrivacyCookiePolicyAnchorLinksLocators.SECURITY,
+    PrivacyCookiePolicyAnchorLinksLocators.OTHERS_WITH_WHOM_WE_SHARE_YOUR_INFORMATION,
+    PrivacyCookiePolicyAnchorLinksLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT,
+    PrivacyCookiePolicyAnchorLinksLocators.YOUR_CALIFORNIA_PRIVACY_RIGHTS,
+    PrivacyCookiePolicyAnchorLinksLocators.COOKIES_WEB_BEACONS_AND_HOW_WE_USE_THEM,
+    PrivacyCookiePolicyAnchorLinksLocators.LIST_OF_COOKIES_WE_COLLECT,
+    PrivacyCookiePolicyAnchorLinksLocators.ONLINE_ACCOUNT_REGISTRATION,
+    PrivacyCookiePolicyAnchorLinksLocators.EMAILS,
+    PrivacyCookiePolicyAnchorLinksLocators.ACCEPTANCE,
+    PrivacyCookiePolicyAnchorLinksLocators.QUESTIONS_FOR_LUMA])
 def test_anchor_links_in_the_left_navbar_are_clickable(driver, anchor_link_locator):
     """TC_012.005.001 | Footer > "Privacy and Cookie Policy" > Visibility and clickability >
-    Visability of the anchor links"""
+    Visibility of the anchor links"""
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
-    page.open()
-    assert page.is_clickable(anchor_link_locator), f"{anchor_link_locator} - isn`t clickable"
-
+    with allure.step('Open Privacy and Cookie Policy page'):
+        page.open()
+    with allure.step('Check the clickability of the elements'):
+        assert page.is_clickable(anchor_link_locator), f"{anchor_link_locator} - isn`t clickable"
 
