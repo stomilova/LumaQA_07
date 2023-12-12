@@ -93,6 +93,8 @@ def test_opening_pages_after_links_clicking(driver, locator, expected_page_url):
     with allure.step('Check the redirection'):
         assert page.current_url == expected_page_url, f"The expected page {expected_page_url} isn`t open"
 
+@allure.feature('Privacy and Cookie Policy elements')
+@allure.story('Visibility')
 @pytest.mark.parametrize('anchor_link_locator', [
     (PrivacyCookiePolicyAnchorLinksLocators.LUMA_SECURITY),
     (PrivacyCookiePolicyAnchorLinksLocators.LUMA_PRIVACY_POLICY),
@@ -112,8 +114,10 @@ def test_anchor_links_in_the_left_navbar_are_displayed(driver, anchor_link_locat
     """TC_012.005.001 | Footer > "Privacy and Cookie Policy" > Visibility and clickability >
     Visability of the anchor links"""
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
-    page.open()
-    assert page.is_visible(anchor_link_locator), f"{anchor_link_locator} - isn`t visible"
+    with allure.step('Open Privacy and Cookie Policy page'):
+        page.open()
+    with allure.step('Check the visibility of the elements'):
+        assert page.is_visible(anchor_link_locator), f"{anchor_link_locator} - isn`t visible"
 
 @pytest.mark.parametrize('anchor_link_locator', [
     (PrivacyCookiePolicyAnchorLinksLocators.LUMA_SECURITY),
