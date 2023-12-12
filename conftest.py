@@ -39,10 +39,10 @@ def pytest_unconfigure(config):
 def options():
     options = Options()
     options.add_argument('--window-size=1000,800')
-    # options.add_argument('--headless')
+    options.add_argument('--headless')
     options.add_argument("--ignore-certificate-errors")
     if os.environ.get('PYTHONDONTWRITEBYTECODE') == '1':
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
     return options
