@@ -40,17 +40,27 @@ def test_privacy_cookie_policy_value_of_elements(driver, locator, css_value, exp
     with allure.step('Check the font size of the element'):
         assert font_size == expected_result
 
+@allure.feature('Privacy and Cookie Policy elements')
+@allure.story('Finding grammar mistakes in the block with content')
 def test_text_block_for_typos_titled_your_choices_regarding_use_of_the_information_we_collect(driver):
     """TC_012.007.004 | Footer > "Privacy and Cookie Policy" > Content > Verify the text block and title for typos
     titled ‘Your Choices Regarding Use Of The Information We Collect’"""
+
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
-    page.open()
-    text_header = page.get_text(PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_HEADER_LOCATOR)
-    text_block = page.get_text(PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR)
+    with allure.step('Open Privacy and Cookie Policy page'):
+        page.open()
+    with allure.step('Get the text of the header'):
+        text_header = page.get_text(
+            PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_HEADER_LOCATOR)
+    with allure.step('Get the text block'):
+        text_block = page.get_text(
+            PrivacyCookiePolicyPageLocators.YOUR_CHOICES_REGARDING_USE_OF_THE_INFORMATION_WE_COLLECT_CONTENT_LOCATOR)
     tool = language_tool_python.LanguageTool('en-US')
     matches_header = tool.check(text_header)
     matches_block = tool.check(text_block)
-    assert len(matches_header) == 0 and len(matches_block) == 0, f"Grammar mistakes have been found in the header: {matches_header}, and in the text block: {matches_block}"
+    with allure.step('Check grammar mistakes'):
+        assert len(matches_header) == 0 and len(
+            matches_block) == 0, f"Grammar mistakes have been found in the header: {matches_header}, and in the text block: {matches_block}"
 
 def test_text_block_format_titled_list_of_cookie_files_we_collect(driver):
     """TC_012.007.005 | Footer > "Privacy and Cookie Policy" > Content >
