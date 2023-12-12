@@ -62,13 +62,18 @@ def test_text_block_for_typos_titled_your_choices_regarding_use_of_the_informati
         assert len(matches_header) == 0 and len(
             matches_block) == 0, f"Grammar mistakes have been found in the header: {matches_header}, and in the text block: {matches_block}"
 
+@allure.feature('Privacy and Cookie Policy elements')
+@allure.story('Tabular format of the element')
 def test_text_block_format_titled_list_of_cookie_files_we_collect(driver):
     """TC_012.007.005 | Footer > "Privacy and Cookie Policy" > Content >
      Verify the text of the block ‘List of cookie files we collect’ is presented in a tabular format"""
     page = BasePage(driver, url=PRIVACY_AND_COOKIE_POLICY_PAGE)
-    page.open()
-    element_format = page.is_visible(locator=PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_CONTENT_LOCATOR).tag_name
-    assert element_format == 'table', f"The text of the block is NOT presented in a tabular format"
+    with allure.step('Open Privacy and Cookie Policy page'):
+        page.open()
+    with allure.step('Get tag name element'):
+        element_format = page.is_visible(locator=PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_CONTENT_LOCATOR).tag_name
+    with allure.step('Check format of the element'):
+        assert element_format == 'table', f"The text of the block is NOT presented in a tabular format"
 
 @pytest.mark.parametrize('locator, expected_page_url', [
     (PrivacyCookiePolicyPageLocators.LIST_OF_COOKIE_FILES_WE_COLLECT_LINK_IN_TEXT_BLOCK, LIST_OF_COOKIES_WE_COLLECT_SECTION),
