@@ -45,3 +45,4 @@ class AdvancedSearchFormPage(BasePage):
 
     def visibility_of_color_options(self):
         return self.is_visible_all_elements(locator.COLOR_OPTIONS)
+      

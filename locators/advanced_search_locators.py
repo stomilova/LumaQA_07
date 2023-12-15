@@ -18,3 +18,4 @@ class AdvancedSearchLocators:
     SEARCH_FIELDS_LIST = (By.CSS_SELECTOR, '.fieldset input[title]')
     SIZE_OPTIONS = (By.CSS_SELECTOR, ".swatch-attribute.size")
     COLOR_OPTIONS = (By.CSS_SELECTOR, '.swatch-attribute.color')
+    
