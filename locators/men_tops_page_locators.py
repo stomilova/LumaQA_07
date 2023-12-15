@@ -13,6 +13,10 @@ class MenTopsPageLocators:
     TOP_MEN_LIST_MODE = (By.CSS_SELECTOR, ".toolbar-products:nth-child(4) .mode-list")
     SHOPING_OPTIONS_MENU = (By.CSS_SELECTOR, '#narrow-by-list div.filter-options-title')
 
+    WISH_LIST_ITEM = [(1, (By.XPATH, "//li[@class='product-item']//a[@title='Cassius Sparring Tank']")),
+                      (2, (By.XPATH, "//li[@class='product-item']//a[@title='Atlas Fitness Tank']")),
+                      (3, (By.XPATH, "//li[@class='product-item']//a[@title='Tiberius Gym Tank']")),
+                      (4, (By.XPATH, "//li[@class='product-item']//a[@title='Sinbad Fitness Tank']"))]
     @staticmethod
     def get_product_trough_foto(position: int):
         return By.CSS_SELECTOR, f"li[class='item product product-item']:nth-child({position}) img[class='product-image-photo']"
@@ -24,6 +28,10 @@ class MenTopsPageLocators:
     @staticmethod
     def location_add_button(position: int):
         return By.CSS_SELECTOR, f"li[class='item product product-item']:nth-child({position}) button"
+
+    @staticmethod
+    def location_heart_shaped_button(position: int):
+        return By.CSS_SELECTOR, f"li[class='item product product-item']:nth-child({position}) a[class='action towishlist']"
 
     @staticmethod
     def location_product_item(position: int):

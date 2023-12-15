@@ -27,6 +27,10 @@ class MenTops(BasePage):
         cart = self.is_visible(MenTopsPageLocators.location_add_button(position))
         cart.click()
 
+    def click_heart_shaped_button(self, position):
+        button = self.is_visible(MenTopsPageLocators.location_heart_shaped_button(position))
+        button.click()
+
     def check_visibility_grid(self):
         return self.is_visible(MenPageLocators.MEN_TOPS_GRID)
 
