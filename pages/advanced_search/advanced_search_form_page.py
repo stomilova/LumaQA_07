@@ -6,6 +6,7 @@ from locators.advanced_search_locators import AdvancedSearchLocators
 
 class AdvancedSearchFormPage(BasePage):
     QUERY_LIST = ['top', 'bottom', 'capri', 'short', 'tank', 'watch', 'sweatshirt', 'pant', 'hoodie']
+    CLOTHES_LIST = ['top', 'bottom', 'jacket', 'short', 'tank', 'sweatshirt', 'pant', 'hoodie']
 
     def __init__(self, driver,url):
         super().__init__(driver, url)
@@ -38,3 +39,10 @@ class AdvancedSearchFormPage(BasePage):
 
     def get_error_message(self):
         return self.is_visible(locator.ERROR_MESSAGE_ON_ADVANCED_SEARCH_PAGE).text.strip()
+
+    def visibility_of_size_options(self):
+        return self.is_visible_all_elements(locator.SIZE_OPTIONS)
+
+    def visibility_of_color_options(self):
+        return self.is_visible_all_elements(locator.COLOR_OPTIONS)
+      
