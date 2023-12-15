@@ -14,3 +14,7 @@ class AdvancedSearchLocators:
     USD = (By.CSS_SELECTOR,'.addafter')
     GRID = (By.XPATH,'//*[@id="mode-grid"]')
     LIST=(By.XPATH,'//*[@id="mode-list"]')
+    ERROR_MESSAGE_ON_ADVANCED_SEARCH_PAGE = (By.CSS_SELECTOR, '.messages [data-bind$="(message.text)"]')
+    SEARCH_FIELDS_LIST = (By.CSS_SELECTOR, '.fieldset input[title]')
+    SIZE_OPTIONS = (By.CSS_SELECTOR, ".swatch-attribute.size")
+    COLOR_OPTIONS = (By.CSS_SELECTOR, '.swatch-attribute.color')
