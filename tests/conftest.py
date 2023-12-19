@@ -82,9 +82,7 @@ def authorization(driver):
     page = LoginPage(driver, LOGIN_PAGE)
     page.open()
     page.sign_in()
-    yield
-    page = LoginPage(driver, LOGAUT_PAGE)
-    page.open()
+
 
 
 @pytest.fixture

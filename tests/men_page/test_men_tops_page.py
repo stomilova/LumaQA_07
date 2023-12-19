@@ -5,6 +5,7 @@ import allure
 from pages.men_category_page.men_tops_page import MenTops
 from data.men_page_url import TOPS_MEN_PAGE, MEN_TOPS_CARDS, CASSIUS_SPARRING_TANK
 from data.men_page_url import MEN_TOPS_HOODIES_PAGE
+from locators.men_tops_page_locators import MenTopsPageLocators
 
 
 class TestMenTopsPage:
@@ -40,6 +41,18 @@ class TestMenTopsPage:
         page.go_to_men_tops_product(position)
         page.click_add_button(position)
         assert page.wait_url_redirection(relevant_page), "Selected product is not relevant to open page"
+
+    @pytest.mark.parametrize("position, relevant_element", MenTopsPageLocators.WISH_LIST_ITEM)
+    @allure.title('Redirection to the My Wish List page by clicking on the heart-shaped BTN of {position} products item')
+    def test_navigate_wishlist_by_clicking_heart_shaped_button(self, driver, authorization, position, relevant_element):
+        """TC_008.004.005| Mens > Tops page > Product item > Redirection to the My Wish List page by
+        clicking on the heart-shaped BTN (acceptance criteria 6)"""
+
+        page = MenTops(driver, TOPS_MEN_PAGE)
+        page.open()
+        page.go_to_men_tops_product(position)
+        page.click_heart_shaped_button(position)
+        assert page.is_visible(relevant_element), "Wished product is not relevant"
 
     def test_grid_is_visible(self, driver):
         page = MenTops(driver, TOPS_MEN_PAGE)
