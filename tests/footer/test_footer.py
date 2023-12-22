@@ -94,3 +94,19 @@ class TestFooterPage:
 
         assert page.get_second_footer_links_block_texts() == EXPECTED_SECOND_FOOTER_LINKS_BLOCK_TEXTS, \
             "Texts of the 2nd footer links block are not as expected"
+
+    @allure.title("TC_012.010.003 | Footer > Self > Set of links > Verify second 4 links redirect to external pages")
+    def test_first_block_links_urls(self, driver):
+        page = FooterPage(driver, MainPage.URL)
+        page.open()
+
+        for url in page.get_first_footer_block_links_urls():
+            assert "magento.softwaretestingboard.com" not in url
+
+    @allure.title("TC_012.010.004 | Footer > Self > Set of links > Verify second 4 links redirect to internal pages")
+    def test_second_block_links_urls(self, driver):
+        page = FooterPage(driver, MainPage.URL)
+        page.open()
+
+        for url in page.get_second_footer_block_links_urls():
+            assert "magento.softwaretestingboard.com" in url
