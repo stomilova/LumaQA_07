@@ -270,3 +270,12 @@ class BasePage:
         action = ActionChains(self.driver)
         action.move_to_element(element).click(element).perform()
 
+
+    def are_dictionary_elements_visible(self, locators, timeout: int = TIMEOUT):
+        """The method checks if all dictionary elements are visible"""
+        elements_visible = True
+        for locator in locators.values():
+            if not self.is_visible(locator, timeout):
+                elements_visible = False
+                break
+        return elements_visible

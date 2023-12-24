@@ -92,3 +92,7 @@ class AdvancedSearchFormPage(BasePage):
             return False
 
         return True
+
+    def are_six_search_fields_visible(self):
+        """The methods checks if the search fields are visible"""
+        return self.are_dictionary_elements_visible(locator.SEARCH_FIELDS_TEXTBOXES)
