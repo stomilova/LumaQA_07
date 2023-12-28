@@ -5,6 +5,8 @@ from pages.main_page import MainPage
 from pages.footer.footer_page import FooterPage
 from data.footer_data import FOOTER_LINKS_TEXTS, EXPECTED_FIRST_FOOTER_LINKS_BLOCK_TEXTS, \
     EXPECTED_SECOND_FOOTER_LINKS_BLOCK_TEXTS
+from data.test_urls_list import TEST_ADVANCED_SEARCH_URLS_LIST
+from data.advanced_search_data import ADVANCED_SEARCH_PAGE_TITLE
 
 
 @pytest.fixture(scope="function")
@@ -47,21 +49,25 @@ class TestFooterPage:
 
     @allure.title("TC_012.013.001 | Footer > 'Advanced Search' link > Redirection > "
                   "Verify the opened page URL upon clicking on the appropriate link")
-    def test_verify_url_upon_redirection(self, driver):
-        page = FooterPage(driver, MainPage.URL)
+    @pytest.mark.parametrize("starting_url", TEST_ADVANCED_SEARCH_URLS_LIST)
+    def test_verify_url_upon_redirection(self, driver, starting_url):
+        page = FooterPage(driver, starting_url)
         page.open()
         page.click_advanced_search_link()
 
-        assert "advanced" in page.current_url, "Current page URL is different"
+        assert "advanced" in page.current_url, f"{starting_url} page navigates to a page with another URL"
 
     @allure.title("TC_012.013.002 | Footer > 'Advanced Search' link > Redirection > "
                   "Verify the opened page title upon clicking on the appropriate link")
-    def test_verify_title_upon_redirection(self, driver):
-        page = FooterPage(driver, MainPage.URL)
+    @pytest.mark.parametrize("starting_url", TEST_ADVANCED_SEARCH_URLS_LIST)
+    def test_verify_title_upon_redirection(self, driver, starting_url):
+        page = FooterPage(driver, starting_url)
         page.open()
         page.click_advanced_search_link()
+        actual_title = page.get_page_title()
 
-        assert page.get_page_title() == "Advanced Search", "Current page title is different"
+        assert actual_title == ADVANCED_SEARCH_PAGE_TITLE, f"Expected the title '{ADVANCED_SEARCH_PAGE_TITLE}'" \
+                                                           f"for '{starting_url}' but got '{actual_title}'"
 
     @allure.title("TC_012.010.001 | Footer > Self > Set of links > Verify first footer block contains 4 links")
     def test_first_footer_block_contains_four_links(self, driver):
