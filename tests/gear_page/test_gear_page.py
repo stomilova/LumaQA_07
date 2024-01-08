@@ -15,29 +15,29 @@ list_of_category_url = [
     WATCHES_PAGE,
 ]
 
-
 class TestGearPageCategory:
     """TC_009.001.001 - TC_009.002.006 for now"""
+    iteration_count = 0
     
+
     def find_categories_and_counters_at_the_sidebar():
         """collect test data"""
-        test_data = []
         gear_page = gear_page_precondition_for_test_data()
         
         categories = gear_page.find_elements_in_sidebar(locator=GearPageLocators.SIDEBAR_ELEMENTS)
         assert len(categories) == len(
             category_list
-        ), f"The number of categories is {len(categories)},(expected = {len(category_list)}).Check, it can be update in category list"
+        ), f"The number of categories is {len(categories)},(expected = {len(total_categories)}).Check, it can be update in category list"
         for category in categories:
             category_xpath = (By.XPATH, f'//dd//a[text()="{category.text}"]')
             counter_xpath = (
                 By.XPATH,
                 f'{category_xpath[1]}/following-sibling::span[@class="count"]',
             )
-            test_data.append([category_xpath, counter_xpath])
+            yield [category_xpath, counter_xpath]
+            
         gear_page.driver.quit()
-        return test_data
-    
+
    
     def test_find_and_verify_title_of_sidebar(self, gear_page_precondition):
         """
@@ -55,7 +55,17 @@ class TestGearPageCategory:
             ), f"""
                 The title of the Sidebar - '{title_in_the_side_bar}'.
                 Expected - 'Shop By Category'"""
-        
+            
+    def check_category_list(self):
+        """Additional step to verify the total list of categories after the previous test cases"""
+
+        missed_category = [
+            cat for cat in total_categories if cat not in founded_categories
+        ]
+        assert (
+            not category_list
+        ), f"Please check compare the we have found : {founded_categories}, we should found : {total_categories}. we miss {missed_category}"
+    
     @pytest.mark.parametrize(
         "category_xpath,counter_xpath", find_categories_and_counters_at_the_sidebar()
     )
@@ -75,18 +85,11 @@ class TestGearPageCategory:
             ), f"We found another one category title - '{category_name}', Please check the locators at the Sidebar and list of categories"
             category_list.remove(category_name)
             founded_categories.append(category_name)
+            
+            self.iteration_count += 1
 
-    @pytest.mark.skip(reason="the test is dependent on the order and fails in CI/CD")
-    def test_check_category_list(self):
-        """Additional step to verify the total list of categories after the previous test cases"""
-
-        missed_category = [
-            cat for cat in total_categories if cat not in founded_categories
-        ]
-        assert (
-            not category_list
-        ), f"Please check compare the we have found : {founded_categories}, we should found : {total_categories}. we miss {missed_category}"
-    
+            if self.iteration_count == len(total_categories):
+                self.check_category_list()
 
     @pytest.mark.parametrize(
         "category_xpath,counter_xpath", find_categories_and_counters_at_the_sidebar()
